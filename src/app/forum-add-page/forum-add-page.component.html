@@ -1,0 +1,87 @@
+<div class="forum-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="search-bar">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input type="text" placeholder="Search Forum">
+    </div>
+
+    <div class="categories">
+      <div *ngFor="let category of forumData" class="category">
+        <h4 (click)="toggleCategory(category)">{{ category.name }}</h4>
+        <ul *ngIf="category.expanded">
+          <li *ngFor="let forum of category.forums" (click)="selectForum(forum)"
+            [class.active]="selectedForum?.id === forum.id">
+            <span>{{ forum.title }}</span>
+            <span class="date">{{ forum.date }}</span>
+            <span *ngIf="forum.unreadCount > 0" class="unread">{{ forum.unreadCount }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Section -->
+  <div class="chat-section" *ngIf="selectedForum">
+    <div class="forum-header">
+      <h2>{{ selectedForum.title }}</h2>
+      <p>{{ selectedForum.description }}</p>
+      <p><i class="far fa-calendar calendar-icon"></i>{{ selectedForum.date }}</p>
+    </div>
+
+    <div class="messages">
+      <div *ngFor="let message of selectedForum.messages" class="message">
+
+        <img class="profile-img" src="assets/profile_icon.png" alt="Profile Image">
+        <strong class="message-sender">{{ message.sender }}</strong>
+
+        <span class="time">{{ message.time }}</span>
+        <span class="trash-container ">
+          <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
+        </span>
+        <p>{{ message.text }}</p>
+
+        <!-- Reply Count Button -->
+        <span (click)="toggleReplyBox(message.id)">
+          <i class="fa-regular fa-comment"></i> {{ message.replies?.length || 0 }} messages
+        </span>
+
+        <!-- Nested Replies -->
+        <div class="replies" *ngIf="replyBoxVisibility[message.id]">
+          <div *ngFor="let reply of message.replies" class="message reply">
+            <img class="profile-img" src="assets/profile_icon.png" alt="Profile Image">
+            <strong class="reply-sender">{{ reply.sender }}</strong>
+            <span class="time">{{ reply.time }}</span>
+            <p>{{ reply.text }}</p>
+          </div>
+          <div class="chat-input">
+            <div class="left-icons">
+              <div class="emoji-picker-container" *ngIf="showEmojiPicker">
+                <emoji-mart set="apple" (emojiSelect)="addEmoji($event)"></emoji-mart>
+              </div>
+              <button (click)="toggleEmojiPicker()">😊</button>
+            </div>
+            <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+            <span (click)="fileInput.click()"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
+            <input type="text" [(ngModel)]="replynewMessage" placeholder="Please enter/type here">
+            <button (click)="sendMessagereply()" class="send-message">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Input -->
+    <div class="chat-input">
+      <div class="left-icons">
+        <div class="emoji-picker-container" *ngIf="showEmojiPicker">
+          <emoji-mart set="apple" (emojiSelect)="addEmoji($event)"></emoji-mart>
+        </div>
+        <button (click)="toggleEmojiPicker()">😊</button>
+      </div>
+      <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+      <span (click)="fileInput.click()">
+        <i class="fa fa-paperclip" aria-hidden="true"></i></span>
+      <input type="text" [(ngModel)]="newMessage" placeholder="Please enter/type here">
+      <button (click)="sendMessage()" class="send-message">➤</button>
+    </div>
+  </div>
+</div>

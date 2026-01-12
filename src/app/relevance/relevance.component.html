@@ -1,0 +1,202 @@
+<div *ngIf="bannerImage" class="bannerimg">
+  <img [src]="bannerImage" class="object-fit-cover img-fluid" alt="Short INFO">
+</div>
+
+<div class="container-fluid body-background" >
+  <div class="container gx-0">
+    <div *ngIf="categoryName"
+      class="category-list d-flex nav-container my-4 align-items-center hide-on-mobile horizontal-sidebar-background"
+      >
+      <div class="nav-sidebar me-3 category-box" *ngIf="categoryName" style="flex-shrink: 0;">
+        {{ categoryName }}
+      </div>
+
+      <div class="sub-category-container d-flex"
+        style="overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; flex-grow: 1;" #scrollContainer>
+        <ul *ngFor="let subcategory of subCategory; let last = last" class="sub-category nav align-items-center">
+          <li class="nav-item" *ngIf="subCategory.length > 0">
+            <div class="d-flex justify-content-lg-start list-unstyled gap-2 category-list rounded px-1 py-1">
+              <button class="text-decoration-none btn" (click)="loadSubCategory(subcategory.sub_category_name)"
+              [ngClass]="{'selected-subcategory': selectedSubcategoryIds?.includes(subcategory._id)}">
+                {{ subcategory.sub_category_name }}
+              </button>
+              <span class="separator" *ngIf="!last && subCategory.length > 1"> |</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="btn scrollRight" (click)="scrollRight()">
+        <i class='fas fa-angle-right'></i>
+      </button>
+    </div>
+
+    <!-- Toggle Button -->
+    <button class="navbar-toggler d-block d-lg-none toggle-button" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#categorySidebar" aria-controls="categorySidebar" >
+      <span class="navbar-toggler-icon px-2"><i class="fa-solid fa-bars"></i></span>
+    </button>
+
+
+    <!-- Sidebar (Offcanvas) -->
+    <div class="offcanvas offcanvas-start d-block d-lg-none scrollable-sidebar" tabindex="-1" id="categorySidebar"
+      aria-labelledby="categorySidebarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="categorySidebarLabel">Categories</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="filter-container">
+          <!-- Categories -->
+          <div *ngFor="let category of Showcategorydata" class="form-check mb-2 ">
+            <input class="form-check-input border border-dark" type="radio" name="category"
+              [id]="category.category_name" (change)="onCategoryChange(category.category_name, category._id, $event)"
+              [checked]="categoryName === category.category_name">
+            <label class="form-check-label" [for]="category.category_name">
+              {{ category.category_name }}
+              <div *ngIf="category._id === categoryID">
+                <ul *ngFor="let subcategory of subCategory" class="form-check mb-1" style="font-size: 12px;">
+                  <div class="d-flex gap-1">
+                    <input type="checkbox" (change)="onSubcategoryChange(subcategory._id, $event)"
+                      [checked]="!subcategoryId || subcategoryId.length === 0 || subcategoryId.includes(subcategory._id)">
+                    <a>{{ subcategory.sub_category_name }}</a>
+                  </div>
+                </ul>
+              </div>
+            </label>
+          </div>
+
+          <!-- Price Filter -->
+          <div class="shadow-sm my-4 check-box">
+            <h5>Price</h5>
+            <div class="price-row">
+              <input type="checkbox"> All (154)
+            </div>
+            <div class="price-row">
+              <input type="checkbox"> Free (24)
+            </div>
+            <div class="price-row">
+              <input type="checkbox"> Paid (130)
+            </div>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="shadow-sm my-4 rating-box">
+            <h5 class="">Ratings</h5>
+            <div class="rating-row mt-2">
+              <input type="checkbox" />
+              <span class="stars">★★★★★</span>
+              <span class="rating-number">(187)</span>
+            </div>
+            <div class="rating-row">
+              <input type="checkbox" />
+              <span class="stars">★★★★<span class="empty-star">★</span></span>
+              <span class="rating-number">(124)</span>
+            </div>
+            <div class="rating-row">
+              <input type="checkbox" />
+              <span class="stars">★★★<span class="empty-star">★★</span></span>
+              <span class="rating-number">(72)</span>
+            </div>
+            <div class="rating-row">
+              <input type="checkbox" />
+              <span class="stars">★★<span class="empty-star">★★★</span></span>
+              <span class="rating-number">(14)</span>
+            </div>
+            <div class="rating-row">
+              <input type="checkbox" />
+              <span class="stars">★<span class="empty-star">★★★★</span></span>
+              <span class="rating-number">(3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row pt-3 gx-4">
+      <div class="col-sm-12  col-lg-3 mt-1 pt-3 ps-4 pe-5 rounded">
+        <div class="shadow-sm hide-on-mobile side-bar" style="">
+          <h5 class="main-heading">Categories</h5>
+          <div *ngFor="let category of Showcategorydata" class="form-check mb-2">
+            <input class="form-check-input border border-dark" type="radio" name="category"
+              [id]="category.category_name" (change)="onCategoryChange(category.category_name,category._id, $event)"
+              [checked]="categoryName === category.category_name">
+            <label class="form-check-label" [for]="category.category_name">
+              {{category.category_name}}
+              <div class="" *ngIf="category._id === categoryID">
+                <ul *ngFor="let subcategory of subCategory" class="form-check mb-1" style="font-size: 12px;">
+                  <div class="d-flex gap-1">
+                    <input type="checkbox" (change)="onSubcategoryChange(subcategory._id, $event)"
+                      [checked]="!subcategoryId || subcategoryId.length === 0 || subcategoryId.includes(subcategory._id)">
+                    <a>{{subcategory.sub_category_name}}</a>
+                  </div>
+                </ul>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="shadow-sm my-5 hide-on-mobile check-box" style="">
+          <h5 style="" class="main-heading">Price</h5>
+          <div class="price-row">
+            <input type="checkbox"> All (154)
+          </div>
+          <div class="price-row">
+            <input type="checkbox">Free (24)
+          </div>
+          <div class="price-row">
+            <input type="checkbox"> Paid (130)
+          </div>
+        </div>
+
+        <div class="shadow-sm my-5 hide-on-mobile rating-box" style="">
+          <div class="">
+            <div class="card-body">
+              <h5 class="card-title main-heading">Ratings</h5>
+              <div class="rating-row mt-2">
+                <input type="checkbox" />
+                <span class="stars">
+                  ★★★★★
+                </span>
+                <span class="rating-number">(187)</span>
+              </div>
+              <div class="rating-row">
+                <input type="checkbox" />
+                <span class="stars">
+                  ★★★★<span class="empty-star">★</span>
+                </span>
+                <span class="rating-number">(124)</span>
+              </div>
+              <div class="rating-row">
+                <input type="checkbox" />
+                <span class="stars">
+                  ★★★<span class="empty-star">★★</span>
+                </span>
+                <span class="rating-number">(72)</span>
+              </div>
+              <div class="rating-row">
+                <input type="checkbox" />
+                <span class="stars">
+                  ★★<span class="empty-star">★★★</span>
+                </span>
+                <span class="rating-number">(14)</span>
+              </div>
+              <div class="rating-row">
+                <input type="checkbox" />
+                <span class="stars">
+                  ★<span class="empty-star">★★★★</span>
+                </span>
+                <span class="rating-number">(3)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-9">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+  </div>
+</div>

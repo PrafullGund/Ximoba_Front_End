@@ -1,0 +1,88 @@
+<mat-card class="light-card">
+  <div>
+    <div class="block">
+      <h5 class="review-title">Reviews and Ratings</h5>
+    </div>
+
+    <div class="px-3 pb-0 bg-gray-100 rounded-lg container">
+      <div class="flex justify-between items-center flex-row-space-between">
+        <div class="review-section ps-4">
+          <p>{{ showReview.course_rating }}</p>
+          <div>
+            <p class="text-sm text-gray-500 mb-1">
+              {{ showReview.length }} Ratings
+            </p>
+            <p class="text-sm text-gray-500">
+              rating index based on {{ showReview.length }} ratings across the
+              web.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex space-x-2 btn-group pe-4 ps-2 ">
+          <button id="allBtn" class="py-2 text-white bg-blue-600 rounded-lg primary-button">
+            All
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="p-4 bg-gray-100 rounded-lg" class="container">
+      <div>
+        <div class="row m-2">
+          <div *ngIf="showReview && showReview.length > 0">
+            <div *ngFor="let review of showReview | paginate : { itemsPerPage: 4, currentPage: p }"
+              class="row g-0 rounded mb-4 px-4 py-3 mt-2 review-box">
+              <div class="block-container d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex gap-3">
+                    <img src="{{ review.trainer_image }}" class="img-resize" alt="" />
+                    <div>
+                      <small class="m-0 fw-bold">
+                        {{ review.user_name }}
+                      </small>
+                      <br />
+
+                      <span *ngFor="let star of starsArray; let i = index" [ngClass]="{ 'fa fa-star checked': i < review.star_count, 
+                                        'fa fa-star': i <= review.star_count }">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p>{{ review.review }}</p>
+                </div>
+
+                <div>
+                  <p>{{ review.createdAt | date }}</p>
+                  <div class="d-flex mt-1">
+                    <div>Helpful</div>
+                    <div class="comment-box">comment</div>
+                    <div class="share-action">
+                      <i class="fa-solid fa-share-from-square me-1"></i>share
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <!-- <div class="d-flex gap-5">
+                <div>Helpful</div>
+                <div class="comment-box">comment</div>
+                <div class="share-action">
+                  <i class="fa-solid fa-share-from-square"></i>share
+                </div>
+              </div> -->
+            </div>
+            <pagination-controls class="pagination-right" (pageChange)="p = $event"></pagination-controls>
+          </div>
+          <div *ngIf="!showReview || showReview.length === 0" class="col-12 text-center">
+            <img src="../../../assets/No data-Found.png" class="no-data-image img-fluid object-fit-cover" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

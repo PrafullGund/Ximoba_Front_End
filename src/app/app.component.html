@@ -1,0 +1,85 @@
+<app-header ></app-header>
+<!-- <app-breadcrumb></app-breadcrumb> -->
+<router-outlet></router-outlet>
+<app-seo-keyword *ngIf="!isSignInRoute()"></app-seo-keyword>
+<app-footer></app-footer>
+
+<app-spinner></app-spinner>
+
+
+<div class="modal fade" id="CheckLoggedIN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="text-end">
+          <button type="button" class="btn-close mt-4 me-4" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body p-0 m-0">
+                    <app-sign-up></app-sign-up>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="LoggedIN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="text-end">
+          <button type="button" class="btn-close mt-4 me-4" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body p-0 m-0">
+                    <app-sign-in></app-sign-in>
+            </div>
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- <app-cart-course></app-cart-course> -->
+
+
+<!-- <app-dashboard></app-dashboard> -->
+<!-- <app-relevance></app-relevance> -->
+<!-- <app-courses></app-courses> -->
+
+<!-- <app-trainer></app-trainer> -->
+
+<!-- <app-shop></app-shop> -->
+
+<!-- <app-cart></app-cart> -->
+
+<!-- <app-sign-in></app-sign-in> -->
+
+<!-- <app-sign-up></app-sign-up> -->
+
+<!-- <app-forgot-password></app-forgot-password> -->
+
+<!-- <app-course-details></app-course-details> -->
+
+<!-- <app-seeallcategories></app-seeallcategories> -->
+
+<!-- <app-seealltrainer></app-seealltrainer> -->
+
+
+<!-- <app-admin-dashboard></app-admin-dashboard> -->
+<!-- <router-outlet></router-outlet> -->
+
+ <!-- <app-admin-home></app-admin-home> -->
+
+
+
+    <!-- <app-trainer-home></app-trainer-home> -->
+
+ 
+    <!-- <app-practice></app-practice> -->
+
+    <!-- <app-courseenroll></app-courseenroll> -->
+
+    <!-- <app-enroll-now></app-enroll-now> -->
+
+    <!-- <app-edittrainer></app-edittrainer> -->
+
+<!-- <app-edit-course></app-edit-course> -->
+
+
+<!-- <app-login></app-login> -->
+

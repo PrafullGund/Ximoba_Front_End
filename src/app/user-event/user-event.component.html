@@ -1,0 +1,58 @@
+<div class="container-fluid">
+
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-4 gy-2 mt-1">
+    <div *ngFor="let Event of filteredEvent | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }"
+      class="col-sm-12 col-md-3 col-lg-4 mb-3">
+      <div class="card" routerLink="/eventdetails/{{Event._id}}">
+        <img *ngIf="Event.event_thumbnail; else dummyImage" src="{{Event?.event_thumbnail}}"
+          class="card-img-top img-fluid" alt="Event Image">
+        <ng-template #dummyImage>
+          <img src="../../assets/event dummy.jpg" alt="Event Image" class="card-img-top event-card-img">
+        </ng-template>
+        <button class="onproducthoverflag rounded px-2">{{Event.event_flag}}</button>
+        <div class="card-body text">
+          <div class="d-flex align-items-center justify-content-between gap-1 trainer-name-container">
+            <span>
+              <label class="poppins-semibold-italic text-muted event-month-label">{{Event.event_date |
+                date:'MMM'}}</label>
+              <br>
+              <span class="poppins-semibold-italic event-day-number">{{Event.event_date | date: 'dd'}}</span>
+            </span>
+
+            <span class="">
+              <p class="card-title poppins-semibold-italic text-center  text-capitalize"
+                (mouseenter)="showEventName = true" (mouseleave)="showEventName = false">
+                {{ turnEventName(Event.event_name) }}
+              </p>
+              <p *ngIf="showEventName" class="card-title full-name rounded event-name-text">
+                {{Event.event_name}}
+              </p>
+            </span>
+            <span class="text-center">
+              <span class="poppins-semibold-italic"> {{Event.event_type}} </span> <br>
+              <i *ngIf="Event.event_type === 'Online'" class="fas fa-circle-play text-muted"></i>
+              <i *ngIf="Event.event_type === 'Offline'" class="fas fa-location-dot"></i>
+            </span>
+          </div>
+          <div class="d-flex align-items-center gap-2 justify-content-center avatar-group">
+            <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+            <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+            <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+            <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+            <label class="p-2 border rounded-circle"> +35</label>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-2">
+            <button class="btn btn-sm rounded-pill px-3 text-light poppins-regular book-seat-small-btn">
+              Book Seat
+            </button>
+            <button class="btn btn-sm rounded-pill px-3 text-light poppins-regular view-more-small-btn">
+              View More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="onPageChange($event)" class="text-end"
+    style="font-size: small;"></pagination-controls>
+</div>

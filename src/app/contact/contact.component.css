@@ -1,0 +1,238 @@
+.card1 {
+    height: 389px;
+}
+
+.subscribe {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0 48px;
+}
+
+.Subscribe-section {
+    padding: 0px 48px;
+}
+
+.font {
+    font-size: 59px;
+    font-weight: 700;
+    line-height: 65px;
+}
+
+@media only screen and (max-width: 600px) {
+    .column {
+        flex-direction: column;
+    }
+
+    .subscribe {
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        font-weight: 600;
+        padding: 0 10px;
+    }
+
+    .font {
+        font-size: 35px;
+        font-weight: 700;
+        line-height: 45px;
+    }
+
+    .contact {
+        padding: 5px 0;
+    }
+
+    .form1 {
+        padding: 5px;
+        box-shadow: none;
+    }
+
+    .form_container {
+        padding-top: 5px;
+    }
+
+    .walk_section {
+        padding: 5px 5px;
+    }
+
+    .Commited_section {
+
+        margin: 10px 0;
+        padding: 0px 0;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+
+    .column {
+        padding: 0 16px;
+    }
+
+    .form {
+        padding: 0 26px;
+    }
+
+    .contact_info {
+        padding: 0 24px;
+    }
+
+    .card1 {
+        padding: 0px 14px;
+    }
+
+    .contact {
+        padding: 48px 0;
+    }
+
+    .form1 {
+        padding: 24px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        border-radius: 25px;
+    }
+
+    .form_container {
+        padding: 48px;
+    }
+
+    .walk_section {
+        padding: 16px 24px;
+    }
+
+    .Commited_section {
+        margin: 48px 0;
+        padding: 16px 0;
+    }
+}
+
+.custom-container {
+    background-color: #f7f7f7;
+}
+
+.contact-us {
+    font-size: 65px;
+    font-weight: 700;
+}
+
+.breadcrumb-text {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.contact-image {
+    border-radius: 30px;
+}
+
+.floating-image {
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    height: 102px;
+    width: 81px;
+}
+
+.custom-card {
+    border-radius: 19px;
+}
+
+.custom-heading {
+    font-size: 22px;
+}
+
+.input-box {
+    background-color: #eeee;
+}
+
+.contact-information {
+    font-size: 16px;
+    font-weight: 700;
+    color: #307DFF;
+    letter-spacing: 1px;
+}
+
+.custom-title {
+    font-size: 48PX;
+    line-height: 52px;
+}
+
+.custom-subtitle {
+    font-size: 16px;
+    color: #307DFF;
+    letter-spacing: 2px;
+}
+
+.borderless-card {
+    border: none;
+}
+
+.circle-container {
+    border-radius: 50%;
+    background-color: #307DFF;
+}
+
+.phone-icon {
+    font-size: 1.5rem;
+}
+
+.location {
+    border-radius: 50%;
+    background-color: #2351A9;
+}
+
+.location-icon {
+    font-size: 1.3rem;
+}
+
+.modern-card {
+    border-radius: 12px;
+}
+
+.faq {
+    font-size: 23px;
+}
+
+.spaced-flex {
+    gap: 20px;
+}
+
+.rounded-box {
+    border-radius: 18px;
+}
+
+.commitment-text {
+    font-size: 16px;
+    color: #307DFF;
+    letter-spacing: 2px;
+}
+
+.no-underline-link {
+    text-decoration: none;
+}
+
+.subscribe-box {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 30px;
+}
+
+.rounded-left-img {
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+}
+
+.subscribe-text {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.subscribe-here {
+    background-color: #f7f7f7;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.subscribe-button {
+    background-color: #307DFF;
+}

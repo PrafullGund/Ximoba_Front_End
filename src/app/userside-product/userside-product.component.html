@@ -1,0 +1,53 @@
+<div class="container-fluid">
+
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-4 gy-2 mt-1">
+
+    <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }"
+      class="col-sm-12 col-md-3 col-lg-4 mb-3">
+      <div class="card productcard">
+        <img src="{{product?.product_image}}" routerLink="/productdetails/{{product._id}}"
+          class="card-img-top img-fluid" alt="...">
+        <button routerLink="/productdetails/{{product._id}}" class="btn btn-light rounded onproducthover">Add to
+          cart</button>
+        <button class="onproducthoverflag rounded px-2">{{product.identityFlag}}</button>
+
+        <div class="card-body text-center mb-0 pt-0 trainer-name-container">
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <p class="m-0 p-0 text-end w-25"></p>
+            <div class="w-50 text-center">
+              <ng-container *ngFor="let star of starsArray; let i = index">
+                <i class="fa-solid fa-star"
+                  [ngStyle]="{ 'color': i < (product.products_rating ) ? '#FFAE06' : '#d3d3d3' }"></i>
+              </ng-container>
+            </div>
+            <small class="m-0 p-0 text-end w-25">{{product.product_flag}}</small>
+          </div>
+
+          <h5 class="card-title  text-capitalize" (mouseenter)="showproductName = true"
+            (mouseleave)="showproductName = false">
+            {{ trunproductName(product.products_name) }}
+          </h5>
+
+          <p *ngIf="showproductName" class="full-name rounded product-name">
+            {{product.products_name }}
+          </p>
+
+          <p>{{product.products_category}}</p>
+
+          <div class="d-flex align-items-center justify-content-between">
+            <i class="fa-solid fa-cart-shopping fs-5 custom-cart-icon"></i>
+            <span class="d-flex align-items-center gap-2">
+              <small class="text-decoration-line-through">{{getFormattedPrice(product.products_price)}}</small>
+              <b class="product-price">
+                {{getFormattedPrice(product.products_selling_price)}}
+              </b>
+            </span>
+            <i class="fa-regular fa-heart fs-5 custom-heart-icon"></i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="onPageChange($event)" class="text-end pagination-controls"></pagination-controls>
+</div>

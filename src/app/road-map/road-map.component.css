@@ -1,0 +1,75 @@
+.roadmap-container {
+  background-image: url('/assets/roadmapguiedance.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 139px 20px;
+}
+
+.roadmap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.roadmap-step {
+  width: 300px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.step-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.step-content {
+  position: relative;
+  z-index: 1;
+}
+
+.step-1 {
+  margin-left: -348px;
+}
+
+.step-2 {
+  margin-top: 69px;
+}
+
+.step-3 {
+  margin-left: 70px;
+}
+
+.step-4 {
+  margin-bottom: 47px;
+}
+
+@media (max-width: 768px) {
+  .roadmap-container {
+    padding: 50px 10px;
+  }
+
+  .roadmap {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .roadmap-step {
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .step-1,
+  .step-2,
+  .step-3,
+  .step-4 {
+    margin: 0;
+  }
+}

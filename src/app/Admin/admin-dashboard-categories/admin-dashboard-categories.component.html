@@ -1,0 +1,178 @@
+<div class="container-fuild">
+  <div class="row">
+    <img class="img-fluid rounded" src="../../../assets/categories banner.jpg" alt="" />
+  </div>
+  <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Categories">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-end mt-3">
+        <div class="d-flex flex-column flex-md-row mt-2 mt-md-0">
+          <button class="btn btn-sm rounded-pill text-light mb-2 mb-md-0 me-0 me-md-2 px-3" data-bs-toggle="modal"
+            data-bs-target="#AddcategoryModal" style="background-color: var(--TextColor);">
+            Add New Category
+          </button>
+          <button class="btn btn-sm rounded-pill text-light mb-2 mb-md-0 me-0 me-md-2 px-3" data-bs-toggle="modal"
+            data-bs-target="#AddsubcategoryModal" style="background-color: var(--btndarkColor);">
+            Add New Sub Category
+          </button>
+          <!-- <button (click)="toggleIcon()" class="btn btn-sm rounded-pill text-light px-3"
+            style="background-color: #f96d63;">
+            Update/Delete Category
+          </button> -->
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 my-1">
+
+        <div *ngFor="let showdata of showCategoryData" class="col-sm-12 col-md-6 col-lg-3 mb-2">
+          <div class="card p-2 round">
+            <img [src]="showdata.category_image" class="card-img-top rounded" alt="...">
+            <div class="card-body">
+              <h6 class="card-title">{{showdata.category_name}}</h6>
+               <i routerLink="/editcategory/{{showdata._id}}" *ngIf="showIcon"
+              class="fa-solid fa-edit right-side-top-delete"></i>
+            <i (click)="onDelete(showdata._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top"></i>
+            </div>
+            <i routerLink="/editcategory/{{showdata._id}}" *ngIf="showIcon "
+              class="fa-solid fa-edit right-side-top-delete"></i>
+            <i (click)="onDelete(showdata._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top"></i>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Sub Categories">
+      <div class="p-3">
+        <div class="mb-3">
+          <label for="category_name" class="col-form-label">Select Categories <sup>*</sup></label>
+          <input type="text" class="form-control" list="categoryName" id="category_name" [(ngModel)]="category_name"
+            (input)="onCategorySelect($event)" name="category_name" required>
+          <datalist id="categoryName" class="w-100">
+            <option class="w-100" *ngFor="let category of showCategoryData" [value]="category.category_name"></option>
+          </datalist>
+        </div>
+        <div>
+          <button *ngFor="let subCategory of subcategory" class="btn border btn-outline-primary rounded-pill me-2 mb-2"
+            (click)="onSubCategoryClick(subCategory)" data-bs-toggle="modal" data-bs-target="#updatesubcategoryModal">
+            {{ subCategory.sub_category_name }}
+            <i class="fa-solid fa-pen"></i>
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!-- Modal for editing subcategory -->
+<div class="modal fade" id="updatesubcategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-3">
+        <input type="text" [(ngModel)]="subCategoryName" class="form-control" placeholder="Edit Subcategory Name">
+      </div>
+      <div class="text-end p-2">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> &nbsp;
+        <button type="button" class="btn btn-primary" (click)="updateSubCategory()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Model For Add New Categories -->
+<div class="modal fade" id="AddcategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Categories</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="category_name" class="col-form-label">Select Categories <sup>*</sup></label>
+            <input type="text" class="form-control" list="categoryName" id="category_name" [(ngModel)]="category_name"
+              name="category_name" required>
+            <datalist id="categoryName">
+              <option value="Fitness">Fitness</option>
+              <option value="Yoga">Yoga</option>
+              <option value="Education">Education</option>
+              <option value="Health">Health</option>
+              <option value="Development">Development</option>
+              <option value="Vocational">Vocational</option>
+            </datalist>
+            <!-- Validation message for category_name -->
+            <div *ngIf="categoryForm.submitted && !category_name" class="text-danger">
+              Category name is required.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="sub_title" class="col-form-label">Sub Title <sup>*</sup></label>
+            <input type="text" class="form-control" id="sub_title" [(ngModel)]="sub_title" name="sub_title" required>
+            <!-- Validation message for sub_title -->
+            <div *ngIf="categoryForm.submitted && !sub_title" class="text-danger">
+              Sub title is required.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="category_image" class="col-form-label">Upload Categories Image <sup>*</sup></label>
+            <input type="file" id="category_image" (change)="onFileSelected($event)" required>
+            <!-- Validation message for category_image -->
+            <div *ngIf="categoryForm.submitted && !category_image" class="text-danger">
+              Category image is required.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Model For Adding Sub category -->
+<div class="modal fade" id="AddsubcategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Sub Categories</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addSubCategory()">
+          <div>
+            <!-- Category Selection -->
+            <div class="col-12  mb-3">
+              <label for="categoryId" class="col-form-label">Select Categories <sup>*</sup></label>
+              <select class="form-select" id="categoryId" [(ngModel)]="categoryId" name="categoryId" #category="ngModel"
+                required>
+                <option value="" disabled selected>Select Categories</option>
+                <option *ngFor="let category of showCategoryData" [value]="category._id">
+                  {{ category.category_name }}
+                </option>
+              </select>
+              <div *ngIf="category.invalid && category.touched" class="text-danger">
+                <small>Select a category.</small>
+              </div>
+            </div>
+            <div class="col-12  mb-3">
+              <label for="subCategoryName" class="col-form-label">Subcategory Name <sup>*</sup></label>
+              <input type="text" class="form-control" id="subCategoryName" [(ngModel)]="subCategoryName"
+                name="subCategoryName" #subCategory="ngModel" required />
+              <div *ngIf="subCategory.invalid && subCategory.touched" class="text-danger">
+                <small>Enter a subcategory name.</small>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!categoryId || !subCategoryName">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

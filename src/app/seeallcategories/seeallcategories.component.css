@@ -1,0 +1,125 @@
+.card-user{
+  border: 1px solid black ;
+  padding: 5px 5px 0 5px;
+  border-radius: 5px;
+}
+
+.round{
+    border-radius: 10px !important;
+}
+
+.tr-img{
+  /* border: 1px solid black ; */
+  height: 24px;
+  object-fit: cover;
+  /* width: 18px; */
+  /* border-radius: 50%; */
+}
+
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+  
+.card {
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.badge-duration {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.online-status {
+  color: red;
+  font-weight: bold;
+}
+.price-discount {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 14px;
+}
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+.price-free {
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.star-rating{
+  .fa-star {
+  font-size: 18px; 
+  }
+
+.checked {
+  color: gold;  
+}
+
+}
+
+.fa-star {
+  color: lightgray;
+}
+
+.active-star {
+  color: #FFAE06;
+}
+.inactive-star {
+  color: #d3d3d3;
+}
+
+/* @media (max-width: 600px) {
+  .card{
+    margin-top: -23px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card{
+    margin-top: -25px;
+  }
+} */
+
+/* .all-section{
+  margin: 80px 0;
+
+} */
+
+
+.image-container {
+  width: 100%;
+  height: 200px; /* Set a fixed height */
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container while maintaining aspect ratio */
+}

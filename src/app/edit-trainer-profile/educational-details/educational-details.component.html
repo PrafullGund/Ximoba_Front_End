@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="main-heading">
+        <h2>Education Details</h2>
+        <p>Add your educational details</p>
+    </div>
+    <hr>
+    <div>
+        <form class="form-section" [formGroup]="educationForm" (ngSubmit)="updateEducationDetails()" >
+            <input formControlName="school" type="text" placeholder="School Education">
+            <input formControlName="college" type="text" placeholder="College Education">
+            <input formControlName="degree" type="text" placeholder="Degree">
+            <input type="text" placeholder="Other Education">
+            <input type="number" placeholder="Other Education">
+            <input type="text" placeholder="Other Education">
+            <input type="text" placeholder="Other Education"><br>
+            <button type="submit" class="btn btn-primary" >Save</button>
+        </form>
+    </div>
+</div>

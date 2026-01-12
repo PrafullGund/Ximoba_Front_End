@@ -1,0 +1,191 @@
+<div class="light-background">
+  <div>
+    <div class="trainer-home mb-2">
+      <img class="img-fluid rounded" src="../../../assets/trainer_Home_Baneer.png" alt="Trainer Banner" />
+    </div>
+
+    <mat-card *ngIf="isTrainer || isInstitute || isSELF_EXPERT" class="frosted-profile-card">
+      <div class="container mt-5" *ngIf="isTrainer || isInstitute || isSELF_EXPERT">
+        <div class="row g-4">
+          <div class="col-md-3" [routerLink]="['/dashboard/mycourse']" [queryParams]="{ tab: 0 }">
+            <div class="card p-3 shadow-lg">
+              <div class="p-0 d-flex flex-column">
+                <div class="d-flex gap-0">
+                  <img src="assets/images/total course.png" class="card-icon" alt="Total Courses" />
+                  <div class="">
+                    <h5 class="card-title mb-0">Total Course</h5>
+                    <p class="card-text ms-1">
+                        <!-- {{ dashboardData.totalCourses }} -->
+                      {{ showDashboardata?.totalCourses }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr class="section-divider" />
+              <button class="btn w-100 full-width-blue-btn">
+                See Details
+                <img src="assets/images/pic/arrow-right.png" class="arrow-icon"/>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-3" [routerLink]="['/dashboard/mycourse']" [queryParams]="{ tab: 1 }">
+            <div class="card p-3 shadow-lg">
+              <div class="card-body p-0 d-flex flex-column align-items-center">
+                <div class="d-flex gap-0">
+                  <img src="assets/images/total course.png" class="card-icon" alt="Total Courses" />
+                  <div class="">
+                    <h5 class="card-title mb-0">Ongoing Courses</h5>
+                    <p class="card-text ms-1">
+                       <!-- {{ dashboardData.ongoingCourses }} -->
+                      {{ showDashboardata?.totalOngoingCourses }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr  class="section-divider"/>
+              <button class="btn w-100 full-width-blue-btn">
+                See Details
+                <img src="assets/images/pic/arrow-right.png" class="arrow-icon" />
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-3" [routerLink]="['/dashboard/mycourse']" [queryParams]="{ tab: 2 }">
+            <div class="card p-3 shadow-lg">
+              <div class="card-body p-0 d-flex flex-column align-items-center">
+                <div class="d-flex gap-0">
+                  <img src="assets/images/total course.png" class="card-icon" alt="Total Courses" />
+                  <div class="">
+                    <h5 class="card-title mb-0">Completed Courses</h5>
+                    <p class="card-text ms-1">
+                      <!-- {{ dashboardData.completedCourses }} -->
+                      {{ showDashboardata?.totalCompletedCourses }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr class="section-divider" />
+              <button class="btn w-100 full-width-blue-btn">
+                See Details
+                <img src="assets/images/pic/arrow-right.png" class="arrow-icon"/>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-3" [routerLink]="['/dashboard/mycourse']" [queryParams]="{ tab: 3 }">
+            <div class="card p-3 shadow-lg custom-card">
+              <div class="card-body p-0 d-flex flex-column align-items-center">
+              
+                <div class="d-flex gap-0">
+                  <img src="assets/images/pic/issuecertificate.png" class="card-icon" alt="Issued Certificates" />
+                  <div class="">
+                    <h5 class="card-title mb-0">Issued Certificates</h5>
+                    <p class="card-text ms-1">
+                      <!-- {{ dashboardData.issuedCertificates }} -->
+                      {{showDashboardata?.totalIssuedCertificates}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr class="section-divider" />
+              <button class="btn w-100 full-width-white-btn">
+                See Details
+                <img src="assets/images/pic/arrow-right.png" class="arrow-img" />
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons Section -->
+          <div class="btn-add">
+            <!-- <button class="btn-plu" [routerLink]="
+                isTrainer ? '/dashboard/add-course' : '/dashboard/add-course'">
+              <img src="assets/images/plusicon.png" class="plus-icon" [routerLink]="
+                  isTrainer ? '/dashboard/add-course' : '/dashboard/add-course'" />
+              Add Course
+            </button> -->
+            <button class="btn-plu" [routerLink]="['/dashboard/add-course']">
+              <img src="assets/images/plusicon.png" class="plus-icon" />
+              Add Course
+            </button>
+            
+            <button class="btn-plu" [routerLink]="
+                isTrainer ? '/dashboard/mycourse' : '/dashboard/mycourse'">
+              <img src="assets/images/plusicon.png" class="plus-icon" />
+              Certificate Issue
+            </button>
+            <button class="btn-plu" [routerLink]="
+                isTrainer ? '/dashboard/Add-Forum' : '/dashboard/Add-Forum'">
+              <img src="assets/images/plusicon.png" class="plus-icon" /> Add
+              Forum
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<mat-card class="blurred-user-card" *ngIf="isUser">
+  <div class="container-fluid mt-4 p-md-4" *ngIf="isUser">
+    <div class="row d-flex g-4">
+
+      <div class="col-md-3" [routerLink]="isUser ? '/dashboard/mycourse' : '/dashboard/mycourse'">
+          <div class="card p-3">
+            <div class="card-body p-0 d-flex flex-column">
+              <div class="d-flex gap-0">
+                <img src="assets/images/total course.png" class="card-icon" alt="Total Courses" />
+                <div class="">
+                  <p class="card-title-one mb-0">My Enrolled Courses</p>
+                  <p class="card-text ms-4">
+                    0{{ showDashboardata?.totalCourses }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr class="custom-divider" />
+            <button class="details-button-one w-100" [routerLink]="isUser ? '/dashboard/mycourse' : '/dashboard/mycourse'">
+              <span>See Details</span>
+              <img src="assets/images/pic/arrow-right.png" class="arrow-icon" />
+            </button>
+          </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="certificate-card">
+          <div class="d-flex align-items-start">
+            <div class="icon-box">
+              <img src="assets/images/pic/issuecertificate.png" class="card-icon" alt="Issued Certificates" />
+            </div>
+            <div class="ms-3">
+              <p class="card-title-achieved">Achieved Certificate</p>
+              <p class="course-count">01</p>
+            </div>
+          </div>
+          <hr class="card-divider" />
+          <button class="details-button-two w-100" routerLink="/dashboard/mycourse">
+            <span>See Details</span>
+            <img src="assets/images/pic/arrow-right.png" class="arrow-icon-second" />
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- <div class="col-md-3">
+        <button class="btn-plus-expert" (click)="studenttoExpert()">
+          <span class="plus-icon">+</span>
+          <span class="btn-text">
+            Are you want to<br />
+            become expert
+          </span>
+        </button>
+      </div> -->
+
+    </div>
+  </div>
+</mat-card>
+
+
+<div class="chat-container">
+  <app-chatbox icon="send" class="floating-chatbox"></app-chatbox>
+</div>

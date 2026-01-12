@@ -1,0 +1,134 @@
+.container {
+  padding-top: 20px;
+  margin-left: 52px;
+  background-color: #fff;
+  border-radius: 8px;
+  height: 82vh;
+  overflow-y: auto;
+  flex: 2;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 31px;
+}
+
+.main-heading h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.py-5 {
+  height: 650px;
+}
+
+p {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}
+
+.bordered-profile-container {
+  width: 563px;
+  height: 258px;
+  margin-left: 97px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: inset 0 0 0 23px white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.form-section {
+  padding-left: 110px;
+}
+
+.form-label {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  width: 60%;
+  padding: 5px;
+  margin: 1px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+@media (max-width:1440px) {
+  .container {
+      padding-top: 15px;
+      margin-left: 175px;
+      width: 85%;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow-y: auto;
+      flex: 2;
+      box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+      height: 81vh;
+      margin-top: 31px;
+      min-height: 96vh;
+  }
+}
+
+
+
+@media (max-width: 1024px) {
+  .bordered-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .profile-img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width:768px){
+  .container{
+      padding: 10px;
+      margin: 0px 0px 20px 33px;
+  }
+}
+
+@media (max-width:480px){
+  .container{
+      padding: 10px;
+      margin: 0px 0px 20px 33px;
+  }
+  
+  .profile-img {
+    height: 120px;
+    width: 120px;
+  }
+  
+  .bordered-profile-container{
+    border: none;
+  }
+
+  #trainer_image {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .form-label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .form-section{
+    margin-left: -57px;
+  }
+}

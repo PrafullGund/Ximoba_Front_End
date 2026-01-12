@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "Deva",
+      "password": "Deva@123"
+    }
+  ],
+  "category": [
+    {
+      "id": "11",
+      "c_name": "Fitness",
+      "img": "./assets/3.jpg"
+    },
+    {
+      "id": "12",
+      "c_name": "Yoga",
+      "img": "./assets/yoga.jpg"
+    },
+    {
+      "id": "13",
+      "c_name": "Health",
+      "img": "./assets/5.jpg"
+    },
+    {
+      "id": "14",
+      "c_name": "Education",
+      "img": "./assets/degree.jpeg"
+    },
+    {
+      "id": "15",
+      "c_name": "Self Development",
+      "img": "./assets/20.jpg"
+    },
+    {
+      "id": "11",
+      "c_name": "Fitness",
+      "img": "./assets/3.jpg"
+    },
+    {
+      "id": "11",
+      "c_name": "Self Development",
+      "img": "./assets/21.jpg"
+    },
+    {
+      "id": "11",
+      "c_name": "Self Development",
+      "img": "./assets/21.jpg"
+    }
+  ],
+  "trainer": [
+    {
+      "id": "21",
+      "t_name": "Sagar Singh",
+      "course_count": "9"
+    },
+    {
+      "id": "22",
+      "t_name": "Amit Bhoj",
+      "course_count": "43"
+    },
+    {
+      "id": "23",
+      "t_name": "Deva Kale",
+      "course_count": "23"
+    },
+    {
+      "id": "24",
+      "t_name": "Sagar Pagar",
+      "course_count": "75"
+    },
+    {
+      "id": "25",
+      "t_name": "Sagar Singh",
+      "course_count": "201"
+    },
+    {
+      "id": "21",
+      "t_name": "Sagar Singh",
+      "course_count": "9"
+    },
+    {
+      "id": "22",
+      "t_name": "Amit Bhoj",
+      "course_count": "43"
+    },
+    {
+      "id": "23",
+      "t_name": "Deva Kale",
+      "course_count": "23"
+    },
+    {
+      "id": "24",
+      "t_name": "Sagar Pagar",
+      "course_count": "75"
+    },
+    {
+      "id": "25",
+      "t_name": "Sagar Singh Rathod",
+      "course_count": "201"
+    }
+  ],
+  "sign-up": [
+    {
+      "id": " ",
+      "name": " Deva",
+      "username": "deva123",
+      "email": "deva123@gmail.com",
+      "passwords": "1234",
+      "mobileno": "9657713214",
+      "altermobo": "963214587",
+      "address1": " narhe",
+      "address2": "Pune",
+      "city": "Pune",
+      "state": "maharashta",
+      "pincode": "411014",
+      "country": "india"
+    }
+  ]
+}

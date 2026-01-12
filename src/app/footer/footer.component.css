@@ -1,0 +1,174 @@
+small {
+  cursor: pointer;
+  font-size: small;
+}
+
+p {
+  font-size: smaller;
+}
+
+small:hover {
+  color: royalblue;
+}
+
+.product-description {
+  font-size: 2rem;
+  font-weight: 500;
+  color: white;
+  margin-top: 1rem;
+}
+
+.footer-section {
+  background-color: #265BBD;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  display: flex; 
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+}
+
+.footer-links h4 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.footer-links ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.footer-links li:hover {
+  color: black;
+}
+
+.footer-bottom {
+  background-color: #307DFF;
+  padding: 0.9rem 0;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-bottom p,
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom p>a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background-color: white;
+  color: #307DFF;
+}
+
+.youtube:hover {
+  color: red !important;
+}
+
+.instagram:hover {
+  color: #d62976 !important;
+}
+
+.twitter:hover {
+  color: black !important;
+}
+
+.linkedIN:hover {
+  color: #0077B5 !important;
+}
+
+.footer-item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.7); 
+  opacity: 0.4;
+}
+
+.footer-item:last-child::after {
+  display: none;
+}
+
+.footer-item {
+  position: relative;
+  padding-right: 30px;
+}
+
+.footer-item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.7);
+  opacity: 0.4;
+}
+
+.last-item::after {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .footer-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .footer-item {
+    width: 100%;
+    padding: 0;
+  }
+
+  .product-description {
+    font-size:2rem;
+  }
+
+  .social-icons {
+    gap: 10px;
+  }
+
+  .social-icons a {
+    font-size: 1.2rem;
+  }
+
+  .footer-links h4 {
+    font-size: 24px;
+  }
+
+  .footer-links li {
+    font-size: 16px;
+  }
+}

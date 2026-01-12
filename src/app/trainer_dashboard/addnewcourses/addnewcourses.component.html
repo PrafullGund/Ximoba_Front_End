@@ -1,0 +1,254 @@
+<div class="block">
+  <h5 class="add-course-heading">{{ isEditMode ? 'Edit Course' : 'Add New Course' }}</h5>
+</div>
+<div class="d-flex justify-content-center" style="background-color: rgb(255,255,255);">
+  <div class="add-course-container">
+
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  
+      <div class="form-row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Course Name</mat-label>
+            <input matInput id="course_name" formControlName="course_name" placeholder="Enter Course Name" />
+            <mat-error *ngIf="courseForm.get('course_name')?.invalid && courseForm.get('course_name')?.touched">
+              Course Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Category</mat-label>
+            <mat-select id="category" formControlName="category_name" (selectionChange)="onCategoryChange($event.value)">
+              <mat-option value="">Select Category</mat-option>
+              <mat-option *ngFor="let category of filteredCategory" [value]="category._id">
+                {{ category.category_name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="courseForm.get('category_name')?.invalid && courseForm.get('category_name')?.touched">
+              Category is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subcategory</mat-label>
+            <mat-select id="subcategory" formControlName="sub_category_name">
+              <mat-option value="">Select Subcategory</mat-option>
+              <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory._id">
+                {{ subCategory.sub_category_name }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="courseForm.get('sub_category_name')?.invalid && courseForm.get('sub_category_name')?.touched">
+              Subcategory is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Online/Offline</mat-label>
+            <mat-select id="online_offline" formControlName="online_offline" placeholder="Select Online/Offline">
+              <mat-option value="online">Online</mat-option>
+              <mat-option value="offline">Offline</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Course Price</mat-label>
+            <input matInput type="text" id="price" formControlName="price" placeholder="Course Price Rs" (keypress)="allowOnlyNumbers($event)"
+            (paste)="blockInvalidPaste($event)" />
+            <mat-error *ngIf="courseForm.get('price')?.invalid && courseForm.get('price')?.touched">
+              Course Price is required and must be a positive number.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Offer Price</mat-label>
+            <input matInput type="text" id="offer_prize" formControlName="offer_prize"
+              placeholder="Enter Offer Price" (keypress)="allowOnlyNumbers($event)"
+              (paste)="blockInvalidPaste($event)"/>
+              <mat-error *ngIf="courseForm.hasError('offerPriceExceeds')">
+                Offer Price cannot be greater than Course Price.
+              </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startPicker" [min]="minStartDate" id="start_date" formControlName="start_date"
+              placeholder="MM/DD/YYYY" />
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endPicker" [min]="minDate" id="end_date" formControlName="end_date"
+              placeholder="MM/DD/YYYY" />
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+            <mat-error *ngIf="courseForm.hasError('endBeforeStart') && courseForm.get('end_date')?.touched">
+              End Date cannot be earlier than Start Date.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Level</mat-label>
+            <mat-select id="level" formControlName="level">
+              <mat-option value="beginner">Beginner</mat-option>
+              <mat-option value="intermediate">Intermediate</mat-option>
+              <mat-option value="advanced">Advanced</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="col-md-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Course Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags">
+            <mat-chip-row
+              *ngFor="let tag of courseTags; let i = index"
+              [editable]="true"
+              (edited)="editTag(i, $event)"
+              (removed)="removeTag(i)"
+              [aria-description]="'Press enter to edit ' + tag"
+            >
+              {{ tag }}
+              <button matChipRemove [attr.aria-label]="'Remove ' + tag">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+      
+            <input
+              placeholder="Enter a tag"
+              [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
+          </mat-chip-grid>
+        </mat-form-field>
+      </div>
+      
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Course Information</mat-label>
+        <textarea matInput id="course_information" formControlName="course_information"
+          placeholder="Enter Course Details">
+        </textarea>
+        <mat-error *ngIf="courseForm.get('course_information')?.invalid && courseForm.get('course_information')?.touched">
+          Course Information is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="row align-items-end">
+        <div class="d-flex flex-column align-items-center justify-content-center gap-2 col-md-4 padded-form-row">
+          <div *ngIf="imageObjectURL" class="mt-2 d-flex align-items-center gap-2">
+            <i class="fa-solid fa-image text-primary" style="cursor: pointer;" (click)="openPreviewModal()"></i>
+            <span style="cursor: pointer;" (click)="openPreviewModal()">{{ newFileName ?? "Preview Img" }}</span>
+          </div>
+          
+          <button type="button" class="btn-doc d-flex gap-3" (click)="onUploadClick(fileInput)">
+            <img src="../../../assets/thumbnail img.png">
+            Upload Thumbnail Image
+          </button>
+          <input type="file" #fileInput class="file-input" (change)="onFileSelected($event)" accept="image/*" />
+          <mat-error *ngIf="thumbnailSizeError" class="error-message">
+            File size must be less than 2MB
+          </mat-error>
+
+            <!-- Image Preview Modal -->
+        <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">Image Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center">
+                <img [src]="imageObjectURL" class="img-fluid rounded" alt="Preview" />
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center justify-content-center gap-2 col-md-4 padded-form-row">
+          <div *ngIf="materialFileName" class="mt-2 d-flex align-items-center gap-2">
+            <i class="fa-solid fa-file-pdf text-danger me-2" style="cursor: pointer;" (click)="openPdfPreview()"></i>
+            <span style="cursor: pointer;" (click)="openPdfPreview()">{{ materialFileName ? materialFileName : 'Preview PDF'  }}</span>
+          </div>
+          
+          <button type="button" class="btn-doc d-flex gap-2" (click)="onUploadMaterials(pdfInput)">
+            <img src="../../../assets/pdf icon.png">
+            Upload Training Materials
+          </button>
+          <input type="file" #pdfInput class="file-input" (change)="onMaterialsSelected($event)"
+            accept="application/pdf" />
+
+             <!-- PDF Preview Modal -->
+        <div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pdfModalLabel">Training Material Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe [src]="pdfPreviewURL ? (pdfPreviewURL | safeUrl) : null" width="100%" height="600px" frameborder="0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+        <div class="d-flex flex-column align-items-center justify-content-center gap-2 col-md-4 padded-form-row">
+          <div *ngIf="courseVideo && courseVideoURL" class="mt-2 d-flex align-items-center gap-2" style="cursor: pointer;" (click)="isVideoPreviewOpen = true">
+            <i class="fas fa-play-circle text-danger"></i>
+            <span class="text-muted">{{ courseVideo.name }}</span>
+          </div>
+
+          <!-- Video Modal -->
+          <div *ngIf="isVideoPreviewOpen" class="modal-backdrop" (click)="isVideoPreviewOpen = false">
+            <div class="modal-content" (click)="$event.stopPropagation()">
+              <video [src]="courseVideoURL" controls autoplay style="width: 100%; max-height: 80vh;"></video>
+              <button class="close-btn" (click)="isVideoPreviewOpen = false">&times;</button>
+            </div>
+          </div>
+
+
+          <button type="button" class="btn-doc d-flex gap-2" (click)="onUploadVideo(videoInput)">
+            <img src="../../../assets/video icon.png">
+            Upload Video
+          </button>
+          <input type="file" #videoInput class="file-input" (change)="onVideoSelected($event)" accept="video/*" />
+        </div>
+  
+      </div>
+
+      <div class="d-flex justify-content-end flex-wrap gap-2 mt-3">
+        <button routerLink="/dashboard/mycourse" type="button" class="btn btn-secondary me-3"
+        data-bs-dismiss="modal">Close</button>
+       <button type="submit" [disabled]="courseForm.invalid" class="btn btn-primary">{{ isEditMode ? 'Update Course' : 'Add Course' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

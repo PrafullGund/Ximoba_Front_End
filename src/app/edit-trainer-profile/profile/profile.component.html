@@ -1,0 +1,85 @@
+<div class="">
+    <div class="profile-box">
+        <div class="main-heading">
+            <h2>Public Profile</h2>
+            <p>Add Information about yourself</p>
+        </div>
+        <hr>
+    
+        <div class="form-section">
+            <h4 class="form-all">Basic Information</h4>
+            <form [formGroup]="profileForm" (ngSubmit)="submitForm()" class="form-all">
+                <div>
+                    <label for="f_Name" class="form-label">Name</label>
+                    <input formControlName="f_Name" type="text" placeholder="Name">
+                </div>
+                <br class="line">
+                <div>
+                    <label for="l_Name" class="form-label">Surname</label>
+                    <input formControlName="l_Name" type="text" placeholder="Surname">
+                </div>
+                <br class="line">
+                <div>
+                    <label for="institute_name" class="form-label">Institute Name</label>
+                    <input formControlName="institute_name" type="text" placeholder="Institute Name">
+                </div>
+                <br class="line">
+                <div class="language">
+                    <label for="institute_name" class="form-label">Language</label>
+                    <select formControlName="language">
+                        <option value="">Select Language</option>
+                        <option value="English (US)">English (US)</option>
+                        <option value="Hindi">Hindi</option>
+                    </select>
+                    <small
+                        *ngIf="profileForm.get('language')?.hasError('required') && profileForm.get('language')?.touched">
+                        Please select a language.
+                    </small>
+                </div>
+                <br class="line">
+                <div>
+                    
+                </div>
+                <hr>
+                <h4>Social Information</h4>
+                <div class="form-all">
+                    <label for="Website" class="form-label">Website.com</label>
+                    <input formControlName="Website" type="text" placeholder="Website">
+                    <small *ngIf="profileForm.get('Website')?.hasError('pattern') && profileForm.get('Website')?.touched">
+                        Enter a valid Website URL.
+                    </small>
+                </div>
+                <br class="line">
+                <div>
+                    <label for="Facebook Profile" class="form-label">Facebook.com</label>
+                    <input formControlName="facebook" type="text" placeholder="Facebook Profile Link">
+                    <small *ngIf="profileForm.get('facebook')?.hasError('pattern') && profileForm.get('facebook')?.touched">
+                        Enter a valid Facebook URL.
+                    </small>
+                </div>
+                <br class="line">
+                <div>
+                    <label for="instagram Profile" class="form-label">Instagram.com</label>
+                    <input formControlName="instagram" type="text" placeholder="instagram Profile Link">
+                    <small
+                        *ngIf="profileForm.get('instagram')?.hasError('pattern') && profileForm.get('instagram')?.touched">
+                        Enter a valid instagram URL.
+                    </small>
+                </div>
+                <br class="line">
+                <div>
+                    <label for="Youtube Profile" class="form-label">Youtube.com</label>
+                    <input formControlName="youtube" type="text" placeholder="Youtube Profile Link">
+                    <small *ngIf="profileForm.get('youtube')?.hasError('pattern') && profileForm.get('youtube')?.touched">
+                        Enter a valid Youtube URL.
+                    </small>
+                </div>
+                <br class="line">
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+

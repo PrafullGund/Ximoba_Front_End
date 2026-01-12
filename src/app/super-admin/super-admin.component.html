@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row">
+        <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="Pending">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center mt-2">
+                        <thead class="mb-2">
+                            <tr>
+                                <th>FULL NAME</th>
+                                <th>USER ROLE</th>
+                                <th>STATUS</th>
+                                <th>REQUEST DATE & Time</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let request of getrequest">
+                                <td (click)="openUserDetailsModal(request.userid)" class="clickable-td"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fa-solid fa-user mx-2 text-primary"></i>
+                                    {{request.user_name}}
+                                </td>
+                                <td>{{request.requestedRole}}</td>
+                                <td>{{request.status}}</td>
+                                <td>{{request.requestDate | date}} &nbsp; {{request.requestTime}}</td>
+                                <td>
+                                    <button (click)="handleApproval(request.userid, 1)"
+                                        class="btn text-light bg-success me-4">
+                                        Approve
+                                    </button>
+                                    <button (click)="handleApproval(request.userid, 0)"
+                                        class="btn text-light bg-danger">
+                                        Reject
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <mat-tab label="Approved">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center mt-2">
+                        <thead class="mb-2">
+                            <tr>
+                                <th>FULL NAME</th>
+                                <th>USER ROLE</th>
+                                <th>STATUS</th>
+                                <th>REQUEST DATE & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let request of getapprovedrequest">
+                                <td>{{request.user_name}}</td>
+                                <td>{{request.requestedRole}}</td>
+                                <td>{{request.status}}</td>
+                                <td>{{request.requestDate | date}} &nbsp; {{request.requestTime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <mat-tab label="Reject">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center mt-2">
+                        <thead class="mb-2">
+                            <tr>
+                                <th>FULL NAME</th>
+                                <th>USER ROLE</th>
+                                <th>STATUS</th>
+                                <th>REQUEST DATE & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let request of getRejectedrequest">
+                                <td>{{request.user_name}}</td>
+                                <td>{{request.requestedRole}}</td>
+                                <td>{{request.status}}</td>
+                                <td>{{request.requestDate | date}} &nbsp; {{request.requestTime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="info-title text-center">Personal Information</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="UserDetailsinfo" class="container">
+                    <div class="profile-header text-center">
+                        <img src="{{UserDetailsinfo.trainer_image}}" alt="User Profile"
+                            class="profile-img rounded-circle mb-3">
+                        <h2 class="profile-name">
+                            {{UserDetailsinfo.f_Name}} {{UserDetailsinfo.l_Name}}
+                        </h2>
+                    </div>
+
+                    <div class="user-info-card  mt-4">
+                        <div class="user-detail-section d-flex flex-wrap  ">
+                            <div class="info-column " style="margin-left: 150px;">
+                                <p><span class="info-heading">Mobile:</span> {{UserDetailsinfo.mobile_number}}</p>
+                                <p><span class="info-heading">Email:</span> {{UserDetailsinfo.email_id}}</p>
+                                <p><span class="info-heading">Address1:</span> {{UserDetailsinfo.address1}}</p>
+                                <p><span class="info-heading">City:</span> {{UserDetailsinfo.city}}</p>
+                                <p><span class="info-heading">State:</span> {{UserDetailsinfo.state}}</p>
+                                <p><span class="info-heading">Role:</span> {{UserDetailsinfo.requested_Role}}</p>
+                            </div>
+                            <div class="info-column" style="margin-left: 150px;">
+                                <p><span class="info-heading">WhatsApp:</span> {{UserDetailsinfo.whatsapp_no}}</p>
+                                <p><span class="info-heading">Date of Birth:</span> {{UserDetailsinfo.date_of_birth}}
+                                </p>
+                                <p><span class="info-heading">Address2:</span> {{UserDetailsinfo.address2}}</p>
+                                <p><span class="info-heading">Country:</span> {{UserDetailsinfo.country}}</p>
+                                <p><span class="info-heading">Pincode:</span> {{UserDetailsinfo.pincode}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

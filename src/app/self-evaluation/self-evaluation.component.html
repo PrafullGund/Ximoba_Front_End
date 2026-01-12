@@ -1,0 +1,181 @@
+<img src="../../assets/selfevolution_banner.png" class="object-fit-cover img-fluid" alt="Short INFO">
+
+<div class="container-fluid" style="background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(224, 235, 255, 1) 100%);">
+
+    <div class="container">
+
+        <mat-horizontal-stepper linear #stepper="matStepper" *ngIf="!showTest">
+
+            <mat-step *ngFor="let step of steps; let i = index"
+                [stepControl]="evaluationForm.controls[step.formControlName]">
+                <div *ngIf="i === 0">
+                   
+                    <div class="container-fluid mt-5" style="margin-top: 15vh;">
+                        <div class="image-container">
+                            <img src="/assets/icon-image.png" alt="Short INFO">
+                        </div>
+                        
+                        <div class="box-container">
+                            <label class="bolck-1">
+                                <input type="radio" name="experience" value="fresher"
+                                    (change)="onExperienceSelect('fresher', stepper)">
+                                <span>Are you Fresher?</span>
+                            </label>
+                            <label class="bolck-1">
+                                <input type="radio" name="experience" value="experienced"
+                                    (change)="onExperienceSelect('experienced', stepper)">
+                                <span>Are you Experienced?</span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="button-container">
+                        
+                    </div>
+                </div>
+
+                <div *ngIf="i === 1">
+                    <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group" style="margin-top: 50px;">
+                            <h2>What field are you learning for?</h2>
+                            <div class="fields-container">
+                                <div *ngFor="let field of learningFields" class="field-option">
+                                    <label>
+                                        <input type="radio" formControlName="learningField" [value]="field">
+                                        <span>{{ field }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h2>Do you currently manage people?</h2>
+                            <div class="manage-container">
+                                <label class="manage-option">
+                                    <input type="radio" formControlName="managingPeople" value="yes">
+                                    <span class="radio-circle"></span>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="manage-option">
+                                    <input type="radio" formControlName="managingPeople" value="no">
+                                    <span class="radio-circle"></span>
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="button-container">
+                        <button mat-button matStepperPrevious class="back-btn" style="color: white;">Back</button>
+                        <button mat-button matStepperNext class="back-btn" style="color: white;">Next</button>
+                    </div>
+                </div>
+
+                <div *ngIf="i === 2">
+                    <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group" style="margin-top: 50px;">
+                            <h2>What occupation are you learning for?</h2>
+                            <div class="fields-container">
+                                <div *ngFor="let field of occupationField" class="field-option">
+                                    <label>
+                                        <input type="radio" formControlName="occupationField" [value]="field">
+                                        <span>{{ field }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="button-container">
+                                <button mat-button matStepperPrevious class="back-btn" style="color: white;">Back</button>
+                                <button mat-button matStepperNext class="back-btn" style="color: white;">Next</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div *ngIf="i === 3">
+                    <div>
+                        <h2>Which skills are you interested in exploring?</h2>
+                        <p>Select a few to get started. You can update your choices or explore more skills later.</p>
+
+                        <div class="search-box-5">
+                            🔍<input type="text" placeholder="Search for a skill" [(ngModel)]="searchTerm"
+                                (input)="filterSkills()" style="border: none;" />
+                        </div>
+                        <h2>Trending among learners like you</h2>
+                        <div class="grid">
+                            <div *ngFor="let category of filteredCategories">
+                                <div class="category">{{ category.name }}</div>
+                                <div class="d-flex gap-3">
+                                    <p *ngFor="let skill of category.skills" class="skill-button"
+                                        (click)="selectSkill(skill)">
+                                        + {{ skill }}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button mat-button matStepperPrevious class="back-btn" style="color: white;">Back</button>
+                        <button mat-button matStepperNext class="back-btn" style="color: white;">Next</button>
+                    </div>
+                </div>
+
+                <div *ngIf="i === 4">
+                    <label>are you looking for certificate</label>
+                    <form [formGroup]="certificationForm" (ngSubmit)="onSubmit()">
+                        <h2>Are you interested in any certifications?</h2>
+                        <div class="search-box-5">
+                            🔍 <input type="text" placeholder=" Search for a Certification" formControlName="search"
+                                style="border: none;">
+                        </div>
+                        <h2>Popular with learners like you</h2>
+                        <div class="certifications-container">
+                            <label *ngFor="let cert of certifications" class="certification-card">
+                                <input type="radio" formControlName="selectedCertification" [value]="cert.name">
+                                <div>
+                                    <strong>{{ cert.name }}</strong>
+                                    <p>{{ cert.description }}</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="button-container">
+                            <button mat-button matStepperPrevious class="back-btn">Back</button>
+                            <button mat-button matStepperPrevious class="back-btn">Back</button>
+                            <button  type="submit" [disabled]="!certificationForm.valid"
+                                class="submit-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+
+        <!-- Self-Evaluation Test Section -->
+        <div *ngIf="showTest" class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+            <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
+                <h2 class="text-2xl font-semibold mb-4">Self-Evaluation Test</h2>
+                <p class="text-lg font-medium mb-4">{{ currentQuestionIndex + 1 }}. {{
+                    questions[currentQuestionIndex].question }}</p>
+
+                <div *ngIf="questions[currentQuestionIndex].type === 'mcq'">
+                    <div *ngFor="let option of questions[currentQuestionIndex].options" class="mb-2">
+                        <label class="Options-test">
+                            <input type="radio" name="quiz" [value]="option"
+                                [(ngModel)]="selectedAnswers[currentQuestionIndex]">
+                            <span class="ml-3">{{ option }}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="questions[currentQuestionIndex].type === 'short-answer'">
+                    <textarea [(ngModel)]="selectedAnswers[currentQuestionIndex]" placeholder="Write your answer..."
+                        class="written-answ"></textarea>
+                </div>
+
+                <div class="flex justify-between mt-4">
+                    <button mat-button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">Back</button>
+                    <button mat-button (click)="nextQuestion()" data-toggle="modal">{{ currentQuestionIndex ===
+                        questions.length - 1 ? 'Submit' : 'Next' }}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>

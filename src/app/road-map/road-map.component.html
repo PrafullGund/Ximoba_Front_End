@@ -1,0 +1,14 @@
+<img class="object-fit-cover img-fluid" src="/assets/roadmapBanner.png" alt="roadmapBanner">
+
+<div class="roadmap-container">
+  <div class="roadmap">
+    <div *ngFor="let step of roadmapSteps" class="roadmap-step step-{{step.id}}">
+      <div class="step-content">
+        <h3>{{ step.id }} - {{ step.title }}</h3>
+        <ul>
+          <li *ngFor="let item of step.description">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container rounded my-5 shadow bg-body-tertiary ">
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-center justify-content-between p-3 rounded-top"
+            style="background-color: #E9E5FB;">
+            <p class="poppins-semibold fs-5">Shopping Cart</p>
+            <button routerLink="/relevance/allproducts" class="btn btn-0">Continue Shopping</button>
+        </div>
+
+        <div *ngIf="showCartData && showCartData.length > 0">
+            <div class="table-responsive">
+                <table class="table  table-bordered border-dark text-center mt-2">
+                    <thead>
+                        <tr>
+                            <th>Images</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cart of showCartData; let i = index">
+                            <td><img class="rounded" src="{{cart.productImage}}" height="80px" width="80px"></td>
+                            <td>{{cart.productName}}</td>
+                            <td>₹ {{cart.productPrice}}</td>
+                            <td>
+                                <button class="counter" (click)="decrement(i)"> <i class="fa-solid fa-minus"></i>
+                                </button> &nbsp;
+                                <label>{{ cart.quantity }}</label>&nbsp;
+                                <button class="counter" (click)="increment(i)"> <i class="fa-solid fa-plus"></i>
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <i (click)="deleteCartProduct(cart.productId)" class="fa-solid fa-trash"></i>
+                            </td>
+                            <td>₹ {{cart.productTotalPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row d-flex justify-content-end pt-3">
+                <div class="col-sm-12 col-md-6 col-lg-3 table-responsive">
+                    <h6>CART TOTALS</h6>
+                    <table class="table" style="border: 1px solid black;">
+                        <tbody class="table-bordered border-dark">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td class="text-end">₹ {{totalprice}}</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td class="text-end">₹ {{totalprice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center mb-3 ">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!showCartData || showCartData.length === 0" class="col-12 text-center p-3">
+            <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover" height="300px" width="300px"
+                alt="">
+        </div>
+    </div>
+</div>

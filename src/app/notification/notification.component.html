@@ -1,0 +1,68 @@
+<div class="container-fluid" style="background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(224, 235, 255, 1) 100%);">
+    <div class="container rounded px-4 shadow bg-body-tertiary mb-4" style="background-color: var(--WhiteColor);">
+      <!-- <div class="row">
+          <div class="d-flex align-items-center  justify-content-between">
+            <h3 class="my-3 text-primary d-none d-sm-block">
+              <i class="fa-solid fa-bell position-relative">
+              </i> Notification
+            </h3>
+            <div class="d-flex gap-3">
+             
+                <button class="btn btn-sm" style="color: var(--WhiteColor);background-color: var(--btndarkColor);" (click)="showAllNotifications()">All</button>
+                
+                
+                <button class="btn btn-sm" style="color: var(--WhiteColor);background-color: var(--btndarkColor);" (click)="showUnreadNotifications()">Unread</button>
+                
+                <button class="btn btn-sm" style="color: var(--WhiteColor);background-color: var(--TextColor);" (click)="markAllNotificationsAsSeen()">Mark all as completed</button>
+            </div>
+          </div>
+      </div> -->
+      
+      <div class="row">
+        <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-sm-row">
+          <!-- Notification Header -->
+          <h3 class="my-3 text-primary ">
+            <i class="fa-solid fa-bell position-relative"></i> Notification
+          </h3>
+      
+          <!-- Buttons Section -->
+          <div class="d-flex gap-3 mt-3 mt-sm-0">
+            <!-- Button to show all notifications -->
+            <button (click)="loadNotifications(currentPage, itemsPerPage)" class="btn btn-sm" style="color: var(--WhiteColor); background-color: var(--btndarkColor);" >All</button>
+            
+            <!-- Button to show only unread notifications -->
+            <button (click)="showUnreadNotifications()" class="btn btn-sm" style="color: var(--WhiteColor); background-color: var(--btndarkColor);" >Unread</button>            
+          </div>
+        </div>
+      </div>
+      
+      <section class="p-3 rounded">
+        <!-- Display all notifications -->
+        <div *ngFor="let Data of Shownotification | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }" 
+             class="row mb-3 border rounded shadow-sm p-3 align-items-center" 
+             (click)="markNotificationAsSeen(Data._id)" style="cursor: pointer;">
+          <div class="col-12 col-md-9">
+            <h6 class="m-0" [ngClass]="{'text-muted': Data.isSeen, 'fw-bold': !Data.isSeen}" style="color: var(--btndarkColor);">
+              {{ Data.activityType }}
+            </h6>
+            <p class="m-0 mt-1" [ngClass]="{'text-muted': Data.isSeen, 'text-dark fw-bold': !Data.isSeen}" style="font-size: 0.9rem;">
+              {{ Data.message }}
+            </p>
+          </div>
+          <div class="col-12 col-md-3 text-md-end mt-2 mt-md-0">
+            <div class="d-flex align-items-center justify-content-md-end text-muted" style="gap: 10px;">
+              <span class="d-flex align-items-center" style="font-size: 0.85rem;">
+                <i class="fa-solid fa-calendar-alt me-1 pe-1"></i>
+                {{ Data.createdAt }}
+              </span>
+              <span class="d-flex align-items-center" style="font-size: 0.85rem;">
+                {{ Data.createdAtTime }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <pagination-controls (pageChange)="onPageChange($event)" class="text-end"></pagination-controls>
+      </section>
+    </div>
+  </div>
+  

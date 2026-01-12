@@ -1,0 +1,136 @@
+.background-arch {
+    background-color: #acd7e0;
+    border-radius: 50% 50% 0 0;
+    padding-top: 80px;
+    margin-top: 100px !important;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.counter {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.font {
+    font-size: 59px;
+    font-weight: 700;
+    line-height: 65px;
+}
+
+.button {
+    padding: 16px 48px;
+}
+
+.Subscribe-section {
+    padding: 0px 48px;
+}
+
+.maincontainer {
+    padding: 0 48px;
+}
+
+.subscribe {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0 48px;
+}
+
+@media (max-width: 767.98px) {
+    .background-arch {
+        margin-top: 15px !important;
+    }
+}
+
+.profile-img {
+    padding: 0 10px;
+    height: 65%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.button {
+    padding: 7px 15px;
+}
+
+.font {
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 45px;
+}
+
+.overlay-card {
+    position: absolute;
+    bottom: 20px;
+    left: 70%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    width: auto;
+}
+
+.subscribe {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 29px;
+    background-color: #1b4ba4;
+}
+
+.card-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.row {
+    display: flex;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 690px) {
+    .counter {
+        font-size: 18px;
+        font-weight: 550;
+    }
+
+    .overlay-card {
+        position: absolute;
+        bottom: 12px;
+        left: 88%;
+        transform: translateX(-50%);
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 3;
+        width: auto;
+    }
+
+    .maincontainer {
+        padding: 0 10px;
+    }
+}

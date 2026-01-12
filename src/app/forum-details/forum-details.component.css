@@ -1,0 +1,20 @@
+.forum-title{
+    color: #265ABB;
+}
+
+.forum-creator-name{
+    color: var(--TextColor);
+}
+
+.author-name{
+    font-size: small;
+    color: var(--TextColor);
+}
+
+.terms-condition{
+    color: #6149CD;
+}
+
+.sign-up{
+    width: 25%;
+}

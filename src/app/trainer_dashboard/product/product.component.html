@@ -1,0 +1,311 @@
+<div class="container-fluid">
+  <div class="row">
+    <img class="img-fluid rounded" src="../../../assets/trainer_home_product.png" alt="">
+  </div>
+
+  <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab *ngIf="isTrainer || isSELF_EXPERT || isInstitute " label="My Products">
+      <div class="col-12 d-flex flex-wrap gap-3 justify-content-start justify-content-md-end mt-2">
+        <button class="btn btn-sm rounded-pill text-light px-3 custom-blue-btn" data-bs-toggle="modal"
+          data-bs-target="#AddProductModal" data-bs-whatever="@mdo">
+          Add New Product
+        </button>
+        <button (click)="toggleIcon()" class="btn btn-sm px-3 rounded-pill text-light salmon-btn">
+          Update/Delete Product
+        </button>
+      </div>
+
+      <div *ngIf="showProductData && showProductData.length > 0"
+        class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3">
+        <div *ngFor="let product of showProductData" class="col-sm-12 col-md-3 col-lg-4 mb-3">
+          <div class="card productcard">
+            <img src="{{product.product_image}}" routerLink="/productdetails/{{product._id}}"
+              class="card-img-top img-fluid" alt="...">
+            <button routerLink="/productdetails/{{product._id}}" class="btn btn-light rounded onproducthover">Add to
+              cart</button>
+            <span class="onproducthoverflag rounded px-3">{{product.identityFlag}}</span>
+            <div class="card-body text-center mb-0 pt-0 trainer-name-container">
+              <div class="d-flex align-items-center justify-content-between mt-1">
+                <p class="m-0 p-0 text-end w-25"></p>
+                <div class="w-50 text-center">
+                  <ng-container *ngFor="let star of starsArray; let i = index">
+                    <i class="fa-solid fa-star"
+                      [ngStyle]="{ 'color': i < (product.products_rating ) ? '#FFAE06' : '#d3d3d3' }"></i>
+                  </ng-container>
+                </div>
+                <small class="m-0 p-0 text-end w-25">{{product.product_flag }}</small>
+              </div>
+              <h5 class="card-title  text-capitalize" (mouseenter)="showproductName = true"
+                (mouseleave)="showproductName = false">
+                {{ trunproductName(product.products_name) }}
+              </h5>
+              <p *ngIf="showproductName" class=" full-name rounded product-name-text">{{product.products_name }}</p>
+              <p class="text-muted poppins-regular product-category-text">{{product.products_category}}</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <i class="fa-solid fa-cart-shopping fs-5 cart-icon"></i>
+                <span class="d-flex align-items-center gap-2">
+                  <small class="text-decoration-line-through">₹ {{product.products_price}}</small>
+                  <b>₹ {{product.products_selling_price}}</b>
+                </span>
+                <i class="fa-regular fa-heart fs-5 cart-icon"></i>
+              </div>
+            </div>
+            <i routerLink="/editproduct/{{product._id}}" *ngIf="showIcon" class="fa-solid fa-edit right-side-top"></i>
+            <i (click)="onDelete(product._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top-delete"></i>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!showProductData || showProductData.length === 0" class="col-12 text-center">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-image" alt="">
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="isUser" label="Purchase Products">
+      <div *ngIf="showProductDataUser && showProductDataUser.length > 0"
+        class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3">
+        <div *ngFor="let product of showProductDataUser" class="col-sm-12 col-md-3 col-lg-4 mb-3">
+          <div class="card productcard">
+            <img src="{{product.product_image}}" routerLink="/productdetails/{{product._id}}"
+              class="card-img-top img-fluid" alt="...">
+            <button routerLink="/productdetails/{{product._id}}" class="btn btn-light rounded onproducthover">Add to
+              cart</button>
+            <span class="onproducthoverflag rounded px-3">{{product.identityFlag}}</span>
+            <div class="card-body text-center mb-0 pt-0 trainer-name-container">
+              <div class="d-flex align-items-center justify-content-between mt-1">
+                <p class="m-0 p-0 text-end w-25"></p>
+                <div class="w-50 text-center">
+                  <ng-container *ngFor="let star of starsArray; let i = index">
+                    <i class="fa-solid fa-star"
+                      [ngStyle]="{ 'color': i < (product.product_rating ) ? '#FFAE06' : '#d3d3d3' }"></i>
+                  </ng-container>
+                </div>
+                <small class="m-0 p-0 text-end w-25">{{product.product_flag }}</small>
+              </div>
+              <h5 class="card-title  text-capitalize" (mouseenter)="showproductName1 = true"
+                (mouseleave)="showproductName1 = false">
+                {{ trunproductName1(product.product_name) }}
+              </h5>
+              <p *ngIf="showproductName1" class=" full-name rounded .product-name-text">{{product.product_name }}</p>
+              <p class="text-muted poppins-regular .product-category-text">{{product.category }}</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <i class="fa-solid fa-cart-shopping fs-5 cart-icon"></i>
+                <span class="d-flex align-items-center gap-2">
+                  <small class="text-decoration-line-through">₹ {{product.product_prize }}</small>
+                  <b>₹ {{product.product_selling_prize}}</b>
+                </span>
+                <i class="fa-regular fa-heart fs-5 cart-icon"></i>
+              </div>
+              <i routerLink="/editproduct/{{product._id}}" *ngIf="showIcon" class="fa-solid fa-edit right-side-top"></i>
+              <i (click)="onDelete(product._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top-delete"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!showProductDataUser || showProductDataUser.length === 0" class="col-12 text-center">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-img" alt="">
+      </div>
+
+    </mat-tab>
+    <mat-tab *ngIf="isInstitute" label="Product Request">
+      <table class="table table-bordered text-center mt-2">
+        <thead class="mb-2">
+          <tr>
+            <th>Trainer Full Name</th>
+            <th>Product Name</th>
+            <th>STATUS</th>
+            <th>REQUEST DATE & Time</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of showPendingProducts">
+            <td>
+              <i class="fa-solid fa-user mx-2 text-primary"></i>
+              {{request.user_name}}
+            </td>
+            <td (click)="openProductDetailsModal(request.productId)" data-bs-toggle="modal"
+              data-bs-target="#ProductDetails" class="coursename clickable-cell">{{request.productName}}</td>
+            <td>{{request.status}}</td>
+            <td>{{request.date | date}} &nbsp; {{request.time}}</td>
+            <td>
+              <button (click)="handleProductApproval(request.productId,  'approved')"
+                class="btn text-light bg-success me-4">Approve</button>
+              <button (click)="handleProductApproval(request.productId,  'rejected')"
+                class="btn text-light bg-danger">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!showPendingProducts || showPendingProducts.length === 0" class="col-12 text-center mt-2">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-image" alt="">
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!-- Modal For Show Products Details -->
+<div class="modal fade" id="ProductDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="info-title text-center">Product Information</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="Showproductdata" class="row">
+          <div class="col-sm-12 col-md-12 col-lg-5 mt-3 ">
+            <img src="{{Showproductdata.product_image}}" class="ThumbnailImage img-fluid thumbnail-img-rounded"
+              alt="...">
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-7  p-3">
+            <div class="d-flex align-items-center gap-2 ">
+              <p class="mb-3 poppins-semibold product-name-text">{{Showproductdata.product_name}} </p>
+              <p class="mt-2 business-name-text">( Provide by {{Showproductdata.business_Name}} )</p>
+            </div>
+
+            <p class="poppins-regular justify-text">{{Showproductdata.products_info}}</p>
+            <p class="mb-1 poppins-semibold ">Price : ₹ <span
+                class="text-decoration-line-through">{{Showproductdata.product_prize}}</span></p>
+            <p class="mb-2 poppins-semibold">Selling Prize : ₹ {{Showproductdata.product_selling_prize}}</p>
+            <p class="mb-2 poppins-semibold">Product Type : {{Showproductdata.product_flag}}</p>
+            <div class="mt-3 pb" style="cursor: pointer;">
+              <b class="me-1">Tags: </b>
+              <label *ngFor="let tag of Showproductdata.tags" class="border rounded py-1 px-2 me-2 mb-2"> {{tag
+                }}</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h5>Description</h5>
+          <p style="text-align: justify;">{{Showproductdata?.products_description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Model For Add New Products -->
+<div class="modal fade" id="AddProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 pt-1">
+        <form (ngSubmit)="onSubmit(productForm)" #productForm="ngForm">
+          <div class="row">
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="product_name" class="col-form-label">Product Name<sup>*</sup></label>
+              <input class="form-control" type="text" id="product_name" [(ngModel)]="product.product_name"
+                name="product_name" required #productName="ngModel" />
+              <div *ngIf="productName.invalid && productName.touched" class="text-danger">
+                Product Name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="product_prize" class="col-form-label">Product Prize<sup>*</sup></label>
+              <input class="form-control" type="number" id="product_prize" [(ngModel)]="product.product_prize"
+                name="product_prize" required #productPrize="ngModel" />
+              <div *ngIf="productPrize.invalid && productPrize.touched" class="text-danger">
+                Product Prize is required and must be a valid number.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="product_selling_prize" class="col-form-label">Product Selling Prize<sup>*</sup></label>
+              <input class="form-control" type="number" id="product_selling_prize"
+                [(ngModel)]="product.product_selling_prize" name="product_selling_prize" required
+                #productSellingPrize="ngModel" />
+              <div *ngIf="productSellingPrize.invalid && productSellingPrize.touched" class="text-danger">
+                Product Selling Prize is required and must be a valid number.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="categoryid" class="col-form-label">Select Categories<sup>*</sup></label>
+              <select class="form-select" id="categoryid" [(ngModel)]="product.categoryid" name="categoryid" required
+                [(ngModel)]="fetchcategoryID" (change)="getsubcategory()" #categoryId="ngModel">
+                <option selected disabled>Select Categories</option>
+                <option *ngFor="let category of showCategoryData" [value]="category._id">
+                  {{ category.category_name }}
+                </option>
+              </select>
+              <div *ngIf="categoryId.invalid && categoryId.touched" class="text-danger">
+                Please select a category.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="sub_category" class="col-form-label">Select Sub Categories <sup>*</sup></label>
+              <select class="form-select" id="sub_category" [(ngModel)]="product.sub_category" name="sub_category"
+                #subcategory="ngModel" required>
+                <option value="" disabled selected>Select Sub Categories</option>
+                <option *ngFor="let category of subCategory" [value]="category._id">{{ category.sub_category_name }}
+                </option>
+              </select>
+              <div *ngIf="subcategory.invalid && subcategory.touched" class="text-danger">
+                <small>Select a sub category.</small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="product_flag" class="col-form-label">Product Type <sup>*</sup></label>
+              <select class="form-select" aria-label="Default select example" id="product_flag"
+                [(ngModel)]="product.product_flag" name="product_flag" #producttype="ngModel" required>
+                <option selected disabled>Select Mode</option>
+                <option value="Physical">Physical</option>
+                <option value="Virtual">Virtual</option>
+              </select>
+              <div *ngIf="producttype.invalid && producttype.touched" class="text-danger">
+                <small>Select a sub category.</small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="tags" class="col-form-label">Tags <sup>*</sup></label><br>
+              <tag-input [(ngModel)]="product.tags" [editable]="true" id="tags" name="tags" [displayBy]="'name'"
+                [identifyBy]="'name'" class="border rounded" #tags="ngModel" required>
+              </tag-input>
+              <div *ngIf="tags.invalid && tags.touched" class="text-danger">
+                Please add at least one tag.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="product_image" class="col-form-label">Product Image</label>
+              <input class="form-control" type="file" id="product_image" name="product_image"
+                (change)="onFileSelected($event)" required />
+              <div *ngIf="!product_image && productForm.submitted" class="text-danger">
+                Product image is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+              <label for="products_info" class="col-form-label">Product Short Information<sup>*</sup></label>
+              <textarea class="form-control" id="products_info" [(ngModel)]="product.products_info" name="products_info"
+                required #productshortinfo="ngModel"></textarea>
+              <div *ngIf="productshortinfo.invalid && productshortinfo.touched" class="text-danger">
+                Product Short Information is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+              <label for="products_description" class="col-form-label">Product Details Information<sup>*</sup></label>
+              <textarea class="form-control" id="products_description" [(ngModel)]="product.products_description"
+                name="products_description" required #productdetailinfo="ngModel"></textarea>
+              <div *ngIf="productdetailinfo.invalid && productdetailinfo.touched" class="text-danger">
+                Product Details Information is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

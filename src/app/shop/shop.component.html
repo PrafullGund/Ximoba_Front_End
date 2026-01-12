@@ -1,0 +1,155 @@
+<div *ngIf="Showproductdata" class="container rounded mt-5 mb-3 shadow-lg bg-body-tertiary" style="background-color: var(--bodyColor);">
+   
+   <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-5 mt-3 ">
+      <img src="{{Showproductdata.product_image}}" class="ThumbnailImage img-fluid" alt="..." style="border-radius: 8px;">
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-7  p-3" >
+      <div class="d-flex align-items-center gap-2 ">
+        <p class="mb-3 poppins-semibold" style="font-size: 25px;">{{Showproductdata.products_name}}  </p>
+        <p class="mt-2" style="font-size: small;">( Provide by {{Showproductdata.business_Name}} )</p>
+      </div>  
+
+      <p class="poppins-regular" style="text-align: justify;">{{Showproductdata.products_info}}</p>
+      <p class="mb-1 poppins-semibold ">Price :  ₹ <span class="text-decoration-line-through">{{Showproductdata.products_price}}</span></p>
+      <p class="mb-2 poppins-semibold" >Selling Prize : ₹ {{Showproductdata.products_selling_price}}</p>
+      <p class="mb-2 poppins-semibold">Product Type : {{Showproductdata.product_flag}}</p>
+
+
+      <div class="  d-flex gap-3 mb-2">
+        <div class="counter rounded d-flex justify-content-between">
+          <button  class="btn p-2" (click)="decrement()"><i class="fa-solid fa-minus"></i></button>
+          <span class="mx-3 p-1" >{{ count }}</span>
+          <button class="btn p-2" (click)="increment()"> <i class="fa-solid fa-plus"></i></button>
+        </div>
+        <button (click)="buyproduct( count , Showproductdata._id)"  class="btn text-white me-3 mb-2" style="background-color: var(--TextColor)">Buy now</button>
+      </div>
+      
+      
+      <div class="mt-3">
+        
+          <button  routerLink="/coursedetails/{{Showproductdata?.traienrid}}" class="btn btn-outline-primary me-3" >View Trainer Profile</button>
+          <button  (click)="shareicon()" class="btn text-white   px-2" style="background-color: #307DFF;"><i class="fas fa-share-alt fs-5"></i> Share</button>
+          <div class="share-container">
+              <div *ngIf="showshare" class="share-options gap-4 p-2">
+                  <a (click)="shareOnFacebook()" class="share-option p-1">
+                      <i class="fab fa-facebook fs-1" style="color: #0976e4;"></i>
+                  </a>
+                  <a (click)="shareOnWhatsApp()" class="share-option p-1">
+                      <i class="fab fa-whatsapp fs-1" style="color: #30d14e; text-decoration: none;"></i>
+                  </a>
+                  <a (click)="copyLink()" class="share-option p-1">
+                      <i class="fas fa-link fs-3"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+
+      <div class="mt-3 pb" style="cursor: pointer;">
+        <b class="me-1">Tags: </b>
+        <label *ngFor="let tag of Showproductdata.tags" class="border rounded py-1 px-2 me-2 mb-2"> {{tag }}</label>
+      </div>
+  </div>
+   </div>
+   <div class="row">
+    <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+      <mat-tab label="Description" >
+        <div class="p-3">
+        <p style="text-align: justify;">{{Showproductdata?.products_description}}</p>
+      </div>
+        </mat-tab>
+      <mat-tab label="Review" >
+        <section class="p-3">
+        <div class="row " *ngFor="let review of ShowProductReview | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }">
+          <div class="col-1 text-end">
+            <img src="{{review.trainer_image}}" class="object-fit-cover rounded-circle" height="60px" width="60px" alt="">
+          </div>
+          <div class="col-10">
+            <h6>{{review.user_name}}</h6>
+            <div>
+              <span *ngFor="let star of starsArray; let i = index"
+              [ngClass]="{'fa fa-star checked': i < review.star_count, 'fa fa-star': i <= review.star_count }">
+             </span>
+           </div>
+           <p>{{review.review}}</p>
+          </div>
+        </div>
+        <pagination-controls (pageChange)="onPageChange($event)" class="text-end" style="font-size: small;"></pagination-controls>
+        <!-- Write Review -->
+        <div class="mt-3" >
+          <h5 class="text-color">Write Review</h5>
+          <div class="row">
+              <form (ngSubmit)="postreviewProduct()" #reviewForm="ngForm">
+  
+                  <div class="d-flex align-items-center gap-2 star-rating">
+                      <span *ngFor="let i of stars; let index = index" class="fa fa-star"
+                          [ngClass]="{'checked': index < rating}" (click)="toggleRating(index + 1)"
+                          style="cursor: pointer;"></span>
+                      <span class="border px-2">{{ rating }}</span>
+                  </div>
+                  <div class="my-3">
+                      <!-- <textarea class="form-control" placeholder="Message" [(ngModel)]="review.review"
+                          name="review" id="review"></textarea> -->
+                          <textarea class="form-control" placeholder="Message" [(ngModel)]="review.review"
+                          name="review" id="review" #reviewField="ngModel" required></textarea>
+                          <div *ngIf="reviewField.invalid && (reviewField.touched || reviewForm.submitted)" class="text-danger">
+                            <small *ngIf="reviewField.errors?.['required']">Review is required.</small>
+                          </div>
+                  </div>
+                  <div>
+                      <button type="submit" class="btn btnq">Submit you'r Review</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+        </section>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+    <div class="p-3">
+        <h5 class="fw-bold" style="color: var(--TextColor);">Related Product</h5>
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 gy-2">
+          <div *ngFor="let product of ShowRelatedPeoduct " class="col-sm-12 col-md-3 col-lg-3 mb-3">
+            <div class="card productcard">
+              <img src="{{product.product_image}}" routerLink="/productdetails/{{product._id}}" class="card-img-top img-fluid"  alt="...">
+                <button routerLink="/productdetails/{{product._id}}" class="btn btn-light rounded onproducthover">Add to cart</button>
+                <span class="onproducthoverflag rounded px-3">{{product.identityFlag}}</span>
+              <div class="card-body text-center mb-0 pt-0 trainer-name-container">
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                  <p class="m-0 p-0 text-end w-25"></p>
+                      <div class="w-50 text-center">
+                        <ng-container *ngFor="let star of starsArray; let i = index">
+                          <i
+                            class="fa-solid fa-star"
+                            [ngStyle]="{ 'color': i < (product.avgRating ) ? '#FFAE06' : '#d3d3d3' }"
+                          ></i>
+                        </ng-container>
+                      </div>
+                   <small class="m-0 p-0 text-end w-25">{{product.product_flag}}</small>
+                </div>
+                <h5 class="card-title  text-capitalize" 
+                (mouseenter)="showproductName = true" 
+                (mouseleave)="showproductName = false">
+                {{ trunproductName(product.products_name) }}
+              </h5>
+             <p *ngIf="showproductName" class=" full-name rounded" style="font-size: 13px;" >{{product.products_name }}</p>
+                <p>{{product.categoryNam}}</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <i class="fa-solid fa-cart-shopping fs-5" style="color: var(--TextColor);"></i>
+                  <span class="d-flex align-items-center gap-2">
+                    <small class="text-decoration-line-through">₹ {{product.products_price}}</small> 
+                    <b>₹ {{product.products_selling_price}}</b>
+                  </span>
+                  <i class="fa-regular fa-heart fs-5" style="color: var(--TextColor);"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+    </div>
+</div>
+
+
+
+ 

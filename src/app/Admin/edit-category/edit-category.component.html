@@ -1,0 +1,36 @@
+<div class="container-fluid" style="background-color: #F9F8FF;">
+  <div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded border my-3">
+
+  <div class="row p-5">
+    <div class="col-12">
+      <h1 class="text-center">Update Category</h1>
+      <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">      
+          <div class="mb-3">
+            <label for="category_name" class="col-form-label">Select Categories<sup>*</sup></label>
+            <input  type="text" formControlName="category_name" class="form-control" name="category_name" id="category_name" list="categoryName">
+          </div>
+
+          <div class=" mb-3">
+            <label for="sub_title" class="col-form-label">Sub Title<sup>*</sup></label>
+            <input type="text" class="form-control" id="sub_title" name="category_name" formControlName="sub_title" />
+          </div>
+
+          <div class="mb-3">
+            <label for="category_image" class="col-form-label">Upload Category Image</label><br>
+            <input type="file" id="category_image" (change)="onFileSelected($event)" required>
+            <div *ngIf="category_image">
+              <img [src]="categoryImagePreview" alt="Category Image" class="img-thumbnail mt-2" style="width: 150px; height: auto;">
+            </div>
+          </div>
+
+          
+        <div class="text-center">
+          <button routerLink="/dashboard/admincategory" type="button" class="btn btn-secondary me-3" >Back</button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+  </div>
+</div>

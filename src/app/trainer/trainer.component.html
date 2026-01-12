@@ -1,0 +1,41 @@
+<div class="px-3" class="all-section">
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-1 gap-4">
+    <div *ngFor="let trainer of filteredtrainer | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }" class="col-sm-12  col-md-6 col-lg-4  mb-3" class="trainer-column" >
+      <div class="card trainercard" routerLink="/coursedetails/{{trainer.t_id}}" >
+        <div class="text-center mt-3">
+        <img src="{{trainer.trainer_image}}" class="object-fit-cover rounded-circle img-class"  alt="...">
+      </div>
+      <button routerLink="/coursedetails/{{trainer._id}}" class="btn btn-sm rounded viewtrainerbtn">
+        View Profile
+      </button>
+
+      <div class="card-body text-center">
+        <button class="btn btn-sm TrainerFlag rounded px-2">
+          {{trainer.flag}}
+        </button>
+        <br>
+          <div class="trainer-name-container pt-2">
+            <h5 class="card-title text-capitalize sub-title" 
+               (mouseenter)="showFullName = true" 
+               (mouseleave)="showFullName = false">
+               {{ truncateBusinessName(trainer.Business_Name) }}
+            </h5>
+            <span *ngIf="showFullName" class="full-name rounded">{{ trainer.Business_Name }}</span>
+         </div>
+          <p class="text-capitalize" > {{trainer.f_Name }}  {{trainer.l_Name }}</p>
+            <div class="social-icons">
+              <i href="https://www.facebook.com"  class="fa-brands fa-facebook  rounded-pill social-icons1"></i>
+              <i href="https://twitter.com" target="_blank" class="fab fa-twitter rounded-pill social-icons1"></i>
+              <i href="https://www.instagram.com" target="_blank" class="fab fa-instagram rounded-pill social-icons1" ></i>
+              <i href="https://www.youtube.com" target="_blank" class="fab fa-youtube  rounded-pill social-icons1"></i>
+            </div>
+          </div>
+        <div class="card-footer d-flex justify-content-between trainercardfooter">
+          <p style="margin-top: 10px;"> <i class="fa-solid fa-star fs-5 trainer-rating"></i> {{trainer.ratings}}</p>
+          <b>{{trainer.course_count}} Courses</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="onPageChange($event)" class="text-end"></pagination-controls>
+</div>

@@ -1,0 +1,693 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center w-100" style="height: 200px;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!showprofile && !isLoading" class="alert alert-warning text-center" role="alert">
+  Sorry: Please try again.
+</div>
+
+<div *ngIf="showprofile" class="container-fluid m-0 g-0" style="background-color: #F5F5F5; background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(224, 235, 255, 1) 100%);">
+
+  <div class="row g-0 mb-0 gallary-section m-0">
+
+    <div class="col-sm-12 col-md-6 col-lg-10 ">
+      <div class="row g-0">
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+          <img
+            [src]="showprofile?.gallarys?.[0]?.photos ? showprofile.gallarys[0].photos : 'assets/gallery-small-img.jpg'"
+            alt="Gallery Image" class="object-fit-cover img-fluid w-100 main-four-image">
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+          <img
+            [src]="showprofile?.gallarys?.[1]?.photos ? showprofile.gallarys[1].photos : 'assets/gallery-small-img.jpg'"
+            alt="Gallery Image" class="object-fit-cover img-fluid   w-100 main-four-image">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+          <img
+            [src]="showprofile?.gallarys?.[2]?.photos ? showprofile.gallarys[2].photos : 'assets/gallery-small-img.jpg'"
+            alt="Gallery Image" class="object-fit-cover img-fluid   w-100 main-four-image">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+          <img
+            [src]="showprofile?.gallarys?.[3]?.photos ? showprofile.gallarys[3].photos : 'assets/gallery-small-img.jpg'"
+            alt="Gallery Image" class="object-fit-cover img-fluid   w-100 main-four-image">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-12 col-md-6 col-lg-2">
+      <div class="row g-0 m-0 ">
+        <div class="col-sm-6 col-md-6 col-lg-6 galleryimg   mb-lg-0">
+          <img
+            [src]="showprofile?.gallarys?.[4]?.photos ? showprofile.gallarys[4].photos : 'assets/gallery-small-img.jpg'"
+            class=" object-fit-cover img-fluid fifth-section" alt="Gallery Image">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 galleryimg  mb-lg-0">
+          <img
+            [src]="showprofile?.gallarys?.[5]?.photos ? showprofile.gallarys[5].photos : 'assets/gallery-small-img.jpg'"
+            class=" object-fit-cover img-fluid fifth-section" alt="Gallery Image">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 galleryimg  position-relative" data-bs-toggle="modal"
+          data-bs-target="#gallery" style="cursor: pointer;">
+          <img
+            [src]="showprofile?.gallarys?.[6]?.photos ? showprofile.gallarys[6].photos : 'assets/gallery-small-img.jpg'"
+            class=" object-fit-cover opacity-25 img-fluid cursor-pointer fifth-section" alt="Gallery Image">
+          <span class="position-absolute top-50 start-50 translate-middle fw-bold text-dark p-2"> Gallery</span>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 galleryimg ">
+          <img
+            [src]="showprofile?.gallarys?.[7]?.photos ? showprofile.gallarys[7].photos : 'assets/gallery-small-img.jpg'"
+            class=" object-fit-cover img-fluid fifth-section" alt="Gallery Image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container gx-0">
+    <div class="row my-3">
+      <div class="table-responsive">
+        <div class="d-flex justify-content-center align-items-center">
+          <ul class="scrolltabs text-center pe-3">
+            <li *ngIf="showprofile.About[0]?.about_us" class="nav-item poppins-light" href="#About"
+              (click)="scrollToSection($event, 'About')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              About&nbsp;us <span class="divider">|</span>
+            </li>
+
+            <li
+              *ngIf="showprofile.Educations[0]?.school && showprofile.Educations[0]?.college && showprofile.Educations[0]?.degree"
+              class="nav-item poppins-light" href="#Education" (click)="scrollToEducation($event)"
+              routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+              Education <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="showprofile.Educations[0]?.achievements" class="nav-item poppins-light" href="#Achievements"
+              (click)="scrollToSection($event, 'Achievements')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Achievements/Certificates <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="showprofile?.skills[0]" class="nav-item poppins-light" href="#Skills"
+              (click)="scrollToSection($event, 'Skills')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Skills <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="showprofile.About[0]?.our_services" class="nav-item poppins-light" href="#Services"
+              (click)="scrollToSection($event, 'Services')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Services <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="showprofile?.testimonials[0]" class="nav-item poppins-light" href="#Testimonials"
+              (click)="scrollToSection($event, 'Testimonials')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Testimonials <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="AllCourses.length > 0" class="nav-item poppins-light" href="#Courses"
+              (click)="scrollToSection($event, 'Courses')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Courses <span class="divider">|</span>
+            </li>
+
+            <li *ngIf="showReviewData.length > 0" class="nav-item poppins-light" href="#Reviews"
+              (click)="scrollToSection($event, 'Reviews')" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              Reviews
+            </li>
+
+            <li class="nav-item poppins-light">
+              <a href="#ChatBox" class="nav-link" (click)="scrollToChatBox($event)">
+                 ChatBox
+              </a>
+            </li>
+            
+            <li class="btn btn-sm text-center " routerLink="/forum">Forum</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="m-0 p-0 g-0">
+    <div class="row gx-0  ">
+
+      <!-- First Row code start hrer -->
+      <div class="col-sm-12 col-md-4 col-lg-4 pt-3 border px-3" style="background-color: #ffffff;">
+        <div class="d-flex align-items-center gap-2 ">
+          <img *ngIf="showprofile.trainer?.role === 'SELF_EXPERT'" src="../../assets/SELF_EXPERT.png" class="rounded"
+            height="30px" width="30px" alt="" style="background-color:var(--TextColor);">
+          <img *ngIf="showprofile.trainer?.role === 'INSTITUTE'" src="../../assets/INSTITUTE.png" class="rounded"
+            height="30px" width="30px" alt="" style="background-color:var(--TextColor);">
+          <h5 class="text-color poppins-semibold  text-capitalize mt-2" style="font-size: 20px;">
+            {{showprofile.trainer?.business_Name || showprofile.institutes}}
+          </h5>
+        </div>
+        <div *ngIf="showprofile.trainer?.f_Name[0] && showprofile.trainer?.l_Name[0]"
+          class="d-flex align-items-center gap-3">
+          <i class="fa-solid fa-user card-user" style=""> </i>
+          <h6 class="mt-1 text-capitalize poppins-regular" style="font-size: 14px;"> {{showprofile.trainer?.f_Name + " "
+            +
+            showprofile.trainer?.l_Name}} </h6>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="border rounded" style="padding: 0px 5px;">{{showprofile.trainer?.ratings}}</span>
+          <span>
+            <ng-container *ngFor="let star of starsArray; let i = index">
+              <i class="fa-solid fa-star"
+                [ngStyle]="{ 'color': i < (showprofile.trainer?.ratings ) ? '#FFAE06' : '#d3d3d3' }"></i>
+            </ng-container>
+          </span>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-1 mb-2">
+          <div>
+            <i class="fa-solid fa-location-dot"></i> &nbsp;
+            <span class="poppins-regular" style="font-size: 14px;">{{showprofile.trainer?.address1 + ", " +
+              showprofile.trainer?.address2 }}</span>
+          </div>
+          <div class="d-flex gap-2 py-1">
+            <a class="" href="{{showprofile?.SocialMedias[0]?.facebook}}" target="_blank" data-bs-toggle="tooltip"
+              data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Facebook"><img
+                src="../../assets/facebook_icon1.png" alt=""></a>
+            <a class="" href="{{showprofile.SocialMedias[0]?.instagram}}" target="_blank" data-bs-toggle="tooltip"
+              data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Instagram">
+              <img src="../../assets/istagram_icons1.png" alt=""></a>
+            <a class="" href="{{showprofile.SocialMedias[0]?.youtube}}" target="_blank" data-bs-toggle="tooltip"
+              data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Youtube">
+              <img src="../../assets/icons8-youtube-100 1.png" alt=""></a>
+            <a class="" href="{{showprofile.SocialMedias[0]?.Linkdein}}" target="_blank" data-bs-toggle="tooltip"
+              data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="linkedin">
+              <img src="../../assets/icons8-linkedin-96 1.png" alt=""></a>
+            <a class="text-dark" href="{{showprofile.SocialMedias[0]?.website}}" target="_blank"
+              data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
+              data-bs-title="Visit Website">
+              <i class="fa-solid fa-globe ms-1 fs-5"></i></a>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap align-items-center gap-2  responsive-container mb-4">
+          <button class="btn btn-sm btn-phone d-flex align-items-center gap-2" (click)="makeCall()">
+            <i class="fa-solid fa-mobile-screen"></i> {{showprofile.trainer.mobile_number}}
+          </button>
+          <button class="btn btn-sm border-dark d-flex align-items-center gap-2" (click)="handleWhatsAppClick()">
+            <img src="../../assets/whatsapp_icon1.png" alt="">Chat with us
+          </button>
+          <button class="btn btn-sm border-dark d-flex align-items-center gap-2"><img
+              src="../../assets/icons8-rating-100 2.png" alt="">Rate</button>
+          <div class="share-wrapper">
+            <button (click)="shareicon()" class="btn btn-sm share-button border-dark rounded">
+              <img src="../../assets/icons8-share-128 1.png" alt=""> Share
+            </button>
+            <div class="share-container">
+              <div *ngIf="showshare" class="share-options gap-4 p-2">
+                <a (click)="shareOnFacebook()" class="share-option p-1">
+                  <i class="fab fa-facebook fs-1" style="color: #0976e4;"></i>
+                </a>
+                <a (click)="shareOnWhatsApp()" class="share-option p-1">
+                  <i class="fab fa-whatsapp fs-1" style="color: #30d14e;"></i>
+                </a>
+                <a (click)="copyLink()" class="share-option p-1">
+                  <i class="fas fa-link fs-3"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="mt-4">
+          <!-- About US -->
+          <div *ngIf="showprofile.About[0]?.about_us" id="About">
+            <h5 class="text-color">About Us</h5>
+            <p style="text-align: left;font-size: 15px;">{{showprofile.About[0]?.about_us}}</p>
+            <hr *ngIf="showprofile.About[0]?.about_us">
+          </div>
+
+          <!-- Education -->
+          <div
+            *ngIf="showprofile.Educations[0]?.school && showprofile.Educations[0]?.college && showprofile.Educations[0]?.degree && showprofile.trainer?.role !== 'INSTITUTE'">
+            <h5 class="text-color" id="Education">Education</h5>
+            <table>
+              <tbody>
+                <tr *ngIf="showprofile.Educations[0]?.school">
+                  <th>School : </th>
+                  <td style="font-size: 15px;">{{showprofile.Educations[0].school}}</td>
+                </tr>
+                <tr *ngIf="showprofile.Educations[0]?.college">
+                  <th>College :</th>
+                  <td style="font-size: 15px;">{{showprofile.Educations[0].college}}</td>
+                </tr>
+                <tr *ngIf="showprofile.Educations[0]?.degree">
+                  <th>Degree :</th>
+                  <td style="font-size: 15px;">{{showprofile.Educations[0].degree}}</td>
+                </tr>
+                <tr *ngIf="showprofile.Educations[0]?.university">
+                  <th>University :</th>
+                  <td style="font-size: 15px;">{{showprofile.Educations[0].university}}</td>
+                </tr>
+                <tr *ngIf="showprofile.Educations[0]?.other_details">
+                  <th>Other Deatils :</th>
+                  <td style="font-size: 15px;">{{showprofile.Educations[0].other_details}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+          </div>
+
+          <!-- Achievements -->
+          <div class="mt-4" id="Achievements" *ngIf="showprofile.Educations[0]?.achievements">
+            <h5 class="text-color">Achievements / Certifications</h5>
+            <p style="font-size: 15px;">{{showprofile.Educations[0].achievements}}</p>
+            <hr>
+          </div>
+
+          <!-- Skills-->
+          <div class="mt-3" id="Skills" *ngIf="showprofile?.skills[0]">
+            <h5 class="text-color">Skills</h5>
+            <label *ngFor="let skills of showprofile.skills" class="border rounded-pill px-2 me-2 mb-2"
+              style="font-size: 15px;">{{skills}}</label>
+            <hr>
+          </div>
+
+          <!-- Our Services -->
+          <div class="mt-3" id="Services" *ngIf="showprofile.About[0]?.our_services">
+            <h5 class="text-color">Our Services</h5>
+            <p style="text-align: left;font-size: 15px;">{{showprofile.About[0].our_services}}</p>
+            <hr *ngIf="showprofile.About[0]?.our_services">
+          </div>
+
+          <!-- Testimonial-->
+          <div *ngIf="showprofile?.testimonials[0]" id="Testimonials">
+            <h5 class="text-color text-center">Testimonial</h5>
+            <div id="carouselExampleDark" class="carousel carousel-dark slide">
+              <div class="carousel-inner">
+                <div *ngFor="let testimonial of showprofile.testimonials; let i = index"
+                  class="carousel-item text-center" [class.active]="i === 0"
+                  [attr.data-bs-interval]="i === 0 ? 10000 : 20000">
+                  <div class="px-2 pt-1 " style="height: auto !important;">
+                    <h4 class="text-center fw-bold" style="color: var(--btndarkColor);">
+                      {{testimonial?.Testimonial_Title}}
+                    </h4>
+                    <p style="font-size: 15px;">{{testimonial?.Testimonial_Description}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-indicators" style="position: static !important;">
+                <button *ngFor="let testimonial of showprofile.testimonials; let i = index" type="button"
+                  [attr.data-bs-target]="'#carouselExampleDark'" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+                  [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <!-- Questions & Answers -->
+          <div class="mt-2">
+            <h5 class="text-color">Questions & Answers</h5>
+            <p style="font-size: 15px;">Would you like to ask a question?</p>
+            <form (ngSubmit)="postquestion()" #questionForm="ngForm">
+              <div class="col-12">
+                <textarea type="text" class="form-control" [(ngModel)]="question.question" name="question" id="question"
+                  #questionField="ngModel" required minlength="10" placeholder="Type your question here">
+                  </textarea>
+                <div *ngIf="questionField.invalid && (questionField.touched || questionForm.submitted)"
+                  class="text-danger">
+                  <small *ngIf="questionField.errors?.['required']">Question is required.</small>
+                  <small *ngIf="questionField.errors?.['minlength']">Question must be at least 10 characters
+                    long.</small>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btnq mt-3 btn-block" data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter" [disabled]="!questionForm.form.valid">Post Your Question</button>
+            </form>
+          </div>
+          <hr>
+
+
+          <!-- Modal -->
+          <!-- <div class="modal fade" #closeBtn #exampleModalCenter id="exampleModalCenter" tabindex="-1"
+                aria-labelledby="enrollModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered mt-5">
+                  <div class="modal-content custom-modal-width">
+                    <div class="modal-header">
+                      <div class="tab-label">
+                        <img src="../../assets/student-icon-login.png" alt="Student Icon" class="tab-icon" />
+                        <span class="form-label">Student Register</span>
+                      </div>
+                      <button type="button" #closeModalBtn class="d-none" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <form (ngSubmit)="onSubmit(StudentsignUpForm)" #StudentsignUpForm="ngForm">
+                      <div class="row desktop mx-4">
+                        <div class="col-sm-12 mb-3"></div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="f_Name" class="form-label label-medium">
+                            First Name <sup>*</sup>
+                          </label>
+                          <input type="text" class="form-control rounded-pill" id="f_Name" name="f_Name"
+                            [(ngModel)]="userData.f_Name" required placeholder="">
+                        </div>
+                        
+            
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="l_Name" class="form-label label-medium">
+                            Last Name <sup>*</sup>
+                          </label>
+                          <input type="text" class="form-control rounded-pill" id="l_Name" name="l_Name"
+                            [(ngModel)]="userData.l_Name" required placeholder="">
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="middle_Name" class="form-label label-medium">
+                            Middle Name
+                            <span class="text-muted">(optional)</span> <sup>*</sup>
+                          </label>
+                          <input type="text" class="form-control rounded-pill" id="middle_Name" name="middle_Name"
+                          [(ngModel)]="userData.middle_Name" placeholder="">
+                        </div>
+            
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="email_id" class="form-label label-medium">
+                           Your Email
+                            <sup>*</sup>
+                          </label>
+                          <input type="text" class="form-control rounded-pill" id="email_id" name="email_id"
+                          [(ngModel)]="userData.email_id" placeholder="">
+                        </div>
+            
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="mobile_number" class="form-label label-medium">
+                            Mobile Number <sup>*</sup>
+                          </label>
+                          <input type="text" class="form-control rounded-pill" id="mobile_number" name="mobile_number"
+                            [(ngModel)]="userData.mobile_number" placeholder="">
+                        </div>
+            
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="password" class="form-label label-medium">
+                            Password <sup>*</sup>
+                          </label>
+                          <div class="d-flex align-items-center inputbtn">
+                            <input [type]="show ? 'text' : 'password'" class="form-control rounded-pill" id="password"
+                              name="password" [(ngModel)]="userData.password" minlength="8"
+                              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required placeholder=""
+                              #password="ngModel">
+            
+                            <button type="button" (click)="togglePassword()">
+                              <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                              <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                            </button>
+                          </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-check pt-3">
+                              <input class="form-check-input border-dark" type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"
+                                id="flexCheckDefault" required #rememberMeField="ngModel" />
+                              <label class="form-check-label" for="flexCheckDefault">
+                                <span>I accept the</span>
+                                <a class="terms-link" >
+                                  Terms & Conditions
+                                </a>
+                              </label>
+                            </div>
+                            <div *ngIf="rememberMeField.invalid && rememberMeField.touched" class="error-text">
+                              Please accept the terms and conditions to continue.
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="pt-5 mb-3 text-center">
+                          <button type="submit" class="btn sign-in-btn rounded-pill px-5"
+                            [disabled]="!StudentsignUpForm.form.valid">
+                            Sign up
+                          </button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div> -->
+
+
+          <!-- Enquiry -->
+          <div class="mt-3">
+            <h5 class="text-color">Enquiry </h5>
+            <form (ngSubmit)="postEnquiry()" #enquiryForm="ngForm">
+              <div class="col-12">
+                <textarea type="text" class="form-control" [(ngModel)]="enquiry.description" name="description"
+                  id="description" #enquiryField="ngModel" required minlength="10"
+                  placeholder="Type your enquiry here"></textarea>
+                <div *ngIf="enquiryField.invalid && (enquiryField.touched || enquiryForm.submitted)"
+                  class="text-danger">
+                  <small *ngIf="enquiryField.errors?.['required']">Enquiry is required.</small>
+                  <small *ngIf="enquiryField.errors?.['minlength']">Enquiry must be at least 10 characters long.</small>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btnq mt-3 btn-block" [disabled]="!enquiryForm.form.valid">Submit Your Enquiry</button>
+            </form>
+          </div>
+          <hr>
+
+          <!-- Write Review -->
+          <div class="my-3">
+            <h5 class="text-color">Write Review</h5>
+            <div class="row">
+              <form (ngSubmit)="postreview()" #reviewform="ngForm">
+
+                <div class="d-flex gap-2 star-rating">
+                  <span *ngFor="let i of stars; let index = index" class="fa fa-star"
+                    [ngClass]="{'checked': index < rating}" (click)="toggleRating(index + 1)"
+                    style="cursor: pointer;"></span>
+                  <span>{{ rating }}</span>
+                </div>
+                <div class="my-3">
+                  <textarea class="form-control" placeholder="Message" [(ngModel)]="review.review" name="review"
+                    id="review" #reviewField="ngModel" required></textarea>
+                  <div *ngIf="reviewField.invalid && (reviewField.touched || reviewform.submitted)" class="text-danger">
+                    <small *ngIf="reviewField.errors?.['required']">Review is required.</small>
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary btnq" [disabled]="!reviewform.form.valid">Submit Your Review</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+      <!-- First Row code End hrer -->
+
+      <!-- Second Row code start hrer -->
+      <div class="col-sm-12 col-lg-8 border ps-3" id="Courses">
+        <!-- All Courses -->
+        <div *ngIf="AllCourses.length > 0" class="pt-3 mb-4" style="background-color: #ffffff;">
+          <h5 class="text-color ps-3">Our Courses</h5>
+          <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3 px-3">
+            <div *ngFor="let allcourses of AllCourses" class="col-sm-12 col-md-4 col-lg-4 mb-3">
+              <div class="card" routerLink="/couserenroll/{{allcourses._id}}">
+                <img src="{{allcourses.thumbnail_image}}" class="card-img-top img-fluid" alt="...">
+                <div class="card-body gx-0">
+                  <div class="d-flex align-items-center trainer-name-container justify-content-between">
+                    <h5 class="card-title  text-capitalize" (mouseenter)="showcourseName = true"
+                      (mouseleave)="showcourseName = false">
+                      {{ truncatecourseName(allcourses.course_name) }}
+                    </h5>
+                    <h5 *ngIf="showcourseName" class="card-title full-name rounded"
+                      style="font-size: 14px; margin-top: 70px;">{{allcourses.course_name}}</h5>
+                    <small>{{allcourses.online_offline }}</small>
+                  </div>
+                  <span>{{allcourses.category_name }}</span>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2  trainer-name-container">
+                      <p><img src="{{allcourses.trainer_image}}" class="rounded-circle" height="20px" width="20px"
+                          alt="">
+                      </p>
+                      <p class="card-title  text-capitalize pb-1 text-muted" (mouseenter)="showbusinessName = true"
+                        (mouseleave)="showbusinessName = false">
+                        {{ trunbusinessName(allcourses.business_Name) }}
+                      </p>
+                      <p *ngIf="showbusinessName" class=" full-name rounded" style="font-size: 13px; margin-top: 79px;">
+                        {{allcourses.business_Name }}</p>
+                    </div>
+                    <p>{{allcourses.course_rating }} <img src="../../assets/Star 15.png" alt="">
+                    </p>
+                  </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <p><i class="fa-solid fa-list-ul"></i> Duration : {{allcourses.course_duration }}wks</p>
+                  <p style="font-family: Poppins;font-weight: bold;color: var(--TextColor);font-size: 20px;">{{
+                    getFormattedPrice(allcourses.course_price) }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-end ">
+            <button class="border border-0  me-2" (click)="AllCoursespreviousPageBatches()"
+              [disabled]="currentPage === 1"><i class="fa-solid fa-angles-left text-primary"></i></button>
+            <span>Page {{ currentPage }} of {{ totalPagescourses() }}</span>
+            <button class="border border-0 ms-2" (click)="AllCoursesnextPageBatches()"
+              [disabled]="currentPage >= totalPagescourses()">
+              <i class="fa-solid fa-angles-right text-primary"></i></button>
+          </div>
+        </div>
+        <div *ngIf="showReviewData.length > 0" class="row mt-5" id="Reviews">
+          <div class="col-sm-12 col-lg-12 pt-2 mt-3 border-top" style="background-color: #ffffff;">
+            <h5 class="text-color mt-3">Reviews & Ratings</h5>
+            <div class="d-flex align-items-center gap-3 mt-1">
+              <h6 class="mt-1 p-2 rounded" style="background-color: var(--btndarkColor);color: white;">
+                {{showprofile.trainer?.ratings}}</h6>
+              <div style="font-size: small;">
+                <p class="m-0 p-0">{{showReviewData.length}} Reviews</p>
+                <p class="m-0 p-0">rating index based on {{showReviewData.length}} ratings across the web.</p>
+              </div>
+            </div>
+            <h5 class="my-3" style="font-size: 14px;">User Reviews </h5>
+            <div class="container mt-4">
+              <div class="mt-3 rounded p-3 review-box"
+                *ngFor="let review of showReviewData | paginate: { itemsPerPage: 2, currentPage: p}">
+                <div class="review-card d-flex align-items-center justify-content-center mb-4">
+                  <!-- User Info Section -->
+                  <div class="d-flex align-items-center">
+                    <img src="{{review.user_image}}" class="img-fluid rounded" width="48" alt="User Profile">
+                    <div class="ms-3">
+                      <h6 class="mb-1">{{ review.f_Name + " " + review.l_Name}}</h6>
+                      <div>
+                        <!-- <span *ngFor="let star of starsArray; let i = index"
+                          [ngClass]="{'fa fa-star checked': i < review.star_count, 'fa fa-star': i <= review.star_count }">
+                        </span> -->
+                        <span *ngFor="let star of starsArray; let i = index" class="fa fa-star"
+                        [style.color]="i < review.star_count ? 'gold' : '#ccc'">
+                      </span>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Review Text -->
+                  <div class="text-muted ms-4 flex-grow-1">
+                    <p class="mb-0">{{review.review}}</p>
+                  </div>
+                  <!-- Date Section -->
+                  <div class="text-end">
+                    <small class="text-muted">{{review.createdAt | date}}</small>
+                    <span class="ms-4 text-end"><img src="../../assets/menu.png" alt=""></span>
+                  </div>
+                </div>
+                <!-- Actions Section -->
+                <div class="review-actions d-flex gap-4 mt-2 text-muted">
+                  <span class="me-2" style="cursor: pointer;">Helpful (2)</span>
+                  <span class="me-2" style="cursor: pointer;">Comment</span>
+                  <span style="cursor: pointer;"><img src="../../assets/share_icon.png" alt=""> Share</span>
+                </div>
+              </div>
+            </div>
+            <pagination-controls style="float:right;font-size: small;margin-top: 10px;"
+              (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+        <hr>
+
+        <!-- ChatBox Section -->
+        <div *ngIf="chatBoxVisible" id="ChatBox" class="chat-box-container container mt-4 shadow rounded">
+          <div class="p-2 border-bottom">
+            <h5 class="m-0">Chat Box</h5>
+          </div>
+        
+          <div class="row m-0" style="height: 80vh;">
+            
+            <div class="col-12 col-md-5 col-lg-4 chat-sidebar p-3">
+              <div class="filter-options mb-3">
+                <button mat-button (click)="setFilter('all')" [class.active]="selectedFilter === 'all'">All</button>
+                <button mat-button (click)="setFilter('unread')" [class.active]="selectedFilter === 'unread'">Unread</button>
+              </div>
+        
+              <div class="search-bar mb-3 mr-2">
+                <mat-icon>search</mat-icon>
+                <input type="text" [(ngModel)]="searchTerm" placeholder="Search Name" class="flex-grow-1 border-0 bg-transparent" />
+              </div>
+        
+              <div class="chat-list overflow-auto">
+                <div class="chat-item d-flex align-items-center gap-2 mb-2" *ngFor="let chat of filteredChats">
+                  <div class="avatar">
+                    <img *ngIf="chat.users[1]?.trainer_image" [src]="chat.users[1].trainer_image" alt="User" class="rounded-circle" style="width: 40px; height: 40px;">
+                  </div>
+                  <div class="chat-info">
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+           
+            <div class="col-12 col-md-7 col-lg-8 p-3 chat-content d-flex flex-column">
+              <p>Hello</p>
+            </div>
+          </div>
+        </div>
+        
+        <hr *ngIf="chatBoxVisible" class="mt-3 mb-3" />
+        
+
+        <!-- Book Appointment -->
+        <div class="mt-4 px-3" style="background-color: #ffffff;">
+          <h5 class="text-color p-1">Book Appointment</h5>
+          <form (ngSubmit)="BookAppoinment()" #ApmtForm="ngForm">
+            <div class="mb-3 ">
+              <label class="form-label">Select Date</label>
+              <input class="form-control" type="date" class="form-control" name="date" id="date"
+                [(ngModel)]="Appoinment.date" #dateField="ngModel" [min]="minDate" required>
+              <div *ngIf="dateField.invalid && (dateField.touched || ApmtForm.submitted)" class="text-danger">
+                <small *ngIf="dateField.errors?.['required']">Date is required.</small>
+              </div>
+            </div>
+            <div>
+              <label class="form-label">Select Time</label>
+              <input class="form-control" type="time" class="form-control" name="time" id="time"
+                [(ngModel)]="Appoinment.time" #timeField="ngModel" required>
+              <div *ngIf="timeField.invalid && (timeField.touched || ApmtForm.submitted)" class="text-danger">
+                <small *ngIf="timeField.errors?.['required']">Time is required.</small>
+              </div>
+            </div>
+            <div class="text-center mb-2">
+              <button type="submit" class="btn btn-primary tnq mt-3 mb-2 btn-block" [disabled]="!ApmtForm.form.valid">Book Now</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal For Gallery -->
+  <div class="modal fade" id="gallery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">All Images</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="showprofile.gallarys.length > 0" class="row">
+            <div *ngFor="let gallary of showprofile.gallarys" class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <img class="img-fluid rounded w-100 h-100" src="{{gallary.photos}}" alt="">
+            </div>
+          </div>
+          <div *ngIf="showprofile.gallarys.length === 0" class="row text-center">
+            <img src="../../assets/No data-Found old.png" class="object-fit-cover img-fluid" height="300px"
+              width="200px" alt="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

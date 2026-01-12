@@ -1,0 +1,125 @@
+.px-3{
+  background-color: var(--bodyColor);
+}
+
+.trainercard{
+  margin-top: 30%;
+  border: none;
+  border-radius: 20px !important; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mt-3{
+  position: relative;
+}
+
+.img-class {
+  width: 180px !important;
+  height: 180px;
+  margin-top: -45%;
+  border: 1px solid #307DFF;
+  padding: 2px
+}
+
+.viewtrainerbtn {
+  position: absolute !important;
+  top: -10%;
+  left: 37%;
+  background-color: transparent;
+  color: #f2f4f7;
+  border: none;
+  display: none;
+  background-color: #307DFF;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-icons{
+  color: #307DFF;
+}
+
+.social-icons i{
+  padding: 6px;
+}
+
+.social-icons1 {
+  border: 1px solid #307DFF;
+}
+
+.trainercardfooter{
+  border-radius: 0px 0px 20px 20px;
+  background-color: white;
+}
+
+.trainer-rating{
+  color: #FFAE06;
+}
+
+.TrainerFlag {
+  background-color: var(--TextColor);
+  color: var(--WhiteColor);
+  font-size: 10px !important;
+  border: none;
+}
+
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.trainer-column{
+  width: 282px !important; 
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px; 
+  margin-bottom: 20px; 
+  padding: 10px;
+}
+
+.col-lg-3 {
+  padding-right: 80px; 
+}
+
+@media (max-width: 768px) {
+  .trainer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start !important; 
+  }
+
+  .trainer-column {
+      width: 45% !important; 
+      max-width: 300px;
+      margin: 10px auto !important;
+      float: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .trainer-column {
+      width: 100% !important; 
+      float: none;
+      margin: 10px auto;
+  }
+}
+
+.card-title{
+  font-size: 15px;
+}
+
+.sub-title{
+  font-size: 15px;
+}

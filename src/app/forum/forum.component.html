@@ -1,0 +1,151 @@
+<div class="categories">
+  <div class="d-flex justify-content-between align-items-center">
+    <!-- <h2>Categories</h2> <button class="btn-add" (click)="openDialog()">Ask Questions</button> -->
+  </div>
+
+  <div class="category-grid">
+    <div *ngFor="let item of Showcategorydata" class="category-card" (click)="toggleCategory(item)">
+      <div class="category-icon">
+        <img [src]="item.category_image" alt="image loading">
+      </div>
+      <p>{{ item.category_name }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="popular-thread-container">
+  <div class="thread-container">
+    <h2 class="title">{{ selectedCategories[0]?.category_name || 'Popular Threads' }}</h2>
+    <div class="custom-curve"></div>
+    <p class="subtitle">Popular Thread</p>
+  </div>
+
+  <div class="right-section">
+    <div class="category-list">
+      <div *ngFor="let category of selectedCategories[0]?.sub_categories" class="category-card">
+        {{ category }}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Forum List -->
+<div class="overflow-scroll">
+  <div *ngFor="let forum of ShowForumdata" class="container-comment">
+    <div class="comment" *ngIf="forum?.subCategory.sub_category_name===selectedCategories[0]?.sub_categories[0]">
+      <div class="post-container">
+        <div class="post-header">
+          <img class="profile-img" [src]="forum.trainer_image || 'assets/profile_icon.png'" alt="Profile Image">
+          <div class="user-info">
+            <h3 class="user-name">{{ forum.creator_name }}</h3>
+            <p class="post-time">{{ forum.createdAt | date}}</p>
+          </div>
+          <i class="fas fa-ellipsis-v" (click)="openDialogDetail(forum._id)"></i>
+        </div>
+
+        <div class="post-content">
+          <p class="post-question">{{ forum.description }}</p>
+        </div>
+
+        <div class="post-footer">
+          <div class="reactions">
+            <span (click)="likepost(forum._id, 'like')">
+              <i class="fa-solid fa-heart" class="heart-icon"></i> {{ forum.likes }} Likes
+            </span>
+            <span>
+              <img src="assets/icons/commenticon.png" (click)="replyData(forum._id)" class="commenticon-png" />{{
+              forum.comments }}
+              Replies
+            </span>
+            <span>
+              <i class="far fa-share-square" class="share-icon" (click)="shareOnWhatsApp(forum)"></i> {{
+              forum.shareCount }} Shares
+            </span>
+          </div>
+          <button class="reply-btn" (click)="activateTextarea(forum._id)">
+            <i class="fa-solid fa-reply"></i> Reply
+          </button>
+        </div>
+      </div>
+
+      <!-- Reply Section (Only Show Replies for the Active Forum) -->
+      <div *ngIf="activeForumId === forum._id" class="expanded-replies">
+        <div class="post-container-reply" *ngIf="getReplies(forum._id)?.length">
+          <div class="custom-curve-reply"></div>
+          <div *ngFor="let reply of getReplies(forum._id) | slice:0:1">
+            <div class="post-header-reply">
+              <img class="profile-img" [src]="reply.profile_image || 'assets/profile dummy.png'" alt="Profile Image">
+              <div class="user-info">
+                <h3 class="user-name">{{ reply.user_name }}</h3>
+                <p class="post-time">{{ reply.createdAt | date }}</p>
+              </div>
+            </div>
+            <div class="post-content">
+              <p class="post-question">{{ reply.content }}</p>
+            </div>
+            <div class="reactions">
+              <span><i class="fa-solid fa-heart" class="heart-icon" (click)="likepostforReply(reply._id, 'like')"></i>
+                {{likeCount}} Likes</span>
+              <span>
+                <img src="assets/icons/commenticon.png" class="commenticon-png" /> 142 Replies</span>
+              <span (click)="shareOnWhatsAppreply(reply)"><i class="far fa-share-square" class="share-icon"></i>
+                {{reply.shareCount}}Shares</span>
+            </div>
+          </div>
+
+          <!-- See More Replies -->
+          <p *ngIf="getReplies(forum._id).length > 1 && !expandedReplies[forum._id]" class="see-more-replies"
+            (click)="toggleReplies(forum._id)">
+            <b>See {{ getReplies(forum._id).length - 1 }} more replies</b>
+          </p>
+
+          <!-- Expanded Replies with Scroll -->
+          <div *ngIf="expandedReplies[forum._id]">
+            <div *ngFor="let reply of getReplies(forum._id) | slice:1">
+              <div class="post-header">
+                <img class="profile-img" [src]="reply.profile_image || 'assets/profile dummy.png'" alt="Profile Image">
+                <div class="user-info">
+                  <h3 class="user-name">{{ reply.user_name }}</h3>
+                  <p class="post-time">{{ reply.createdAt | date }}</p>
+                </div>
+              </div>
+              <div class="post-content">
+                <p class="post-question">{{ reply.content }}</p>
+              </div>
+              <div class="reactions">
+                <span><i class="fa-solid fa-heart" class="heart-icon" (click)="likepostforReply(reply._id, 'like')"></i>
+                  1132 Likes</span>
+                <span>
+                  <img src="assets/icons/commenticon.png" class="commenticon-png" /> 142 Replies</span>
+                <span><i class="far fa-share-square" class="share-icon"
+                    (click)="shareOnWhatsAppreply(reply)"></i>{{reply.shareCount}} Shares</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Input Section -->
+      <div class="message-container" *ngIf="activeForumId === forum._id">
+        <div class="message-box">
+          <div class="left-icons">
+            <div class="emoji-picker-container" *ngIf="showEmojiPicker">
+              <emoji-mart set="apple" (emojiSelect)="addEmoji($event)"></emoji-mart>
+            </div>
+            <button class="icon-btn" (click)="toggleEmojiPicker()">😊</button>
+          </div>
+
+          <textarea [(ngModel)]="message" class="message-input" placeholder="Write Message"
+            [attr.data-forum-id]="activeForumId"></textarea>
+
+          <button class="send-btn" (click)="AddReply(activeForumId)">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+
+          <div class="right-avatar">
+            <img [src]="UserImage ||'assets/profile dummy.png'" alt="Avatar" class="avatar-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

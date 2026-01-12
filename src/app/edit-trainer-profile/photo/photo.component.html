@@ -1,0 +1,24 @@
+<div class="container ">
+  <div class="main-heading">
+    <h2>Photo</h2>
+    <p>Add Information about yourself</p>
+  </div>
+  <hr>
+  <div class="row text-center">
+    <p class="img-text">Image Preview</p>
+    <div class="bordered-profile-container">
+      <ng-container *ngIf="currentImage; else iconTemplate">
+        <img [src]="currentImage" class="profile-img rounded-circle object-fit-cover" alt="Trainer Image" height="200"
+          width="200" />
+      </ng-container>
+      <ng-template #iconTemplate>
+        <img src="../../assets/user-dummy-img.png" class="profile-img" alt="Trainer Image" height="200" width="200" />
+      </ng-template>
+    </div>
+  </div>
+  <form class="form-section" (ngSubmit)="onSubmit()">
+    <label for="trainer_image" class="form-label ">Add / Change Image</label>
+    <input type="file" class="form-control" id="trainer_image" (change)="onFileSelected($event)" accept="image/*" /><br>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>

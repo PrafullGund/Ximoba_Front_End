@@ -1,0 +1,365 @@
+.text-color {
+  color: var(--TextColor);
+}
+
+.card-user {
+  border: 1px solid black;
+  padding: 5px 5px 0 5px;
+  border-radius: 5px;
+}
+
+.checked {
+  color: orange;
+}
+
+.btn-phone {
+  color: white;
+  background-color: var(--TextColor);
+}
+
+.srolltabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  li {
+    list-style: none;
+    cursor: pointer;
+  }
+}
+
+.ViewmoreArrow {
+  cursor: pointer;
+
+  i {
+    color: var(--TextColor);
+  }
+}
+
+.btnq {
+  background-color: var(--TextColor);
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.card-title {
+  font-size: medium;
+}
+
+.left-side-top {
+  background-color: #F9C4C4;
+  color: black;
+  padding: 5px 15px;
+  font-size: small;
+  border: none;
+  position: absolute;
+  top: 0%;
+  margin-top: 10px;
+}
+
+.img-resize {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+.textonimage {
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 120px;
+}
+
+.onmobile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.onmobile .btn {
+  flex: 1 1 auto;
+}
+
+.share-options {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+  z-index: 1000;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.share-option {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.share-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.star-rating {
+  .fa-star {
+    font-size: 18px;
+  }
+
+  .checked {
+    color: gold;
+  }
+
+}
+
+.fa-star {
+  color: lightgray;
+}
+
+.checked {
+  color: gold;
+}
+
+.productcard {
+  position: relative;
+}
+
+.productcard:hover .onproducthover {
+  display: block;
+}
+
+.onproducthover {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  display: none;
+}
+
+.sign-in-btn {
+  background: #3078FF !important;
+  color: white !important;
+  padding: 10px;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--TextColor);
+  --bs-tooltip-color: #ffffff;
+}
+
+.scrolltabs {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.nav-item .divider {
+  color: #ccc;
+  margin-left: 8px;
+}
+
+.nav-item.active-link {
+  font-weight: bold;
+  color: #307DFF;
+}
+
+.nav-item:hover {
+  color: #307DFF;
+}
+
+.fifth-section{
+  height: 124px;
+}
+
+@media (max-width: 1440px){
+  .fifth-section{
+    height: 94px;
+  }
+}
+
+@media (max-width: 1024px){
+  .fifth-section{
+    height: 67px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallary-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .gallary-section > .col-md-6 {
+    width: 100% !important; 
+  }
+
+  .gallary-section .col-lg-10,
+  .gallary-section .col-lg-2 {
+    flex: none;
+    width: 100%; /* Make sure both main and side sections take full width */
+  }
+
+  .gallary-section .col-lg-3 {
+    width: 25% !important; /* Each image takes 25% of the row */
+  }
+
+  .galleryimg {
+    width: 105px 
+  }
+
+  .fifth-section {
+    height: 100px; 
+    object-fit: cover;
+    width: 172px;
+  }
+
+  .main-four-image {
+    height: 150px; 
+    object-fit: cover;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .gallary-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .gallary-section > .col-md-6 {
+    width: 100% !important; 
+  }
+
+  .gallary-section .col-lg-10,
+  .gallary-section .col-lg-2 {
+    flex: none;
+    width: 100%; 
+  }
+
+  .gallary-section .col-lg-3 {
+    width: 25% !important; 
+  }
+
+  .galleryimg {
+    width: 25%
+  }
+
+  .fifth-section {
+    height: 100px;
+    object-fit: cover;
+    width: 230px;
+  }
+
+  .main-four-image {
+    height: 150px; 
+    object-fit: cover;
+  }
+}
+
+.custom-modal-width {
+  max-width: 700px;
+  width: 100%;
+}
+
+.tab-label {
+  margin-left: 208px;
+}
+
+.filter-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-options button {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.filter-options button.active {
+  background-color: #007bff;
+  color: white !important;
+}
+
+.chat-sidebar {
+  background: #f9f9f9;
+  border-right: 1px solid #ddd;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  padding: 6px 12px;
+  gap: 10px;
+  width: 106%;
+}
+
+.search-bar mat-icon {
+  color: #777;
+}
+
+.chat-list {
+  max-height: calc(80vh - 160px); 
+  overflow-y: auto;
+}
+
+.chat-content {
+  background-color: #fff;
+}
+
+.review-box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff; 
+  transition: box-shadow 0.3s ease;
+}
+
+
+.chat-box-container {
+  background-color: white;
+  min-height: 500px;
+}

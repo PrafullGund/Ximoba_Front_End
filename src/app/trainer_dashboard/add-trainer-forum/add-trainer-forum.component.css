@@ -1,0 +1,118 @@
+.forum-container {
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+
+    .title {
+        color: white;
+        margin: 0;
+        padding-left: 50px;
+    }
+
+    .add-course-container {
+        width: 90%;
+        max-width: 800px;
+        padding: 20px;
+    }
+
+    mat-card {
+        padding: 20px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    button {
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    button.mat-raised-button {
+        background-color: #3b82f6;
+        color: white;
+    }
+
+    button.mat-stroked-button {
+        border: 1px solid #3b82f6;
+        color: #3b82f6;
+    }
+}
+
+.block {
+  display: flex;
+  color: white;
+  background-color: #307dff;
+  grid-template-columns: repeat(2);
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.add-forum-heading{
+  margin: 20px 75px;
+  color: white
+}
+
+.publish-button {
+  background-color: #307dff !important;
+  color: white !important; 
+}
+
+.publish-button:hover {
+  background-color: #256ae0; 
+}
+
+.save-button{
+    
+}
+
+
+@media screen and (max-width: 768px) {
+    .forum-container {
+        .title {
+            padding-left: 20px;
+            font-size: 1.2rem;
+        }
+        .add-course-container {
+            width: 100%;
+        }
+        .button-group {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .forum-container {
+        flex-direction: column; /* Change to column only for mobile */
+    }
+
+    .add-course-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+

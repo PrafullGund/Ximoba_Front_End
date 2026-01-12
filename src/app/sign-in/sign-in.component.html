@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="row" style="background-image: url('../../assets/Log IN_background.png') ;">
+    <div class="login-img col-md-12 col-lg-6 col-sm-12 mt-5 d-flex align-items-center justify-containt-center"
+      style="background-image: url('../../assets/Log IN_background.png') ; ">
+      <img src="../../assets/Login-Vol 1.png" class="w-100 " alt="Login Image">
+    </div>
+
+    <div class="col-sm-12 col-md-12  col-lg-6 login-in-modal">
+      <div class="row desktop my-3 py-3 px-2">
+        <div class="col-sm-12 col-lg-12 py-1 text-end">
+          <p (click)="registermodal()">New Users? <label style="color: var(--TextColor); cursor: pointer;">Create
+              an account <span class="px-2 py-1  ms-2"
+                style="border-radius: 12px; font-size: 20px; border: 1px solid var(--TextColor);">
+                <i class="fas fa-ellipsis-h" style="color: var(--TextColor);"></i></span></label></p>
+        </div>
+        <div class="px-5 py-4"
+          style="background-color: white; border-radius:20px; box-shadow: rgba(146, 145, 145, 0.19) 0px 10px 20px, rgba(154, 153, 153, 0.23) 0px 6px 6px;">
+          <div>
+            <h5 class="py-1 fw-bold lh-base">Hello, <br>Welcome back</h5>
+          </div>
+
+          <mat-tab-group mat-align-tabs="center">
+            <mat-tab>
+              <div class="overflow-x-hidden">
+              <ng-template mat-tab-label>
+                <div class="tab-label">
+                  <img src="../../assets/student-icon-login.png" alt="Student Icon" class="tab-icon">
+                  <span>Student</span>
+                </div>
+              </ng-template>
+              <form #login="ngForm" (ngSubmit)="onSubmit(login.value)">
+                <div class="col-12 pt-3">
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-2">
+                      <label for="email_id" class="form-label" style="font-weight: 500;">Your Email</label>
+                      <input type="email" class="form-control rounded-pill" id="email_id" [(ngModel)]="email_id"
+                        name="email_id" required placeholder="Enter Your Email Id">
+                    </div>
+                    <div class="col-sm-12 col-lg-12 py-2">
+                      <label for="password" class="form-label" style="font-weight: 500;">Password</label>
+                      <div class="d-flex align-items-center inputbtn">
+                        <input [type]="show ? 'text' : 'password'" class="form-control rounded-pill" id="password"
+                          [(ngModel)]="password" name="password" required placeholder="Enter Password">
+                        <button type="button" (click)="togglePassword()">
+                          <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                          <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-check pt-3">
+                    <input class="form-check-input custom-checkbox border-primary" type="checkbox"
+                      [(ngModel)]="rememberMe" name="rememberMe" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">Remember me</label>
+                    &nbsp; &nbsp; &nbsp;
+                    <label data-bs-toggle="modal" data-bs-target="#forgotpwd"
+                      style="color: var(--TextColor);cursor: pointer;">Forgot Password?</label>
+                  </div>
+                </div>
+                <div class="pt-3">
+                  <button type="submit" [disabled]="!password" class="btn btn-primary rounded-pill  px-4 mb-3">Sign
+                    In</button>
+                </div>
+              </form>
+              <div class="login-divider">
+                <hr class="my-3">
+                <span class="divider-text">Or login with</span>
+                <hr class="my-3">
+              </div>
+
+              <div class="row justify-content-center gx-2 gy-2">
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-google"></i> Google
+                  </button>
+                </div>
+              
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                  </button>
+                </div>
+              
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+            </mat-tab>
+
+            <mat-tab>
+              <div class="overflow-x-hidden">
+              <ng-template mat-tab-label>
+                <div class="tab-label">
+                  <img src="../../assets/expert-icon-login.png" alt="Student Icon" class="tab-icon">
+                  <span>Expert</span>
+                </div>
+              </ng-template>
+              <form #instituteLogin="ngForm" (ngSubmit)="onInstituteLogin(instituteLogin.value)">
+                <div class="col-12 pt-3">
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-2">
+                      <label for="email_id" class="form-label" style="font-weight: 500;">Your Email</label>
+                      <input type="email" class="form-control rounded-pill" id="email_id" [(ngModel)]="email_id"
+                        name="email_id" required placeholder="Enter Your Email Id">
+                    </div>
+                    <div class="col-sm-12 col-lg-12 py-2 ">
+                      <label for="password" class="form-label" style="font-weight: 500;">Password</label>
+                      <div class="d-flex align-items-center inputbtn">
+                        <input [type]="show ? 'text' : 'password'" class="form-control rounded-pill" id="password"
+                          [(ngModel)]="password" name="password" required placeholder="Enter Password">
+                        <button type="button" (click)="togglePassword()">
+                          <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                          <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-check pt-3">
+                    <input class="form-check-input custom-checkbox border-primary" type="checkbox"
+                      [(ngModel)]="rememberMe" name="rememberMe" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">Remember me</label>
+                    &nbsp; &nbsp; &nbsp;
+                    <label data-bs-toggle="modal" data-bs-target="#forgotpwd"
+                      style="color: var(--TextColor);cursor: pointer;">Forgot Password?</label>
+                  </div>
+
+                </div>
+                <div class="pt-3">
+                  <button type="submit" [disabled]="!password" class="btn btn-primary rounded-pill  px-4 mb-3">Sign
+                    In</button>
+                </div>
+              </form>
+              <div class="login-divider">
+                <hr class="my-3">
+                <span class="divider-text">Or login with</span>
+                <hr class="my-3">
+              </div>
+
+              <div class="row justify-content-center gx-2 gy-2">
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-google"></i> Google
+                  </button>
+                </div>
+              
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                  </button>
+                </div>
+              
+                <div class="col-12 col-sm-6 col-md-4">
+                  <button class="btn rounded-pill social-btn w-100">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="forgotpwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-ml modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" style="border-radius: 20px !important;">
+      <div class="text-end">
+        <button type="button" class="btn-close p-4" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-5">
+        <form (ngSubmit)="forgotpwd()">
+          <p class="poppins-semibold" style="font-size: 20px;">Forgot Password</p>
+          <div class="col-12  mb-3">
+            <label for="email_id" class="form-label">Your Email <sup>*</sup></label>
+            <input type="email" class="form-control form-control-lg rounded-input" placeholder="" id="email_id"
+              [(ngModel)]="forget.email_id" name="email_id" required email #email="ngModel">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['email']">Please enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div class="pt-5 mb-3 text-center">
+            <button type="submit" class="btn sign-in-btn rounded-pill px-5">Reset Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

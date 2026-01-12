@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="col-12">
+        <img class="img-fluid rounded" src="../../../assets/Appointment 1.png" alt="Appointment Image">
+    </div>
+
+    <!-- Responsive Table Section -->
+    <div class="row mt-2">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <!-- show trainer -->
+                            <th *ngIf="!isUser" scope="col">Action</th>
+
+                            <!-- show user -->
+                            <th *ngIf="isUser" scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="showAppointmentData && showAppointmentData.length > 0">
+                        <tr
+                            *ngFor="let Apmt of showAppointmentData | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems }">
+                            <td>{{ Apmt.user_name }}</td>
+                            <td>{{ Apmt.date }}</td>
+                            <td>{{ Apmt.time }}</td>
+                            <td>
+                                <div *ngIf="!isUser">
+                                    <button (click)="approveAppointment(Apmt._id)"
+                                        class="btn btn-success text-light me-2 mb-2 mb-md-0">Approve</button>
+                                    <button (click)="rejectAppointment(Apmt._id)" class="btn btn-danger text-light"
+                                        data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                                </div>
+
+                                <button class="btn btn-sm status" *ngIf="isUser" [ngClass]="{
+                                  'btn-success': Apmt.status === 'approved',
+                                  'btn-danger': Apmt.status === 'rejected',
+                                  'btn-warning': Apmt.status === 'pending'
+                                }">
+                                    {{ Apmt.status }}
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf="!showAppointmentData || showAppointmentData.length === 0" class="text-center mt-3">
+                    <img src="../../../assets/No data-Found.png" class="img-fluid no-data-image" alt="No Data Found">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Pagination Controls -->
+    <div class="row mt-3">
+        <div class="col-12 text-end">
+            <pagination-controls (pageChange)="onPageChange($event)" class="pagination-sm"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel">Reason for Rejection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="submitRejection()" #rejectionForm="ngForm">
+                    <div class="mb-3">
+                        <label for="rejectionReason" class="form-label">Reason<sup>*</sup></label>
+                        <input type="text" class="form-control" id="rejectionReason" [(ngModel)]="rejectionReason"
+                            name="rejectionReason" required #reason="ngModel" />
+                        <div *ngIf="reason.invalid && reason.touched" class="text-danger">
+                            <small>Please provide a rejection reason.</small>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

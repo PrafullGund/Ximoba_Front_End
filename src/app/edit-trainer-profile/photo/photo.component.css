@@ -1,0 +1,59 @@
+.container {
+  padding-top: 15px;
+  margin-left: 52px;
+  max-width: 750px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow-y: auto;
+  flex: 2;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 81vh;
+  margin-top:31px;
+}
+
+.main-heading h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.py-5 {
+  height: 650px;
+}
+
+p {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}
+
+.bordered-profile-container {
+  width: 563px;
+  height: 258px;
+  margin-left: 97px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: inset 0 0 0 23px white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.form-section {
+  padding-left: 110px;
+}
+
+.form-label {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  width: 60%;
+  padding: 5px;
+  margin: 1px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,145 @@
+<div *ngIf="Forum" class="container-fluid">
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex align-items-center justify-content-between mb-0">
+                    <h1 class="mb-0 forum-title">{{Forum.title}}</h1>
+                    <button class="btn btn-primary" routerLink="/Add-Forum" >Ask Question?</button>
+                </div>
+                <small class="ms-2">Asking by <b class="forum-creator-name">@{{Forum.creator_name}}</b>, Asked {{Forum.createdAt}}</small>
+                <hr>
+                <div [innerHtml]="Forum?.sanitizedDescription"></div>
+
+            </div>
+            <hr>
+            <div *ngFor="let Answer of Forum.answer">
+                <h4 class="forum-title">Answer by <small class="author-name">@{{Answer.author_name}}</small></h4>
+                <div [innerHtml]="Answer?.sanitizedDescription"></div>
+                <hr>
+            </div>
+        </div>
+        
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <h4 class="text-muted">Give Your Answer</h4>
+          <form (ngSubmit)="PostAnswer()">
+			<div class="editor">
+				<ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+				</ngx-editor-menu>
+                <ngx-editor [editor]="editor" [(ngModel)]="ForumAnswer.content" name="content"></ngx-editor>
+			</div>
+            <button type="submit" class="btn btn-primary my-3">Post Your Answer</button>    
+		</form>     
+    </div>    
+        
+    </div>
+</div>
+
+ 
+ <!-- Model For User Registration -->
+
+<div class="modal fade" id="CheckLoggedIN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="text-end">
+                <button type="button" class="btn-close mt-4 me-4" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5">
+                <form (ngSubmit)="onSubmit(signUpForm)" #signUpForm="ngForm">
+                    <div class="row desktop">
+                      <div class="row">
+                        <div class="col-sm-12 mb-3">
+                          <h4><b>Register</b></h4>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="f_Name" class="form-label">First Name <sup>*</sup></label>
+                          <input type="text" class="form-control form-control-lg rounded-input" placeholder="" id="f_Name"
+                            [(ngModel)]="userData.f_Name" name="f_Name" required #FirstName="ngModel">
+                          <div *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)" class="text-danger">
+                            First Name is required.
+                          </div>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="l_Name" class="form-label">Last Name <sup>*</sup></label>
+                          <input type="text" class="form-control form-control-lg rounded-input" placeholder="" id="l_Name"
+                            [(ngModel)]="userData.l_Name" name="l_Name" required #LastName="ngModel">
+                          <div *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)" class="text-danger">
+                            Last Name is required.
+                          </div>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="middle_Name" class="form-label">Middle Name <span class="text-muted">(optional)</span></label>
+                          <input type="text" class="form-control form-control-lg rounded-input" placeholder="" id="middle_Name"
+                            [(ngModel)]="userData.middle_Name" name="middle_Name" #MiddleName="ngModel">
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="email_id" class="form-label">Your Email <sup>*</sup></label>
+                          <input type="email" class="form-control form-control-lg rounded-input" placeholder="" id="email_id"
+                            [(ngModel)]="userData.email_id" name="email_id" required email #email="ngModel">
+                          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                            <div *ngIf="email.errors?.['required']">Email is required.</div>
+                            <div *ngIf="email.errors?.['email']">Please enter a valid email address.</div>
+                          </div>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="mobile_number" class="form-label">Mobile Number <sup>*</sup></label>
+                          <input type="number" pattern="^[0-9]{10}$" class="form-control form-control-lg rounded-input" minlength="10"
+                            maxlength="10" pattern="^\d{10}$" id="mobile_number" [(ngModel)]="userData.mobile_number" name="mobile_number" required
+                            #mobile="ngModel">
+                          <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="text-danger">
+                            <div *ngIf="mobile.errors?.['required']">Mobile Number is required.</div>
+                            <div *ngIf="mobile.errors?.['pattern']">Mobile Number must be exactly 10 digits.</div>
+                          </div>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                          <label for="password" class="form-label">Password <sup>*</sup></label>
+                          <div class="d-flex align-items-center inputbtn">
+                            <input [type]="show ? 'text' : 'password'" class="form-control form-control-lg rounded-input h-25"
+                              id="password" minlength="8" [(ngModel)]="userData.password" name="password" required #password="ngModel"
+                              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                            <button type="button" (click)="togglePassword()">
+                              <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                              <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                            </button>
+                          </div>
+              
+                          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                            <div *ngIf="password.errors?.['required']">Password is required.</div>
+                            <div *ngIf="password.errors?.['pattern']">
+                              Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.
+                            </div>
+                          </div>
+                        </div>
+              
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-check pt-3">
+                              <input class="form-check-input border-dark" type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"
+                                id="flexCheckDefault">
+                              <label class="form-check-label" for="flexCheckDefault">I accept the</label> &nbsp;
+                              <label class="terms-condition">Terms and Conditions</label>
+                            </div>
+                        </div>
+              
+                          <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="form-check pt-3">
+                            <label class="form-check-label" for="flexCheckDefault">Already Have an Account ? <a routerLink="/signin"> Login </a></label>
+                          </div>
+                          </div>
+                        
+                      </div>
+              
+                      <div class="pt-5 mb-3 text-center">
+                        <button type="submit" class="btn sign-in-btn rounded-pill "
+                          [disabled]="!signUpForm.form.valid" class="sign-up">Sign up</button>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+  </div>

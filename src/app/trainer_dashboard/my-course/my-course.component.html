@@ -1,0 +1,347 @@
+<div *ngIf="isTrainer || isSELF_EXPERT || isInstitute">
+  <div class="d-flex justify-content-end flex-wrap mb-3">
+     <button type="submit" class="btn btn-primary add-course"  [routerLink]="isTrainer ? '/dashboard/add-course' : '/dashboard/add-course'">
+        Add Course</button>
+  </div>
+
+  <mat-tab-group style="margin-left: 45px;">
+    <mat-tab label="My Total Courses">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="srNo">
+            <th mat-header-cell *matHeaderCellDef > Sr no </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="thumbnail_image">
+            <th mat-header-cell *matHeaderCellDef> Thumbnail Image </th>
+            <td mat-cell *matCellDef="let element">
+              <img [src]="element.thumbnail_image" alt="thumbnail_image" width="60" height="40"
+                style="object-fit: cover; border-radius: 5px;" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_name">
+            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+            <td mat-cell *matCellDef="let element">
+              <span [routerLink]="['/couserenroll', element._id]" class="course-link">
+                {{ element.course_name }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category_name">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{ element.category_name }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.start_date | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{ convertToMonthsAndDays(element.course_duration) }} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element"> {{ element.online_offline }} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-slide-toggle
+                color="primary"
+                [checked]="element.online_offline.toLowerCase() === 'offline'"
+                (change)="onToggleCourseType(element, $event.checked)">
+                {{ element.online_offline }}
+              </mat-slide-toggle>
+            </td>
+          </ng-container>
+          
+
+          <ng-container matColumnDef="course_price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{ element.course_price | currency:'INR' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="level">
+            <th mat-header-cell *matHeaderCellDef> Level </th>
+            <td mat-cell *matCellDef="let element"> {{ element.level}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-select (selectionChange)="onActionSelected($event, element)" placeholder="Action"
+                style="border: 1px solid #80808042; background-color: white; border-radius:7px; padding:10px">
+                <mat-option value="edit">Edit Course</mat-option>
+                <mat-option value="disable">Temporary Disable</mat-option>
+                <mat-option value="delete">Delete Course</mat-option>
+              </mat-select>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginatorCourses [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <!-- My Ongoing Courses Tab -->
+    <mat-tab label="My Ongoing Courses">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSourceOngoing" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="srNo">
+            <th mat-header-cell *matHeaderCellDef> Sr no </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="thumbnail_image">
+            <th mat-header-cell *matHeaderCellDef> Thumbnail Image </th>
+            <td mat-cell *matCellDef="let element">
+              <img [src]="element.thumbnail_image" alt="thumbnail_image" width="60" height="40"
+                style="object-fit: cover; border-radius: 5px;" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_name">
+            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+            <td mat-cell *matCellDef="let element">
+              <span [routerLink]="['/couserenroll', element._id]" class="course-link">
+                {{ element.course_name }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category_name">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{ element.category_name }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.start_date | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{ convertToMonthsAndDays(element.course_duration) }} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element"> {{ element.online_offline }} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-slide-toggle
+                color="primary"
+                [checked]="element.online_offline.toLowerCase() === 'offline'"
+                (change)="onToggleCourseType(element, $event.checked)">
+                {{ element.online_offline }}
+              </mat-slide-toggle>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{ element.price| currency:'INR' }} </td>
+          </ng-container>
+          
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsOngoing"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsOngoing;"></tr>
+        </table>
+
+        <mat-paginator #paginatorOngoing [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <!-- My Completed Courses Tab -->
+    <mat-tab label="My Completed Courses">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSourceCompleted" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="srNo">
+            <th mat-header-cell *matHeaderCellDef> Sr no </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="thumbnail_image">
+            <th mat-header-cell *matHeaderCellDef> Thumbnail Image </th>
+            <td mat-cell *matCellDef="let element">
+              <img [src]="element.thumbnail_image" alt="thumbnail_image" width="60" height="40"
+                style="object-fit: cover; border-radius: 5px;" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_name">
+            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+            <td mat-cell *matCellDef="let element">
+              <span [routerLink]="['/couserenroll', element._id]" class="course-link">
+                {{ element.course_name }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category_name">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{ element.category_name }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.start_date | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.end_date | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{ convertToMonthsAndDays(element.course_duration) }} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element"> {{ element.online_offline }} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="online_offline">
+            <th mat-header-cell *matHeaderCellDef> Online/Offline </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-slide-toggle
+                color="primary"
+                [checked]="element.online_offline.toLowerCase() === 'offline'"
+                (change)="onToggleCourseType(element, $event.checked)">
+                {{ element.online_offline }}
+              </mat-slide-toggle>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="course_price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{ element.course_price| currency:'INR' }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCompleted"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsCompleted;"></tr>
+        </table>
+
+        <mat-paginator #paginatorCompleted [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+
+    <!-- Issued Certificates Tab -->
+    <mat-tab label="Issued Certificates">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSourceCertificate" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="srNo">
+            <th mat-header-cell *matHeaderCellDef> Sr no </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="thumbnail_image">
+            <th mat-header-cell *matHeaderCellDef> Thumbnail Image </th>
+            <td mat-cell *matCellDef="let element">
+              <img [src]="element.thumbnail_image" alt="thumbnail_image" width="60" height="40"
+                style="object-fit: cover; border-radius: 5px;" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="courseName">
+            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+            <td mat-cell *matCellDef="let element">
+              <span [routerLink]="['/couserenroll', element._id]" class="course-link">
+                {{ element.courseName }}
+              </span>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="studentName">
+            <th mat-header-cell *matHeaderCellDef> Student Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.studentName }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="issuedDate">
+            <th mat-header-cell *matHeaderCellDef> Issued Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.issuedDate | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email ID </th>
+            <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCertificate"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsCertificate;"></tr>
+        </table>
+
+        <mat-paginator #paginatorCertificates [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
+
+<div *ngIf="isUser" class="container-1">
+  <div class="block">
+    <h5 style="margin: 20px 75px;">My Courses</h5> <button class="btn-view" routerLink="/relevance/Allcourses">View All
+      Courses</button>
+  </div>
+  <div class="container" *ngIf="showCourseDataStudent.length > 0">
+    <div class="row">
+      <div class="card" *ngFor="let allcourses of showCourseDataStudent">
+        <img *ngIf="allcourses.thumbnail_image; else dummyImage" [src]="allcourses.thumbnail_image"
+          class="img-fluid rounded" alt="Course Thumbnail">
+        <ng-template #dummyImage>
+          <img src="../../assets/courses dummy.jpg" alt="Course Image" class="img-fluid rounded">
+        </ng-template>
+
+        <div class="main-block">
+          <div class="block-1">
+            <h5>{{ allcourses.course_name }}</h5>
+            <p style="text-align: end;">{{ allcourses.online_offline }}</p>
+          </div>
+
+          <div class="block-1">
+            <div class="d-flex align-items-center">
+              <img [src]="allcourses?.trainer_image || 'https://via.placeholder.com/40'" alt="Instructor">
+              <span>{{allcourses.business_Name}}</span>
+            </div>
+
+            <div style="align-items: end; display: flex;">
+              <span>{{ allcourses.course_rating }}</span>
+              <p class="text-warning"><i class="fa-solid fa-star" style="padding: 5px;"></i> </p>
+
+            </div>
+          </div>
+          <div class="block-1">
+            <p> <i class="fa-solid fa-list" style="padding: 10px;color: gray;"></i>Duration:{{
+              convertToMonthsAndDays(allcourses.course_duration) }}</p>
+            <p style="align-items: end; color:#307dff; text-align: end;font-size: x-large">₹{{ allcourses.course_price
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showCourseDataStudent.length === 0" class="text-center">
+    <p>No courses available at the moment. Please check back later!</p>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.text {
+    font-size: 16px;
+    font-family: "Poppins", system-ui;
+    /* padding-bottom: 10px; */
+    /* margin-bottom: 14px; */
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 800;
+    font-family: "Poppins", system-ui;
+
+}
+
+.privacy-policy {
+    font-size: 3.5rem;
+    font-weight: 800;
+    font-family: sans-serif;
+}
+
+.no-underline-link {
+    text-decoration: none;
+}
+
+.subscribe-box {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 30px;
+}
+
+.rounded-left-image {
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+}
+
+.styled-text {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.email-input {
+    background-color: #f7f7f7;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.subscribe-btn {
+    background-color: #307DFF;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+}

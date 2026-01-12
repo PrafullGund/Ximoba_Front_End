@@ -1,0 +1,28 @@
+.forum-heading {
+  margin: 20px 75px;
+  color: white
+}
+
+table {
+  width: 100%;
+
+  tbody.mdc-data-table__content {
+    /* background-color: aliceblue; */
+  }
+}
+
+button {
+  text-transform: none;
+  background-color: white;
+}
+
+.block {
+  display: flex;
+  color: white;
+  background-color: #307dff;
+  grid-template-columns: repeat(2);
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}

@@ -1,0 +1,41 @@
+.dialog-title {
+  padding-left: 50px;
+  margin-top: 30px;
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.dialog-content p, 
+.dialog-content ul, 
+.dialog-content h3, 
+.dialog-content h4 {
+  padding-left: 50px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.dialog-content ul {
+  padding-left: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dialog-content li {
+  line-height: 1.8;
+}
+
+.dialog-content h3 {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.dialog-content h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.custom-list li {
+  list-style-type: none;
+}

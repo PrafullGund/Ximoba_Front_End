@@ -1,0 +1,541 @@
+<div class="container-fluid g-0 course-details" *ngIf="Showcoursedetails">
+  <div *ngIf="Showcoursedetails.thumbnail_image" class="banner-container" [ngStyle]="{
+      'background-image': 'url(' + Showcoursedetails.thumbnail_image + ')'
+    }">
+    <div class="overlay">
+      <h1 class="title">{{ Showcoursedetails.course_name }}</h1>
+      <p class="breadcrumb">
+        Home → Courses → Development → {{ Showcoursedetails.course_name }}
+      </p>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <div class="row" *ngIf="Showcoursedetails">
+      <!-- Main Content -->
+      <div class="col-lg-9">
+        <div class="custom-box border p-3">
+          <div class="relative-container">
+            <img *ngIf="Showcoursedetails.thumbnail_image; else dummyImage"
+              src="{{ Showcoursedetails.thumbnail_image }}" class="course-thumbnail card-img-top" alt="Course Image" />
+            <ng-template #dummyImage>
+              <img src="../../assets/courses dummy.jpg" alt="Dummy Image" class="ThumbnailImage rounded img-fluid" />
+            </ng-template>
+
+            <!-- Buttons or elements relative to the image -->
+            <div class="overlay-box d-flex align-items-center gap-3">
+              <span class="course-duration-badge btn text-light rounded-pill px-4 poppins-bold">
+                <i class="fa-regular fa-clock"></i>
+                {{ Showcoursedetails.course_duration }}
+              </span>
+              <span class="btn text-light rounded-pill px-4 poppins-bold best-seller-badge">BEST SELLER</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-4 mt-4">
+              <span class="me-4">
+                <img src="../../assets/lesson.png" class="lesson-icon p-1 rounded" alt="" />
+                Lessons: 20
+              </span>
+              <span class="me-4"><img src="../../assets/student1.png" class="lesson-icon p-1 rounded" alt="" />
+                Students: 60+</span>
+              <span><img src="../../assets/beginner1.png" class="lesson-icon p-1 rounded" alt="" />
+                {{ Showcoursedetails.level }}</span>
+            </div>
+            <p class="course-title poppins-semibold">
+              {{ Showcoursedetails.course_name }}
+            </p>
+            <div class="container">
+              <div class="container">
+                <div class="row d-flex align-items-stretch">
+                  <div class="col-lg-3 col-md-6 d-flex flex-column border-end">
+                    <div class="d-flex align-items-center justify-content-center">
+                      <div class="profile-icon"></div>
+                      <div>
+                        <span class="text-muted">Instructor :</span>
+                        <p class="fw-medium-custom mb-0 business-name">
+                          {{ Showcoursedetails.business_Name }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 d-flex flex-column border-end">
+                    <div class="flex-grow-1 category-container">
+                      <span class="text-muted ms-3 category-name">Category :</span>
+                      <p class="fw-medium-custom ms-3 mb-0">
+                        {{ Showcoursedetails.category_name }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 d-flex flex-column border-end">
+                    <div class="flex-grow-1 category-container">
+                      <span class="text-muted ms-3 category-name">Start Date :</span>
+                      <p class="fw-medium-custom mb-0 ms-3">
+                        {{ Showcoursedetails.start_date }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 d-flex flex-column">
+                    <div class="flex-grow-1 category-container">
+                      <span class="text-muted ms-3 category-name">Ratings :</span>
+                      <div class="d-flex align-items-center ms-3">
+                        <ng-container *ngFor="let star of starsArray; let i = index">
+                          <i class="fa-solid fa-star" [ngStyle]="{
+                              color:
+                                i < Showcoursedetails.course_rating
+                                  ? '#FFAE06'
+                                  : '#d3d3d3'
+                            }"></i>
+                        </ng-container>
+                        <span class="ms-1 text-muted">({{ Showcoursedetails.course_rating }})</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <!-- Tabs Section -->
+              <div>
+                <ul class="nav nav-tabs main-class" id="courseTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="tab-button nav-link active px-5 py-2 poppins-medium" id="description-tab"
+                      data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab"
+                      aria-controls="description" aria-selected="true">
+                      <img src="../../assets/Description-icon.png" class="bg-dark rounded" alt="" />
+                      Description
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="tab-button nav-link px-5 py-2 poppins-medium" id="reviews-tab" data-bs-toggle="tab"
+                      data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">
+                      <img src="../../assets/star.png" alt="" /> Reviews
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="tab-button nav-link px-5 py-2 poppins-medium" id="instructor-tab"
+                      data-bs-toggle="tab" data-bs-target="#instructor" type="button" role="tab"
+                      aria-controls="instructor" aria-selected="false" routerLink="/coursedetails/{{
+                        Showcoursedetails?.trainer_id
+                      }}">
+                      <img src="../../assets/student1.png" alt="" /> Instructor
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="tab-button nav-link px-5 py-2 poppins-medium" id="material-tab" data-bs-toggle="tab"
+                      data-bs-target="#material" type="button" role="tab" aria-controls="material"
+                      aria-selected="false">
+                      <img src="../../assets/discription.png" class="bg-dark rounded" alt="" />
+                      Material
+                    </button>
+                  </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content p-4" id="courseTabContent">
+                  <div class="tab-pane fade show active" id="description" role="tabpanel"
+                    aria-labelledby="description-tab">
+                    <p class="experience-title poppins-semibold">
+                      Experience Description
+                    </p>
+                    <p>
+                      {{ Showcoursedetails?.course_information }}
+                    </p>
+
+                    <hr class="line" />
+                    <div
+                      class="mt-4 pb d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-4">
+                      <!-- Tags Section -->
+                      <div class="d-flex align-items-center">
+                        <label class="tag-labels me-1 poppins-semibold">Tag:</label>
+                        <div class="tag-container">
+                          <div class="main-tag-name-heading d-flex flex-nowrap">
+                            <label *ngFor="let tag of Showcoursedetails.tags"
+                              class="tag-name border rounded py-1 px-2 me-2 mb-2">
+                              {{ tag }}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Social Icons Section -->
+                      <div class="social-icons d-flex align-items-center mt-3 mt-md-0">
+                        <span class="tag-label me-2 poppins-semibold">Share</span>
+                        <a (click)="shareOnFacebook()" class="lesson-icon me-2">
+                          <i class="fab fa-facebook"></i>
+                        </a>
+                        <a (click)="shareOnWhatsApp()" class="lesson-icon me-2">
+                          <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a class="lesson-icon me-2" (click)="copyLink()">
+                          <i class="fab fa-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+
+                    <hr class="line" />
+                    <div class="container">
+                      <div class="comment-section">
+                        <h3>{{ Showcoursedetails?.total_comments }} Comment</h3>
+                        <br />
+                        <div *ngFor="let comment of Showcoursedetails.comments" class="comment">
+                          <img class="profile-icon-comment-section" src="{{
+                              comment?.user_id?.trainer_image !== null
+                                ? comment?.user_id.trainer_image
+                                : 'https://ximboa-serverless.s3.ap-south-1.amazonaws.com/users/default/profile.png'
+                            }}" alt="" />
+                          <div class="comment-content">
+                            <h4>
+                              {{ comment?.user_id?.f_Name }}
+                              {{ comment?.user_id?.l_Name }}
+                            </h4>
+                            <p>
+                              {{ comment?.created_at | date : "mediumDate" }}
+                            </p>
+                            <p>{{ comment?.comment_text }}</p>
+                          </div>
+                          <div class="comment-actions">
+                          </div>
+                        </div>
+                        <br />
+
+                        <hr class="line" />
+                        <div class="comment-form">
+                          <h3>Write your comment</h3>
+                          <form (ngSubmit)="postComment(commentText.value)">
+                            <div class="input-group">
+                              <div class="input-field">
+                                <input type="text" placeholder="Enter your name*" required />
+                              </div>
+                              <div class="input-field">
+                                <input type="text" placeholder="Enter your number*" required />
+                              </div>
+                            </div>
+                            <br />
+                            <div class="input-field">
+                              <input type="email" placeholder="Enter your mail*" required />
+                            </div>
+                            <br />
+                            <textarea #commentText class="text-area" placeholder="Enter your Message*"
+                              required></textarea>
+                            <button class="submit-button" type="submit">
+                              POST A COMMENT
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    <div class="row mt-3" id="Reviews">
+                      <div class="col-sm-12 col-lg-12 pt-2">
+                        <h5 class="text-color">Reviews & Ratings</h5>
+                        <div class="d-flex align-items-center gap-3 mt-1">
+                          <h6 class="score-box mt-1 p-2 rounded">10</h6>
+                          <div class="small-text">
+                            <p class="m-0 p-0">Reviews</p>
+                            <p class="m-0 p-0">
+                              Rating index based on 12 ratings across the web.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="container mt-4">
+                          <div class="mt-3 border rounded p-3" *ngFor="
+                              let review of ShowCourseReview
+                                | paginate
+                                  : {
+                                      itemsPerPage: itemsPerPage,
+                                      currentPage: p,
+                                      totalItems
+                                    }
+                            ">
+                            <div class="review-card d-flex align-items-center justify-content-center mb-4">
+                              <div class="d-flex align-items-center">
+                                <img src="{{ review.trainer_image }}" class="img-fluid border rounded" width="48"
+                                  alt="User Profile" />
+                                <div class="ms-3">
+                                  <h6 class="mb-1">{{ review.user_name }}</h6>
+                                  <div>
+                                    <span *ngFor="let star of starsArray; let i = index" class="fa fa-star"
+                                      [style.color]="i < review.star_count ? 'gold' : '#ccc'">
+                                    </span>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="text-muted ms-4 flex-grow-1">
+                                <p class="mb-0">{{ review.review }}</p>
+                              </div>
+
+                              <div class="text-end">
+                                <small class="text-muted">9 Feb 2024</small>
+                                <span class="ms-4 text-end"><img src="../../assets/menu.png" alt="" /></span>
+                              </div>
+                            </div>
+
+                            <div class="review-actions d-flex gap-4 mt-2 text-muted">
+                              <span class="clickable-container me-2">Helpful (2)</span>
+                              <span class="clickable-container me-2">Comment</span>
+                              <span class="clickable-container"><img src="../../assets/share_icon.png" alt="" />
+                                Share</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                          <pagination-controls (pageChange)="onPageChange($event)"
+                          class="small-text text-end mt-4"></pagination-controls>
+                        </div>
+
+                        
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="mt-3">
+                      <h5 class="review-form mt-5">Write a Review</h5>
+                      <div class="row">
+                        <form (ngSubmit)="postreviewCourse()" #reviewForm="ngForm" class="mt-4">
+                          <div class="review-section">
+                            <div class="form-rating-section">
+                              <div class="review-inputs">
+                                <div class="field-group">
+                                  <input type="text" placeholder="Enter your name*" [(ngModel)]="review.name"
+                                    name="name" required />
+                                </div>
+                                <br />
+                                <div class="field-group">
+                                  <input type="email" placeholder="Enter your mail*" [(ngModel)]="review.email"
+                                    name="email" required />
+                                </div>
+                              </div>
+
+                              <div class="rating-box">
+                                <p class="ratings-text">Rate Now</p>
+                                <div class="star-group">
+                                  <span *ngFor="let star of starsArray; let i = index" class="fa fa-star"
+                                    [ngClass]="{ selected: i < rating }" (click)="setRating(i + 1)"></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <br />
+                          <textarea class="text-area pt-2" placeholder="Write a review" [(ngModel)]="review.review"
+                            name="review" id="review" required></textarea>
+
+                          <button class="submit-button-review" [disabled]="!reviewForm.valid" type="submit">
+                            SUBMIT
+                          </button>
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" routerLink="/coursedetails/{{
+                      Showcoursedetails?.trainer_id
+                    }}" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
+                    <p>Instructor content goes here.</p>
+                  </div>
+
+                  <div class="tab-pane fade" id="material" role="tabpanel" aria-labelledby="material-tab">
+                    <div class="materials-section">
+                      <h2>Download Material</h2>
+                      <div class="row">
+                        <div *ngFor="let material of Showcoursedetails?.materials"
+                          class="col-md-2 col-sm-2 col-xs-6 material">
+                          <div class="material-item" (click)="downloadMaterial(material.material)">
+                            <img src="../../assets/Pdf_icon.png" alt="PDF Icon" class="material-icon" />
+                            <p>{{ material.material_name }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-3 fixed-sidebar">
+        <div class="custom-card border p-3 rounded">
+          <div class="position-relative">
+            <div class="blurred-bg" [ngStyle]="{'background-image':'url(' +
+                  (Showcoursedetails.thumbnail_image ||
+                    '../../assets/courses dummy.jpg') +
+                  ')'
+              }"></div>
+
+            <ng-container *ngIf="Showcoursedetails.course_video; else dummyVideo">
+              <video #courseVideoPlayer class="foreground-img rounded card-img-top"
+                [src]="Showcoursedetails.course_video" muted playsinline preload="metadata" (click)="openVideoModal()">
+              </video>
+
+              <div class="video-icon-wrapper" *ngIf="showIcon" (click)="openVideoModal()">
+                <img *ngIf="!videoPlaying" src="../../assets/video_Icon.png" class="video-icon" alt="Play" />
+                <img *ngIf="videoPlaying" src="../../assets/pause_icon.png" class="video-icon" alt="Pause" />
+              </div>
+            </ng-container>
+
+            <ng-template #dummyVideo>
+              <img [src]="
+                  Showcoursedetails.thumbnail_image ||
+                  '../../assets/courses dummy.jpg'
+                " class="foreground-img ThumbnailImage rounded img-fluid" alt="Fallback Thumbnail" />
+            </ng-template>
+          </div>
+
+          <div class="video-modal" *ngIf="enlargedVideoVisible" (click)="closeVideoModal()">
+            <div class="video-modal-content" (click)="$event.stopPropagation()">
+              <video controls autoplay [src]="Showcoursedetails.course_video" class="video-full"></video>
+              <button class="close-btn" (click)="closeVideoModal()">×</button>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <div class="d-flex gap-4">
+              <p class="tag-label mb-3 poppins-semibold">
+                ₹{{ Showcoursedetails.course_offer_prize }}
+              </p>
+            </div>
+            <div>
+              <button (click)="CourseEnroll(Showcoursedetails._id)"
+                class="btn enroll-now w-100 text-center py-2 mb-3 poppins-semibold">
+                ENROLL NOW
+              </button>
+              <!-- (click)="CourseEnroll(Showcoursedetails._id)" -->
+
+              <div class="modal fade" #closeBtn #enrollModal id="enrollModal" tabindex="-1"
+                aria-labelledby="enrollModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered mt-5">
+                  <div class="modal-content custom-modal-width">
+                    <div class="modal-header">
+                      <div class="tab-label">
+                        <img src="../../assets/student-icon-login.png" alt="Student Icon" class="tab-icon" />
+                        <span class="form-label">Student Register</span>
+                      </div>
+                      <button type="button" #closeModalBtn class="d-none" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <form [formGroup]="studentForm" (ngSubmit)="signInForm()">
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">First Name <sup>*</sup></label>
+                            <input type="text" class="form-control" formControlName="f_Name" />
+                            <div *ngIf="
+                                studentForm.get('f_Name')?.invalid &&
+                                studentForm.get('f_Name')?.touched
+                              " class="text-danger">
+                              First Name is required.
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">Last Name <sup>*</sup></label>
+                            <input type="text" class="form-control" formControlName="l_Name" />
+                            <div *ngIf="
+                                studentForm.get('l_Name')?.invalid &&
+                                studentForm.get('l_Name')?.touched
+                              " class="text-danger">
+                              Last Name is required.
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" formControlName="middle_Name" />
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">Email <sup>*</sup></label>
+                            <input type="email" class="form-control" formControlName="email_id" />
+                            <div *ngIf="
+                                studentForm.get('email_id')?.invalid &&
+                                studentForm.get('email_id')?.touched
+                              " class="text-danger">
+                              Email is required.
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">Mobile Number <sup>*</sup></label>
+                            <input type="text" maxlength="10" class="form-control" formControlName="mobile_number" />
+                            <div *ngIf="
+                                studentForm.get('mobile_number')?.invalid &&
+                                studentForm.get('mobile_number')?.touched
+                              " class="text-danger">
+                              Mobile Number is required.
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label class="form-label">Password <sup>*</sup></label>
+                            <input [type]="show ? 'text' : 'password'" class="form-control"
+                              formControlName="password" />
+                          </div>
+
+                          <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary" [disabled]="studentForm.invalid">
+                              Sign Up
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Course Information -->
+              <p class="tag-label mt-3 poppins-semibold">Course Information</p>
+              <hr class="dot" />
+              <ul class="text-start list-unstyled">
+                <li class="pe-4">
+                  <img src="../../assets/Home_icon.png" alt="" class="me-1" /><span class="poppins-medium"> Instructor:
+                  </span>
+                  <span class="text-muted">{{
+                    Showcoursedetails.business_Name
+                    }}</span>
+                </li>
+                <hr class="dot" />
+                <li>
+                  <img src="../../assets/Duration_icon.png" class="me-1" alt="" /><span class="poppins-medium">
+                    Duration: </span>
+                  <span class="text-muted">{{
+                    Showcoursedetails.course_duration
+                    }}</span>
+                </li>
+                <hr class="dot" />
+                <li>
+                  <img src="../../assets/pin_icon.png" class="me-1" alt="" />
+                  <span class="poppins-medium">Course Level: </span>
+                  <span class="text-muted">{{
+                    Showcoursedetails?.level || "Beginner"
+                    }}</span>
+                </li>
+                <hr class="dot" />
+                <li>
+                  <img src="../../assets/language_icon.png" class="me-1" alt="" /><span class="poppins-medium">
+                    Language: </span><span class="text-muted">English</span>
+                </li>
+                <hr class="dot" />
+              </ul>
+              <button routerLink="/coursedetails/{{ Showcoursedetails?.trainer_id }}" class="trainerbtn btn w-100 my-3">
+                VIEW TRAINER PROFILE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

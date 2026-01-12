@@ -1,0 +1,107 @@
+<div class="block">
+  <h5 class="add-forum-heading">Add Forum</h5>
+</div>
+
+<div class="forum-container">
+    <div class="add-course-container">
+        <mat-card>
+            <form [formGroup]="forumForm" (ngSubmit)="onSubmit()">
+                <mat-grid-list cols="2" rowHeight="100px">
+                    
+                    <!-- Forum & Category -->
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Forum</mat-label>
+                            <mat-select formControlName="forumtype">
+                                <mat-option *ngFor="let forum of forumtype" [value]="forum">
+                                    {{ forum }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forumForm.get('forumtype')?.invalid && forumForm.get('forumtype')?.touched">
+                                Forum is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Category</mat-label>
+                            <mat-select id="category" formControlName="category" (selectionChange)="onCategoryChange($event.value)">
+                                <mat-option value="">Select Category</mat-option>
+                                <mat-option *ngFor="let category of filteredCategory" [value]="category._id">
+                                    {{ category.category_name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forumForm.get('category')?.invalid && forumForm.get('category')?.touched">
+                                Category is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <!-- Subcategory & Topic -->
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Subcategory</mat-label>
+                            <mat-select id="subcategory" formControlName="subCategory">
+                                <mat-option value="">Select Subcategory</mat-option>
+                                <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory._id">
+                                    {{ subCategory.sub_category_name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forumForm.get('subCategory')?.invalid && forumForm.get('subCategory')?.touched">
+                                Subcategory is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Topic</mat-label>
+                            <input matInput formControlName="title" placeholder="Enter Topic">
+                            <mat-error *ngIf="forumForm.get('title')?.invalid && forumForm.get('title')?.touched">
+                                Subcategory is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <!-- Description -->
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Add Description</mat-label>
+                            <textarea matInput id="description" formControlName="description"
+                                placeholder="Enter Description"></textarea>
+                            <mat-error *ngIf="forumForm.get('description')?.invalid && forumForm.get('description')?.touched">
+                                Description is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <!-- Tags -->
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Tags</mat-label>
+                            <mat-chip-grid #chipGrid aria-label="Enter tags">
+                                <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                                    {{ tag }}
+                                    <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </mat-chip-row>
+                            </mat-chip-grid>
+
+                            <input matInput [formControl]="tagsControl" [matChipInputFor]="chipGrid"
+                                (matChipInputTokenEnd)="addTag($event)" placeholder="Add a tag" />
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <!-- Buttons -->
+                <div class="button-group justify-content-end">
+                    <button  class="publish-button" type="submit">Publish</button>
+                    <button type="button" class="btn btn-secondary" (click)="saveForLater()">Save for Later</button>
+                </div>
+
+            </form>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+<div class="container-fluid p-2 section-background">
+  <div *ngIf="ShowEvent" class="container">
+    <div class="row gap-5">
+      <div class="col-sm-12 col-md-5 col-lg-8">
+        <div>
+          <img *ngIf="ShowEvent.event_thumbnail; else dummyImage" src="{{ShowEvent?.event_thumbnail}}"
+            class="ThumbnailImage rounded img-fluid" alt="Event Thumbnail">
+          <ng-template #dummyImage>
+            <img src="../../assets/event dummy.jpg" alt="Dummy Image" class="ThumbnailImage img-fluid rounded">
+          </ng-template>
+        </div>
+        <div class="d-flex align-items-center justify-content-between px-2">
+          <div class="d-flex gap-2 pt-2">
+            <p class="card-title poppins-semibold" style="font-size: 25px;">{{ShowEvent?.event_name}}</p>
+            <p class="mt-3" style="font-size: small;">(Provided by {{ShowEvent?.business_Name}})</p>
+          </div>
+          
+          <!-- share button scetion -->
+          <div>
+            <i (click)="shareIcon()" class="fa-solid fa-share text-primary fs-3"></i>
+            <div class="share-container">
+              <div *ngIf="showShare" class="share-options gap-4 p-2">
+                <a (click)="shareOnFacebook()" class="share-option p-1">
+                  <i class="fab fa-facebook fs-1 social-icon-facebook"></i>
+                </a>
+                <a (click)="shareOnWhatsApp()" class="share-option p-1">
+                  <i class="fab fa-whatsapp fs-1 social-icon-whatsapp"></i>
+                </a>
+                <a (click)="copyLink()" class="share-option p-1">
+                  <i class="fas fa-link fs-3"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="poppins-regular text-justified">{{ShowEvent.event_info}}</p>
+      </div>
+
+      <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="card trainercard ">
+          <div class="text-center mt-3">
+            <img src="{{ShowEvent.trainer_image}}" class="object-fit-cover rounded-circle trainer-image" alt="...">
+          </div>
+          <button routerLink="/coursedetails/{{ShowEvent.trainer_id}}" class="btn btn-sm rounded viewtrainerbtn">
+            View Profile</button>
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold"> {{ShowEvent?.business_Name}}</h5>
+            <div class="social-icons">
+              <i href="https://www.facebook.com" class="fa-brands fa-facebook border rounded"></i>
+              <i href="https://twitter.com" target="_blank" class="fab fa-twitter border rounded"></i>
+              <i href="https://www.instagram.com" target="_blank" class="fab fa-instagram border rounded"></i>
+              <i href="https://www.linkedin.com" target="_blank" class="fab fa-linkedin-in border rounded"></i>
+              <i href="https://www.youtube.com" target="_blank" class="fab fa-youtube border rounded"></i>
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <p><i class="fa-solid fa-star fs-5 star-icon"></i> 4.5</p>
+            <b>{{ShowEvent.total_course}} courses</b>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small>Tickets Price</small>
+            <small>Free</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-calendar"></i> Date </small>
+            <small>{{ShowEvent.event_date | date}} </small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-clock"></i> Schedule </small>
+            <small>{{ShowEvent.event_start_time}} To {{ShowEvent.event_end_time}} </small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-clock"></i> Event Mode </small>
+            <small>{{ShowEvent.event_type}} </small>
+          </div>
+          <div *ngIf="ShowEvent?.event_location" class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-location-dot"></i> Location </small>
+            <small> {{ShowEvent.event_location}} </small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-layer-group"></i> Category </small>
+            <small>{{ShowEvent.event_category}} </small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-solid fa-globe"></i> Language </small>
+            <small> {{ShowEvent.event_languages}} </small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <small><i class="fa-regular fa-flag"></i> Estimated Seat </small>
+            <small> {{ShowEvent.estimated_seats}} </small>
+          </div>
+          <div class="text-center mt-3">
+            <button (click)="bookEvent(ShowEvent._id)" class="btn btn-primary rounded-pill px-5">Join Event</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+        <mat-tab label="Description">
+          <div class="p-3">
+            <p style="text-align: justify;">{{ShowEvent?.event_description}}</p>
+          </div>
+        </mat-tab>
+        <mat-tab label="Review">
+          <section class="p-3">
+            <div class="row "
+              *ngFor="let review of showEventReview | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems }">
+              <div class="col-1 text-end">
+                <img src="{{review.trainer_image}}" class="object-fit-cover rounded-circle trainer-avatar" alt="">
+              </div>
+              <div class="col-10">
+                <h6>{{review.user_name}}</h6>
+                <div>
+                  <span *ngFor="let star of starsArray; let i = index"
+                    [ngClass]="{'fa fa-star checked': i < review.star_count, 'fa fa-star': i <= review.star_count }">
+                  </span>
+                </div>
+                <p>{{review.review}}</p>
+              </div>
+            </div>
+
+            <pagination-controls (pageChange)="onPageChange($event)" class="text-end pagination-controls"></pagination-controls>
+
+            <!-- Write Review -->
+            <div class="mt-3">
+              <h5 class="text-color">Write Review</h5>
+              <div class="row">
+                <form (ngSubmit)="postReviewEvent()" #reviewForm="ngForm">
+
+                  <div class="d-flex align-items-center gap-2 star-rating">
+                    <span *ngFor="let i of stars; let index = index" class="fa fa-star"
+                      [ngClass]="{'checked': index < rating}" (click)="toggleRating(index + 1)"
+                      class="star-icons">
+                    </span>
+                    <span class="border px-2">{{ rating }}</span>
+                  </div>
+                  <div class="my-3">
+                    <textarea class="form-control" placeholder="Message" [(ngModel)]="review.review" name="review"
+                      id="review"></textarea>
+                  </div>
+                  <div>
+                    <button type="submit" class="btn btnq" [disabled]="!reviewForm.valid">Submit you'r Review</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+  <div class="container mt-3">
+    <h5 class="fw-bold related-events-title">Related Events</h5>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3">
+      <div *ngFor="let Event of relatedEvent" class="col-sm-12 col-md-3 col-lg-3 mb-3">
+        <div class="card" routerLink="/eventdetails/{{Event._id}}">
+          <img src="{{Event.event_thumbnail}}" class="card-img-top img-fluid" alt="...">
+          <span class="onproducthoverflag rounded px-3">{{Event.event_flag}}</span>
+          <div class="card-body text">
+            <div class="d-flex align-items-center justify-content-between gap-1 trainer-name-container">
+              <span>
+                <label class="poppins-semibold-italic text-muted event-date-label">
+                  {{Event.event_date | date:'MMM'}}
+                </label>
+                <br>
+                <span class="poppins-semibold-italic event-date-day">
+                  {{Event.event_date | date: 'dd'}}
+                </span>
+              </span>
+              <span class="text-center">
+                <p class="card-title poppins-semibold-italic text-center  text-capitalize"
+                  (mouseenter)="showEventName = true" (mouseleave)="showEventName = false">
+                  {{ turnEventName(Event.event_name) }}
+                </p>
+                <p *ngIf="showEventName" class="card-title full-name rounded event-name-title">
+                  {{Event.event_name}}
+                </p>
+              </span>
+              <span class="text-center">
+                <span class="poppins-semibold-italic"> {{Event.event_type}} </span> <br>
+                <i *ngIf="Event.event_type === 'Online'" class="fas fa-circle-play text-muted"></i>
+                <i *ngIf="Event.event_type === 'Offline'" class="fas fa-location-dot"></i>
+              </span>
+            </div>
+            <div class="d-flex align-items-center gap-2 justify-content-center user-avatar-group">
+              <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+              <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+              <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+              <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+              <label class="p-2 border rounded-circle"> +35</label>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2">
+              <button class="btn rounded-pill text-light poppins-regular book-seat-btn">
+                Book Seat
+              </button>
+              <button class="btn rounded-pill  text-light poppins-regular view-more-btn">
+                View More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

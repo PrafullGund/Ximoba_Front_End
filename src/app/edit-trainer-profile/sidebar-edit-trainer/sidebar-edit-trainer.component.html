@@ -1,0 +1,100 @@
+<div class="light-background">
+  <div class="container">
+    
+    <button class="navbar-toggler d-block d-lg-none toggle-button" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#categorySidebar" aria-controls="categorySidebar">
+      <span class="navbar-toggler-icon px-2">
+        <i class="fa-solid fa-bars"></i>
+      </span>
+    </button>
+
+    <div class="offcanvas offcanvas-start d-block d-lg-none scrollable-sidebar" tabindex="-1" id="categorySidebar"
+      aria-labelledby="categorySidebarLabel">
+
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <div class="filter-container">
+          <div class="rounded white-background p-3">
+            <ul class="list ps-4 pt-2 pb-3">
+              <li>
+                <div class="user-profile-image" (click)="editUserImg()">
+                  <img [src]="userImage || '../../../assets/student-icon-login.png'" class="img-fluid rounded-circle"
+                    width="60">
+                  <div class="user-name mt-2">
+                    <span class="edit-profile-text text-primary">Edit Profile Image</span>
+                  </div>
+                </div>
+              </li>
+              <li routerLink="/profile/my-profile" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Profile</li>
+              <li routerLink="/profile/address" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Address</li>
+              <li routerLink="/profile/education-details" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Education Details</li>
+              <li routerLink="/profile/account-security" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Account Security</li>
+              <li routerLink="/profile/close-account" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Close Account</li>
+              <li routerLink="/profile/view-public-profile/" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">View Public Profile</li>
+              <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">View
+                Dashboard</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <!-- Permanent Sidebar for LG and up -->
+      <div class="col-lg-3 pt-1 sidebarlgscreen me-0 pe-0 d-none d-lg-block">
+        <div class="rounded white-background p-3">
+          <ul class="list ps-4 pt-2 pb-3">
+            <li>
+              <div class="user-profile-image" (click)="editUserImg()">
+                <img [src]="userImage || '../../../assets/student-icon-login.png'" class="img-fluid rounded-circle"
+                  width="60">
+                <div class="user-name mt-2">
+                  <span class="edit-profile-text text-primary">Edit Profile Image</span>
+                </div>
+              </div>
+            </li>
+            <li routerLink="/profile/my-profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              Profile</li>
+            <li routerLink="/profile/address" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              Address</li>
+            <li routerLink="/profile/education-details" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Education Details</li>
+            <li routerLink="/profile/account-security" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Account Security</li>
+            <li routerLink="/profile/close-account" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Close Account</li>
+              
+              <li [routerLink]="['/coursedetails', Showcoursedetails?.trainer_id]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+            View Public Profile
+          </li>
+          
+
+            <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">View
+              Dashboard</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-lg-8 pt-2">
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,403 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <img class="img-fluid rounded" src="../../../assets/trainer_home_event.png" alt="" />
+  </div>
+
+  <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab *ngIf="isTrainer || isSELF_EXPERT || isInstitute" label="My Events">
+
+      <div class="col-12 d-flex flex-wrap gap-3 justify-content-start justify-content-md-end mt-2">
+        <button class="btn btn-sm rounded-pill text-light px-3 add-event-btn" data-bs-toggle="modal"
+          data-bs-target="#AddEventModal" data-bs-whatever="@mdo">
+          Add New Event
+        </button>
+        <button (click)="toggleIcon()" class="btn btn-sm px-3 rounded-pill text-light update-delete-btn">
+          Update/Delete Event
+        </button>
+      </div>
+
+      <!-- Event List Code Start From Here -->
+      <div *ngIf="showEventData && showEventData.length > 0">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3">
+          <div *ngFor="let Event of showEventData" class="col-sm-12 col-md-3 col-lg-4 mb-3">
+            <div class="card">
+              <img routerLink="/eventdetails/{{Event._id}}" src="{{Event.event_thumbnail}}"
+                class="card-img-top img-fluid" alt="...">
+              <div class="card-body text">
+                <div class="d-flex align-items-center justify-content-between gap-1 trainer-name-container">
+                  <span>
+                    <label class="poppins-semibold-italic text-muted event-date-label">
+                      {{Event.event_date |date: 'MMM'}}
+                    </label>
+                    <br>
+                    <span class="poppins-semibold-italic event-day">{{Event.event_date | date:'dd'}}</span>
+                  </span>
+                  <span>
+                    <p class="card-title poppins-semibold-italic text-center text-capitalize"
+                      (mouseenter)="showEventName = true" (mouseleave)="showEventName = false">
+                      {{ turnEventName(Event.event_name) }}
+                    </p>
+                    <p *ngIf="showEventName" class="card-title full-name rounded event-name">
+                      {{Event.event_name}}</p>
+                  </span>
+                  <span class="text-center">
+                    <span class="poppins-semibold-italic">
+                      {{Event.event_type}}
+                    </span>
+                    <br>
+                    <i *ngIf="Event.event_type === 'Online'" class="fas fa-circle-play text-muted"></i>
+                    <i *ngIf="Event.event_type === 'Offline'" class="fas fa-location-dot"></i>
+                  </span>
+                </div>
+                <div class="d-flex align-items-center gap-2 justify-content-center profile-img ">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <label class="p-2 border rounded-circle"> +35</label>
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-3">
+                  <button routerLink="/eventdetails/{{Event._id}}"
+                    class="btn rounded-pill px-4 text-light poppins-regular view-more-btn">
+                    View More
+                  </button>
+                </div>
+              </div>
+              <i routerLink="/editevent/{{ Event._id }}" *ngIf="showIcon" class="fa-solid fa-edit right-side-top"></i>
+              <i (click)="onDelete(Event._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top-delete"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!showEventData || showEventData.length === 0" class="col-12 text-center">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-img" alt="">
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="isUser" label="Booked Events">
+      <!-- Event List Code Start From Here -->
+      <div *ngIf="showEventDataStudent && showEventDataStudent.length > 0">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-3">
+          <div *ngFor="let Event of showEventDataStudent" class="col-sm-12 col-md-3 col-lg-4 mb-3">
+            <div class="card">
+              <img routerLink="/eventdetails/{{Event._id}}" src="{{Event.event_thumbnail}}"
+                class="card-img-top img-fluid" alt="...">
+              <div class="card-body text">
+                <div class="d-flex align-items-center justify-content-between gap-1 trainer-name-container">
+                  <span>
+                    <label class="poppins-semibold-italic text-muted event-date-label">
+                      {{Event.event_date | date: 'MMM'}}
+                    </label>
+                    <br>
+                    <span class="poppins-semibold-italic event-day">
+                      {{Event.event_date | date:'dd'}}
+                    </span>
+                  </span>
+                  <span>
+                    <p class="card-title poppins-semibold-italic text-center  text-capitalize"
+                      (mouseenter)="showEventName1 = true" (mouseleave)="showEventName1 = false">
+                      {{ turnEventName1(Event.event_name) }}
+                    </p>
+                    <p *ngIf="showEventName1" class="card-title full-name rounded event-name">
+                      {{Event.event_name}}
+                    </p>
+                  </span>
+                  <span class="text-center">
+                    <span class="poppins-semibold-italic">
+                      {{Event.event_type}}
+                    </span>
+                    <br>
+                    <i *ngIf="Event.event_type === 'Online'" class="fas fa-circle-play text-muted"></i>
+                    <i *ngIf="Event.event_type === 'Offline'" class="fas fa-location-dot"></i>
+                  </span>
+                </div>
+                <div class="d-flex align-items-center gap-2 justify-content-center profile-img">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <img src="../../assets/Rohit sharma.jpg" class="rounded-circle object-fit-cover" alt="">
+                  <label class="p-2 border rounded-circle"> +35</label>
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-3">
+                  <button routerLink="/eventdetails/{{Event._id}}"
+                    class="btn rounded-pill px-4 text-light poppins-regular view-more-btn">
+                    View More
+                  </button>
+                </div>
+              </div>
+              <i routerLink="/editevent/{{ Event._id }}" *ngIf="showIcon" class="fa-solid fa-edit right-side-top"></i>
+              <i (click)="onDelete(Event._id)" *ngIf="showIcon" class="fa-solid fa-trash right-side-top-delete"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!showEventDataStudent || showEventDataStudent.length === 0" class="col-12 text-center">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-img" alt="">
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="isInstitute" label="Event Request">
+      <table class="table table-bordered text-center mt-2">
+        <thead class="mb-2">
+          <tr>
+            <th>Trainer Full Name</th>
+            <th>Event Name</th>
+            <th>STATUS</th>
+            <th>REQUEST DATE & Time</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of showPendingEvents">
+            <td>
+              <i class="fa-solid fa-user mx-2 text-primary"></i>
+              {{request.user_name}}
+            </td>
+            <td (click)="openEventsDetailsModal(request.eventId)" data-bs-toggle="modal" data-bs-target="#Event"
+              class="coursename">
+              {{request.eventName}}
+            </td>
+            <td>{{request.status}}</td>
+            <td>{{request.date | date}} &nbsp; {{request.time}}</td>
+            <td>
+              <button (click)="handleEventsApproval(request.eventId,  'approved')"
+                class="btn text-light bg-success me-4">Approve</button>
+              <button (click)="handleEventsApproval(request.eventId,  'rejected')"
+                class="btn text-light bg-danger">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!showPendingEvents || showPendingEvents.length === 0" class="col-12 text-center mt-2">
+        <img src="../../../assets/No data-Found.png" class="img-fluid object-fit-cover no-data-img" alt="">
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!-- Modal For Event Deatils -->
+<div class="modal fade" id="Event" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Event Information</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="ShowEvent" class="row gap-5">
+          <div class="col-sm-12 col-md-5 col-lg-8">
+            <div>
+              <img *ngIf="ShowEvent.event_thumbnail; else dummyImage" src="{{ShowEvent.event_thumbnail}}"
+                class="ThumbnailImage rounded img-fluid" alt="Event Thumbnail">
+              <ng-template #dummyImage>
+                <img src="../../assets/event dummy.jpg" alt="Dummy Image" class="ThumbnailImage img-fluid rounded">
+              </ng-template>
+            </div>
+            <h5>Event Short Info</h5>
+            <p class="poppins-regular justify-text">
+              {{ShowEvent.event_info}}
+            </p>
+            <div class="mt-2">
+              <h5>Description</h5>
+              <p class="justify-text">
+                {{ShowEvent?.event_description}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-5 col-lg-3">
+            <div class="mt-5">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small>
+                  <i class="fa-solid fa-ticket"></i>
+                  Tickets Price
+                </small>
+                <small>Free</small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-calendar"></i> Date </small>
+                <small>{{ShowEvent.event_date | date}} </small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-clock"></i> Schedule </small>
+                <small>{{ShowEvent.event_start_time}} To {{ShowEvent.event_end_time}} </small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-clock"></i> Event Mode </small>
+                <small>{{ShowEvent.event_type}} </small>
+              </div>
+              <div *ngIf="ShowEvent?.event_location" class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-location-dot"></i> Location </small>
+                <small> {{ShowEvent.event_location}} </small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-layer-group"></i> Category </small>
+                <small>{{ShowEvent.event_category}} </small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <small><i class="fa-solid fa-globe"></i> Language </small>
+                <small> {{ShowEvent.event_languages}} </small>
+              </div>
+              <div class="d-flex align-items-center justify-content-between ">
+                <small><i class="fa-regular fa-flag"></i> Estimated Seat </small>
+                <small> {{ShowEvent.estimated_seats}} </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Model For Add New Event -->
+<div class="modal fade" id="AddEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable ">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Event</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 pt-1">
+        <form (ngSubmit)="onSubmit(eventForm)" #eventForm="ngForm">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_name" class="col-form-label">Event Name<sup>*</sup></label>
+              <input class="form-control" type="text" id="event_name" [(ngModel)]="event.event_name" name="event_name"
+                required #EventName="ngModel" />
+              <div *ngIf="EventName.invalid && EventName.touched" class="text-danger">
+                Event Name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label for="event_category" class="col-form-label">Select Categories<sup>*</sup></label>
+              <select class="form-select" aria-label="Default select example" id="event_category"
+                [(ngModel)]="event.event_category" name="event_category" [(ngModel)]="fetchCategoryId"
+                (change)="getSubCategory()" #category="ngModel" required>
+                <option selected disabled>Select Categories</option>
+                <option *ngFor="let category of showCategoryData" [value]="category._id">
+                  {{ category.category_name }}
+                </option>
+              </select>
+              <div *ngIf="category.invalid && category.touched" class="text-danger">
+                Event Category is required.
+              </div>
+            </div>
+
+            <!--Sub Category Selection -->
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="sub_category" class="col-form-label">Select Sub Categories <sup>*</sup></label>
+              <select class="form-select" id="sub_category" [(ngModel)]="event.sub_category" name="sub_category"
+                #subcategory="ngModel" required>
+                <option value="" disabled selected>Select Sub Categories</option>
+                <option *ngFor="let category of subCategory" [value]="category._id">{{ category.sub_category_name }}
+                </option>
+              </select>
+              <div *ngIf="subcategory.invalid && subcategory.touched" class="text-danger">
+                <small>Select a sub category.</small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_type" class="col-form-label">Event Mode<sup>*</sup></label>
+              <select class="form-select" aria-label="Default select example" id="event_type"
+                [(ngModel)]="event.event_type" name="event_type" #EventMode="ngModel" required>
+                <option selected disabled>Select Mode</option>
+                <option value="Online">Online</option>
+                <option value="Online">Offline</option>
+              </select>
+              <div *ngIf="EventMode.invalid && EventMode.touched" class="text-danger">
+                Event Mode is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_date" class="col-form-label">Event Date<sup>*</sup></label>
+              <input class="form-control" type="date" id="event_date" [(ngModel)]="event.event_date" name="event_date"
+                [min]="minDate" required #Eventdate="ngModel" />
+              <div *ngIf="Eventdate.invalid && Eventdate.touched" class="text-danger">
+                Event Date is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_start_time" class="col-form-label">Event Start Time<sup>*</sup></label>
+              <input class="form-control" type="time" id="event_start_time" [(ngModel)]="event.event_start_time"
+                name="event_start_time" required #Eventtime="ngModel" />
+              <div *ngIf="Eventtime.invalid && Eventtime.touched" class="text-danger">
+                Event Start Time is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_end_time" class="col-form-label">Event End Time<sup>*</sup></label>
+              <input type="time" class="form-control" id="event_end_time" [(ngModel)]="event.event_end_time"
+                name="event_end_time" required #Eventendtime="ngModel" />
+              <div *ngIf="EventName.invalid && EventName.touched" class="text-danger">
+                Event Name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_location" class="col-form-label">Location<sup>*</sup></label>
+              <input type="text" class="form-control" id="event_location" [(ngModel)]="event.event_location"
+                name="event_location" required #Eventlocation="ngModel" />
+              <div *ngIf="Eventlocation.invalid && Eventlocation.touched" class="text-danger">
+                Event Location is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_languages" class="col-form-label">Event Language<sup>*</sup></label>
+              <input type="text" class="form-control" id="event_languages" [(ngModel)]="event.event_languages"
+                name="event_languages" required #Eventlanguage="ngModel" />
+              <div *ngIf="Eventlanguage.invalid && Eventlanguage.touched" class="text-danger">
+                Event Language is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="estimated_seats" class="col-form-label">Estimate Seat<sup>*</sup></label>
+              <input type="text" class="form-control" id="estimated_seats" [(ngModel)]="event.estimated_seats"
+                name="estimated_seats" required #seat="ngModel" />
+              <div *ngIf="seat.invalid && seat.touched" class="text-danger">
+                Event Name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_thumbnail" class="col-form-label">Event Thumbnail Image</label>
+              <input class="form-control" type="file" id="event_thumbnail" name="event_thumbnail"
+                (change)="onFileSelected($event)" required>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_info" class="col-form-label">Event Short Information<sup>*</sup></label>
+              <textarea type="text" class="form-control" id="event_info" [(ngModel)]="event.event_info"
+                name="event_info" required #short="ngModel"></textarea>
+              <div *ngIf="short.invalid && short.touched" class="text-danger">
+                Event Short Information is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_description" class="col-form-label">Event Details Information<sup>*</sup></label>
+              <textarea type="text" class="form-control" id="event_description" [(ngModel)]="event.event_description"
+                name="event_description" required #detailsinfo="ngModel"></textarea>
+              <div *ngIf="EventName.invalid && EventName.touched" class="text-danger">
+                Event Detail Information is required.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

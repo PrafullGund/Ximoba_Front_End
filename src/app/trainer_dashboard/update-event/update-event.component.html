@@ -1,0 +1,160 @@
+<div class="container-fluid">
+  <div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded border my-3 px-5">
+    <div class="row">
+      <h2 class="text-center">Update Event</h2>
+          <form [formGroup]="uploadform" (ngSubmit)="onSubmit()" #eventForm="ngForm">
+            <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_name" class="col-form-label">Event Name<sup>*</sup></label>
+              <input class="form-control" type="text" id="event_name" formControlName="event_name" name="event_name"
+                required />
+              <small *ngIf="uploadform.get('event_name')?.touched && uploadform.get('event_name')?.errors?.['required']"
+                class="text-danger">
+                Event Name is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label for="event_categories" class="col-form-label">Select Categories<sup>*</sup></label>
+              <select class="form-select" aria-label="Default select example" id="event_categories"
+                formControlName="event_categories" name="event_categories" [(ngModel)]="fetchcategoryID" (change)="getsubcategory()">
+                <option selected disabled>Select Categories</option>
+                <option *ngFor="let category of showCategorydata" [value]="category._id">
+                  {{ category.category_name }}
+                </option>
+              </select>
+              <small *ngIf="uploadform.get('event_categories')?.touched && uploadform.get('event_categories')?.invalid"
+                class="text-danger">
+                Event category is required.
+              </small>
+            </div>
+
+             <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="sub_category" class="col-form-label">Select Sub Categories <sup>*</sup></label>
+              <select class="form-select" id="sub_category" formControlName="sub_category" name="sub_category" required>
+                <option value="" disabled selected>Select Sub Categories</option>
+                <option *ngFor="let category of subCategory" [value]="category._id">{{ category.sub_category_name }}
+                </option>
+              </select>
+              <small *ngIf="uploadform.get('sub_category')?.touched && uploadform.get('sub_category')?.invalid"
+              class="text-danger">
+              Event category is required.
+            </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_date" class="col-form-label">Event Date<sup>*</sup></label>
+              <input class="form-control" type="date" id="event_date" formControlName="event_date" name="event_date"
+                required />
+              <small *ngIf="uploadform.get('event_date')?.touched && uploadform.get('event_date')?.invalid"
+                class="text-danger">
+                Event Date is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_type" class="col-form-label">Event Mode<sup>*</sup></label>
+              <select class="form-select" aria-label="Default select example" id="event_type"
+                formControlName="event_type" name="event_type">
+                <option selected disabled>Select Mode</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+              </select>
+              <small *ngIf="uploadform.get('event_type')?.touched && uploadform.get('event_type')?.invalid"
+                class="text-danger">
+                Event mode is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <label for="event_start_time" class="col-form-label">Event Start Time<sup>*</sup></label>
+              <input class="form-control" type="text" id="event_start_time" formControlName="event_start_time"
+                name="event_start_time" required />
+              <small *ngIf="uploadform.get('event_start_time')?.touched && uploadform.get('event_start_time')?.invalid"
+                class="text-danger">
+                Event Start Time is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_end_time" class="col-form-label">Event End Time<sup>*</sup></label>
+              <input type="text" class="form-control" id="event_end_time" formControlName="event_end_time"
+                name="event_end_time" required />
+              <small *ngIf="uploadform.get('event_end_time')?.touched && uploadform.get('event_end_time')?.invalid"
+                class="text-danger">
+                Event End Time is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_location" class="col-form-label">Location<sup>*</sup></label>
+              <input type="text" class="form-control" id="event_location" formControlName="event_location"
+                name="event_location" required />
+              <small *ngIf="uploadform.get('event_location')?.touched && uploadform.get('event_location')?.invalid"
+                class="text-danger">
+                Event location is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_languages" class="col-form-label">Event Language<sup>*</sup></label>
+              <input type="text" class="form-control" id="event_languages" formControlName="event_languages"
+                name="event_languages" required />
+              <small *ngIf="uploadform.get('event_languages')?.touched && uploadform.get('event_languages')?.invalid"
+                class="text-danger">
+                Event language is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="estimated_seats" class="col-form-label">Estimate Seat<sup>*</sup></label>
+              <input type="text" class="form-control" id="estimated_seats" formControlName="estimated_seats"
+                name="estimated_seats" required />
+              <small *ngIf="uploadform.get('estimated_seats')?.touched && uploadform.get('estimated_seats')?.invalid"
+                class="text-danger">
+                Estimated seats are required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_info" class="col-form-label">Event Short Information<sup>*</sup></label>
+              <textarea class="form-control" id="event_info" formControlName="event_info" name="event_info"
+                required></textarea>
+              <small *ngIf="uploadform.get('event_info')?.touched && uploadform.get('event_info')?.invalid"
+                class="text-danger">
+                Event short information is required.
+              </small>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+              <label for="event_description" class="col-form-label">Event Details Information<sup>*</sup></label>
+              <textarea class="form-control" id="event_description" formControlName="event_description"
+                name="event_description" required></textarea>
+              <small
+                *ngIf="uploadform.get('event_description')?.touched && uploadform.get('event_description')?.invalid"
+                class="text-danger">
+                Event detailed information is required.
+              </small>
+            </div>
+
+            <div class="mb-3 col-sm-12 col-md-6 col-lg-6">
+              <label for="event_thumbnail" class="col-form-label">Upload Event Image</label><br />
+              <input type="file" name="event_thumbnail" id="event_thumbnail" (change)="onFileSelected($event)" />
+              <small *ngIf="uploadform.get('event_thumbnail')?.touched && uploadform.get('event_thumbnail')?.invalid"
+                class="text-danger">
+                Event image is required.
+              </small>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button routerLink="/dashboard/event" type="button" class="btn btn-secondary">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary ms-3" >
+            Update Event
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

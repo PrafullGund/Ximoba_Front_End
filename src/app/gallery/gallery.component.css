@@ -1,0 +1,20 @@
+.galimg {
+    position: relative;
+  }
+  
+  .overlaybtn {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    width: 200px;
+    font-size: 20px;
+    transform: translateX(-50%);
+  }
+  
+  .galimg:hover .overlaybtn{
+    background-color: rgb(48, 48, 48);
+    color: white;
+  }
+  .gallimg {
+    border: 10px solid rgb(48, 48, 48);
+  }

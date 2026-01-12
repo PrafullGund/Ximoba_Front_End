@@ -1,0 +1,38 @@
+app-sign-in {
+    padding: 0px !important;
+
+    .login-img {
+        margin: 0px !important;
+    }
+
+    .login-in-modal {
+        div {
+            margin: 0px !important;
+            /* width: 100% !important; */
+        }
+
+        .Google-btn {
+            margin-bottom: 10px !important;
+        }
+    }
+}
+
+app-sign-up {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
+
+    .login-section {
+        width: 100% !important;
+        padding: 0px !important;
+        margin: 0px !important;
+
+        .text-danger {
+            font-size: small !important;
+        }
+
+        .rounded-input {
+            border-radius: 10px;
+        }
+    }
+}

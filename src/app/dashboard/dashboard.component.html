@@ -1,0 +1,516 @@
+<div class="container-fluid gx-0" style="background-image: url(../../assets/bannerBackground\ _ColorImg.png);">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <!-- Left Content -->
+      <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
+        <p class="text-primary poppins-bold">CONNECT. SHARE. GROW</p>
+        <p class="poppins-extrabold">Network with Experts<br>Gain Insights
+        </p>
+        <div class="d-flex justify-content-center justify-content-lg-start gap-3">
+          <button routerLink="/signin" class="btn rounded-pill px-4 poppins-light login-In">Log In</button>
+          <button routerLink="/signup" class="btn btn-outline-primary rounded-pill px-4 poppins-light sign-Up">Sign
+            Up</button>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="col-lg-6">
+        <div class="position-relative">
+          <div class="nav-btn">
+            <button class="btn"> >> </button>
+          </div>
+
+          <img src="../../assets/banner_imageNew.png" alt="Banner Image" class="img-fluid rounded">
+          <div class="position-absolute translate-middle-y w-100 h-100">
+            <div class="mb-3 d-flex align-items-center justify-content-start expert-badge">
+              <div class="text-white rounded-pill d-flex align-items-center px-4 py-2 shadow expert-card" [routerLink]="'/relevance/alltrainer'">
+
+                <!-- Left Side Text -->
+                <div class="me-3 expert-info">
+                  <h4 class="mb-1 poppins-semibold">1K+</h4>
+                  <p class="mb-0 poppins-semibold">Expert Joined</p>
+                </div>
+                <div class="d-flex">
+                  <img src="https://storage.googleapis.com/a1aa/image/RkegXzoOE02hpIHfIVrqW5lqmaksw9CIJAXhGEoaXtU.jpg"
+                    alt="Expert 1" class="rounded-circle border border-white expert-img">
+                  <img src="https://storage.googleapis.com/a1aa/image/eYWN1mXZzr90l9aOsLc2_SgAfc8D6KlNgBQSM0HJAjQ.jpg"
+                    alt="Expert 2" class="rounded-circle border border-white expert-img">
+                  <img src="https://storage.googleapis.com/a1aa/image/xHpz6Olb7_l9MYBRNFh1f08fTMy5rKNGKJVXIiGPqNY.jpg"
+                    alt="Expert 3" class="rounded-circle border border-white expert-img">
+                </div>
+                <img src="../../assets/Rectangle 5.png" alt="Icon" class="img-fluid expert-arrow" >
+              </div>
+            </div>
+
+            <!-- Student and Institute Joined Section -->
+            <div class="mb-6 d-flex align-items-center justify-content-between student-institute-section">
+              <div class="text-white rounded-pill d-flex align-items-center px-4 py-2 shadow student-card" [routerLink]="'/self-evaluation'">
+                <div class="me-3 expert-info">
+                  <h4 class="mb-1 poppins-semibold">5K+</h4>
+                  <p class="mb-0 poppins-semibold">Student Joined</p>
+                </div>
+                <div class="d-flex">
+                  <img src="https://storage.googleapis.com/a1aa/image/RkegXzoOE02hpIHfIVrqW5lqmaksw9CIJAXhGEoaXtU.jpg"
+                    alt="Expert 1" class="rounded-circle border border-white expert-img">
+                  <img src="https://storage.googleapis.com/a1aa/image/eYWN1mXZzr90l9aOsLc2_SgAfc8D6KlNgBQSM0HJAjQ.jpg"
+                    alt="Expert 2" class="rounded-circle border border-white expert-img">
+                  <img src="https://storage.googleapis.com/a1aa/image/xHpz6Olb7_l9MYBRNFh1f08fTMy5rKNGKJVXIiGPqNY.jpg"
+                    alt="Expert 3" class="rounded-circle border border-white expert-img">
+                </div>
+                <img src="../../assets/Rectangle 5.png" alt="Icon" class="img-fluid expert-arrow" >
+              </div>
+              <div class="text-white rounded-pill d-flex align-items-center px-5 py-2 shadow institute-card" [routerLink]="'/share-Expertise'">
+                <div class="me-3 py-1 expert-info">
+                  <h4 class="mb-1 poppins-semibold">80+</h4>
+                  <p class="mb-0 poppins-semibold">Institute Joined</p>
+                </div>
+                <img src="../../assets/Rectangle 5.png" alt="Icon" class="img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top category -->
+<div class="container-fluid category-section">
+  <div class="container ximboa-workflow-box">
+    <div class="col-sm-12">
+      <p class="text-primary text-center poppins-bold mb-1" style="letter-spacing: 2px;">EXPLORE</p>
+      <h1 class="text-center poppins-extrabold fsize m-0 p-0">Our Top Categories</h1>
+    </div>
+
+    <div class="row align-items-center justify-content-center gap-4">
+      <div *ngFor="let category of visibleCategories()"
+        class="col-sm-6 col-md-3 col-lg-2 my-3 d-flex align-items-center justify-content-center py-4 position-relative category-container"
+        [routerLink]="['/relevance']" [queryParams]="{ category: category.category_name, id: category._id }">
+        <div class="text-center category-content d-flex flex-column align-items-center">
+          <img src="{{category.category_image}}" alt="" class="category-image"><br>
+          <small class="poppins-semibold category-name">{{category?.category_name}}</small>
+        </div>
+        <div class="view-more-overlay">
+          View More
+        </div>
+      </div>
+      <div class="text-end mt-2 pe-5">
+        <p class="ViewmoreArrow pe-3 poppins-semibold" data-bs-toggle="modal" data-bs-target="#categorymodel">
+          View More <i class="fa-solid fa-arrow-right"></i> </p>
+      </div>
+      <div class="modal fade" id="categorymodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">All Categories</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div *ngFor="let category of ShowAllCategory" class="col-sm-12 col-md-5 col-lg-4   mt-3 rounded  mb-2"
+                  [routerLink]="['/relevance']" [queryParams]="{ category: category.category_name,id: category._id}"
+                  data-bs-dismiss="modal" aria-label="Close">
+                  <div class="p-3 d-flex align-items-center gap-2 border box-hover shadow-sm rounded category-box">
+                    <img src="{{category.category_image}}" alt="" class="category-image">
+                    <div>
+                      <p class="m-0 categoryheading">{{category?.category_name}}</p>
+                      <p class="m-0 categorysubtitle">{{truncatecategorytitle(category?.Sub_title)}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- card -->
+<div class="container">
+  <div class="horizontal-scroll custom-section">
+    <div class="highlighted-card">
+      <div class="max-box">
+        <p class="poppins-bold title-small">LOOKING A</p>
+        <p class="poppins-extrabold title-large">Expert</p>
+        <a href="#" class="btn btn-light rounded-pill  view-btn" routerLink="/relevance/alltrainer">View Now</a>
+      </div>
+      <div class="image-container">
+        <img src="../../assets/looking_expert.png" alt="Expert">
+      </div>
+    </div>
+
+    <div class="zoom-container findacourses d-flex flex-column justify-content-between align-items-center">
+      <div class="text-start w-100 pt-2 heading">
+        <p class="text-light poppins-bold m-0 ps-4 text-light-find-a">Find a</p>
+        <p class="poppins-bold text-light ps-3 mb-0 text-light-courses">Courses</p>
+      </div>
+      <img src="../../assets/D1.png" class="img-fluid foregrounds-img">
+      <div class="right-arrow-second" routerLink="/relevance/Allcourses">
+        Explore <i class="fa-solid fa-arrow-right"></i>
+      </div>
+      
+    </div>
+
+    <div class="zoom-container evaluate-background d-flex flex-column justify-content-between align-items-center">
+      <div class="text-start w-100 p-2 third-heading">
+        <p class="text-light poppins-bold m-0 ps-1 text-light-evaluate">Evaluate</p>
+        <p class="poppins-bold text-light ps-2 mb-0 text-light-yourself">Yourself</p>
+      </div>
+      <img src="../../assets/D22.png" class="evaluateBackground img-fluid">
+      <div class="right-arrow" routerLink="/relevance/alltrainer">
+        Explore <i class="fa-solid fa-arrow-right"></i>
+      </div>
+    </div>
+
+    <div class="zoom-container findacourses d-flex flex-column justify-content-between align-items-center">
+      <div class="text-start w-100 p-2 fourth-heading">
+        <p class="text-light poppins-bold m-0 ps-4 text-light-join-our">Join Our</p>
+        <p class="poppins-bold text-light ps-1 mb-0 text-light-community">Community</p>
+      </div>
+      <img src="../../assets/D3.png" class="img-fluid foregrounds-img">
+      <div class="right-arrow-second" routerLink="/forum">
+        Explore <i class="fa-solid fa-arrow-right"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- lasted Tranding Courses -->
+<mat-card>
+  <div class="container-fluid ximboa-workflow-box">
+    <div class="container box-style">
+      <div>
+        <p class="text-primary text-center poppins-bold mb-1" style="letter-spacing: 2px;">DISCOVER</p>
+        <h1 class="text-center poppins-extrabold fsize m-0 p-0">World's Best Courses</h1>
+      </div>
+      <div class="container">
+        <div class="mt-3 d-flex justify-content-center align-items-center">
+            <button class=" btn-light scrollCategoryLeft" (click)="scrollCategoryLeft()">
+              <i class='fas fa-angle-left'></i>
+            </button>
+          <div class="category-containers">
+            <ul #categoryList class="category-list d-flex justify-content-start list-unstyled  category-lists">
+              <li *ngFor="let category of categories" [class.selected]="category._id === selectedCategory"
+                (click)="fetchSubcategories(category._id)" class="category px-3 py-1" style="cursor: pointer;">
+                {{ category.category_name }}
+              </li>
+            </ul>
+          </div>
+          <button class=" btn-light scrollCategoryRight" (click)="scrollCategoryRight()">
+            <i class='fas fa-angle-right'></i>
+          </button>
+        </div>
+
+        <div *ngIf="selectedCategory">
+          <div *ngIf="!loadingSubcategories && subcategories.length > 0" class="d-flex align-items-center">
+            <!-- <button class="btn btn-light me-2 scrollCategoryLeft" (click)="scrollLeft()">◀</button> -->
+
+            <!-- Subcategory List -->
+            <div class="subcategory-container">
+              <ul #subcategoryList
+                class="d-flex justify-content-lg-start list-unstyled gap-2 category-list rounded px-1 py-1 sub-category-list">
+                <li *ngFor="let subcategory of subcategories" [class.selected]="subcategory._id === selectedSubcategory"
+                  (click)="fetchCourses(subcategory._id); selectedSubcategory = subcategory._id"
+                  class="category border round py-2 px-3" style="cursor: pointer;">
+                  {{ subcategory.sub_category_name }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 gx-3 mt-4">
+            <!-- <div *ngFor="let allcourses of visibleCourses()" class="col-sm-12 col-md-6 col-lg-3 mb-3 ">
+              <div class="card courses-home" routerLink="/couserenroll/{{ allcourses._id }}"
+                (mouseenter)="hoveredCourse = allcourses._id" (mouseleave)="hoveredCourse = null">
+                <img *ngIf="allcourses.thumbnail_image; else dummyImage" src="{{ allcourses.thumbnail_image }}"
+                  class="card-img-top img-fluid" alt="Image" />
+                <ng-template #dummyImage>
+                  <img src="../../assets/courses dummy.jpg" alt="Dummy Image" class="card-img-top img-fluid" />
+                </ng-template>
+                <div class="card-body mb-0 pb-0">
+                  <div class="d-flex align-items-center trainer-name-container justify-content-between">
+                    <h5 class="card-title text-capitalize" (mouseenter)="showcourseName = true"
+                      (mouseleave)="showcourseName = false">
+                      {{ truncatecourseName(allcourses.course_name) }}
+                    </h5>
+                    <h5 *ngIf="showcourseName" class="card-title full-name rounded card-title-course">
+                      {{ allcourses.course_name }}
+                    </h5>
+                    <span class="text-center">
+                      <span class="poppins-semibold-italic">
+                        {{ allcourses.online_offline }}
+                      </span>
+                      <i *ngIf="allcourses.online_offline === 'Online'"
+                        class="fas fa-circle-play text-muted m-0 p-0"></i>
+                      <i *ngIf="allcourses.online_offline === 'Offline'" class="fas fa-location-dot m-0 p-0"></i>
+                    </span>
+                  </div>
+                  <span class="">{{ allcourses.category_name }}</span>
+
+                  <div class="d-flex align-items-center justify-content-between mt-1 mb-0 m-0 p-0">
+                    <div class="d-flex align-items-center gap-2 trainer-name-container">
+                      <p>
+                        <img src="{{ allcourses.trainer_image }}" class="rounded-circle trainer-image" alt="" />
+                      </p>
+                      <p class="card-title text-capitalize pb-1" (mouseenter)="showbusinessName = true"
+                        (mouseleave)="showbusinessName = false">
+                        {{ trunbusinessName(allcourses.business_Name) }}
+                      </p>
+                      <p *ngIf="showbusinessName" class="full-name rounded business-Name">
+                        {{ allcourses.business_Name }}
+                      </p>
+                    </div>
+                    <p>
+                      {{ allcourses.course_rating }}
+                      <i class="fa-solid fa-star fs-5 course-rating"></i>
+                    </p>
+                  </div>
+
+                  <button class="left-side-top rounded px-2">
+                    {{ allcourses.course_flag }}
+                  </button>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <p>
+                    <i class="fa-solid fa-list-ul"></i> Duration :
+                    {{ allcourses.course_duration }} Weeks
+                  </p>
+                  <p class="course-price">
+                    {{ getFormattedPrice(allcourses.course_price) }}
+                  </p>
+                </div>
+              </div>
+            </div> -->
+
+            <div *ngFor="let allcourses of visibleCourses()" class="col-sm-12 col-md-6 col-lg-3 mb-3">
+              <div class="card courses-home h-100" routerLink="/couserenroll/{{ allcourses._id }}"
+                (mouseenter)="hoveredCourse = allcourses._id" (mouseleave)="hoveredCourse = null">
+                <img *ngIf="allcourses.thumbnail_image; else dummyImage" src="{{ allcourses.thumbnail_image }}"
+                  class="card-img-top img-fluid" alt="Image" />
+                <ng-template #dummyImage>
+                  <img src="../../assets/courses dummy.jpg" alt="Dummy Image" class="card-img-top img-fluid" />
+                </ng-template>
+                <div class="card-body mb-0 pb-0">
+                  <div class="d-flex align-items-center trainer-name-container justify-content-between">
+                    <h5 class="card-title text-capitalize text-truncate" title="{{ allcourses.course_name }}">
+                      {{ truncatecourseName(allcourses.course_name) }}
+                    </h5>
+                    <span class="text-center">
+                      <span class="poppins-semibold-italic text-truncate" title="{{ allcourses.online_offline }}">
+                        {{ allcourses.online_offline }}
+                      </span>
+                      <i *ngIf="allcourses.online_offline === 'Online'" class="fas fa-circle-play text-muted m-0 p-0"></i>
+                      <i *ngIf="allcourses.online_offline === 'Offline'" class="fas fa-location-dot m-0 p-0"></i>
+                    </span>
+                  </div>
+                  <span class="">{{ allcourses.category_name }}</span>
+            
+                  <div class="d-flex align-items-center justify-content-between mt-1 mb-0 m-0 p-0">
+                    <div class="d-flex align-items-center gap-2 trainer-name-container">
+                      <p>
+                        <img src="{{ allcourses.trainer_image }}" class="rounded-circle trainer-image" alt="" />
+                      </p>
+                      <p class="card-title text-capitalize pb-1 text-truncate" title="{{ allcourses.business_Name }}">
+                        {{ trunbusinessName(allcourses.business_Name) }}
+                      </p>
+                    </div>
+                    <p>
+                      {{ allcourses.course_rating }}
+                      <i class="fa-solid fa-star fs-5 course-rating"></i>
+                    </p>
+                  </div>
+            
+                  <button class="left-side-top rounded px-2">
+                    {{ allcourses.course_flag }}
+                  </button>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <p>
+                    <i class="fa-solid fa-list-ul"></i> Duration :
+                    {{ allcourses.course_duration }} Weeks
+                  </p>
+                  <p class="course-price">
+                    {{ getFormattedPrice(allcourses.course_price) }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="selectedSubcategory" class="selectedSubcategory">
+          <div *ngFor="let subcategory of subcategories">
+            <li *ngIf="subcategory._id === selectedSubcategory" class="list-unstyled">
+              <button class="border round px-2 py-2 text-white mx-2 show-all-button" routerLink="/relevance"
+                [queryParams]="{ id: selectedCategory,category:subcategory.category_name,subcategoryId: subcategory._id }"
+                (click)="selectSubCategory(subcategory._id)">
+                Show All {{ subcategory.sub_category_name }} Courses
+              </button>
+            </li>
+          </div>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</mat-card>
+
+<!-- Ximboa workflow -->
+<div class="container-fluid ximboa-workflow">
+  <div class="container ximboa-workflow-box">
+    <!-- px-5 -->
+    <div class="">
+      <!-- py-3 -->
+      <h4 class="text-center text-light fsizeblue m-0 p-0">HOW</h4>
+      <h1 class="text-center text-light fsize m-0 p-0">Ximboa Works</h1>
+    </div>
+
+    <div class="row align-items-center all-card">
+      <div
+        class="col-sm-12 col-md-5 col-lg-2 my-3  d-flex align-items-center justify-content-center py-4 rounded cards">
+        <div class="text-center">
+          <img src="../../assets/CONNECT ICON NEW.png" class="images" alt=""><br>
+          <small class="workflowwords">CONNECT</small>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-5 col-lg-1 me-3 workflowhide ">
+        <!-- <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 550 300">
+          <path id="line-1" fill="none" stroke="white" stroke-width="14" stroke-dasharray="1000"
+            stroke-dashoffset="1000" d="M18.9 128.6c62 33 186 99 311.3 28.5 37.3-21 77.3-108-81.2-92.3-175.5 17.3-6 116.6 54.4 132.5 
+            16.7 4.4 108.5 34.2 209.9-18.6" />
+          <g id="arrow-group-1" transform="translate(0, -5)">
+            <path id="arrow-1" fill="white" d="M0 0 l47.1 6 -29.8 33.3 -17.3 -39.3z" />
+          </g>
+        </svg> -->
+        <img src="../../assets/arrow new.gif" class="gif">
+      </div>
+
+      <div class="downarrowhide text-center">
+        <i class="fa-solid fa-down-long down-arrow"></i>
+      </div>
+
+      <div
+        class="col-sm-12 col-md-5 col-lg-2 my-3  d-flex align-items-center justify-content-center py-4 rounded cards">
+        <div class="text-center">
+          <img src="../../assets/SHARE ICON NEW.png" class="images" alt=""><br>
+          <small class="workflowwords">SHARE</small>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-5 col-lg-1 me-3 workflowhide">
+        <!-- <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 550 300">
+          <path id="line-2" fill="none" stroke="white" stroke-width="14" stroke-dasharray="1000"
+            stroke-dashoffset="1000" d="M18.9 128.6c62 33 186 99 311.3 28.5 37.3-21 77.3-108-81.2-92.3-175.5 17.3-6 116.6 54.4 132.5 
+            16.7 4.4 108.5 34.2 209.9-18.6" />
+          <g id="arrow-group-2" transform="translate(0, -5)">
+            <path id="arrow-2" fill="white" d="M0 0 l47.1 6 -29.8 33.3 -17.3 -39.3z" />
+          </g>
+        </svg> -->
+        <img src="../../assets/arrow new.gif" class="gif">
+      </div>
+
+      <div class="downarrowhide text-center">
+        <i class="fa-solid fa-down-long down-arrow"></i>
+      </div>
+
+      <div
+        class="col-sm-12 col-md-5 col-lg-2 my-3  d-flex align-items-center justify-content-center py-4 rounded cards">
+        <div class="text-center">
+          <img src="../../assets/EARN ICON NEW.png" class="images" alt=""><br>
+          <small class="workflowwords">EARN</small>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-5 col-lg-1 me-3 workflowhide">
+        <!-- <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 550 300">
+          <path id="line-3" fill="none" stroke="white" stroke-width="14" stroke-dasharray="1000"
+            stroke-dashoffset="1000" d="M18.9 128.6c62 33 186 99 311.3 28.5 37.3-21 77.3-108-81.2-92.3-175.5 17.3-6 116.6 54.4 132.5 
+            16.7 4.4 108.5 34.2 209.9-18.6" />
+          <g id="arrow-group-3" transform="translate(0, -5)">
+            <path id="arrow-3" fill="white" d="M0 0 l47.1 6 -29.8 33.3 -17.3 -39.3z" />
+          </g>
+        </svg> -->
+        <img src="../../assets/arrow new.gif" class="gif">
+      </div>
+
+      <div class="downarrowhide text-center">
+        <i class="fa-solid fa-down-long down-arrow"></i>
+      </div>
+
+      <div
+        class="col-sm-12 col-md-5 col-lg-2 my-3  d-flex align-items-center justify-content-center py-4 rounded cards">
+        <div class="text-center">
+          <img src="../../assets/LEARN ICON NEW.png" class="images" alt=""><br>
+          <small class="workflowwords">LEARN</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Grow yourself -->
+<div class="container">
+  <div class="row align-items-center justify-content-center mobile-margin-top">
+    <div class=" my-5">
+      <p class="mb-4 poppins-regular text-center main-heading" style="">
+        The <span class="highlight-text poppins-semibold">Path</span> to Grow yourself, <br> <span
+          class="highlight-text poppins-semibold">Step
+        </span>by <span class="highlight-text poppins-semibold">Step
+        </span>
+      </p>
+      <div class="row align-items-center justify-content-center mb-5 mt-4 step-first">
+        <div class="col-md-2">
+          <div class="d-flex justify-content-center">
+            <button class="btn rounded-circle btn-outline-primary me-2">&lt;</button>
+            <button class="btn rounded-circle btn-outline-primary">&gt;</button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="mb-3 step-container">
+            <div class="btn btn-primary rounded-pill mb-2 step-btn">Step 01</div>
+            <h5 class="mb-0 poppins-regular step-heading">Choose Your Path</h5>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-start">
+          <div class="info-box">
+            <p class="poppins-regular" style="font-size: 18px;">
+              Browse our diverse e-course catalog and select a program that matches your goals, whether you're a
+              beginner,
+              an industry professional, or an AI enthusiast.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center justify-content-center step-section step-last">
+
+        <div class="col-12 col-md-3 text-center text-md-start mt-3 mt-md-0">
+          <div class="mb-3">
+            <span class="btn btn-primary rounded-pill mb-2 step-number-heading">Step 02</span>
+            <h5 class="mb-0 poppins-regular step-heading">Enroll and Start Learning</h5>
+          </div>
+        </div>
+
+
+        <div class="col-12 col-md-4 text-center text-md-start">
+          <p class="poppins-regular step-description">
+            Sign up effortlessly and get instant access to video lessons, downloadable resources, and interactive
+            quizzes—all available 24/7.
+          </p>
+        </div>
+
+
+        <div class="col-12 col-md-2 text-center text-md-end mt-3 mt-md-0">
+          <a href="#" class="btn btn-primary rounded-pill text-light next">Next &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

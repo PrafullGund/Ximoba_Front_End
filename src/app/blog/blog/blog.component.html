@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="row mt-5 p-2">
+        <div class="col-sm-12 col-lg-8">
+            <div class="col-12 mb-3 rounded p-3 border" *ngFor="let blog of showBlogData">
+                <div class="bg-white  rou transition hover-shadow-lg ">
+                    <div class="position-relative overflow-hidden" style="height: 260px;">
+                        <img src="../../../assets/15.jpg" alt class="w-100 h-100 object-cover">
+                    </div>
+                    <div class="course-content p-4">
+                        <h4 class="mb-3 fw-bold">
+                            <a class="text-dark text-decoration-none hover-primary">{{
+                                blog.title }}</a>
+                        </h4>
+                        <div class="d-flex mb-3 align-items-center">
+                            <a class="d-flex align-items-center me-4">
+                                <i class="fa-regular fa-user"></i>
+                                <span>{{ blog.author }}</span>
+                            </a>
+                            <div class="d-flex align-items-center gap-2">
+                                <span><i class="fa-regular fa-clock px-1"></i>{{
+                                    blog.createdAt | date: 'dd MMM, yy' }}</span>
+                                <span class="ms-2">|</span>
+                                <span class="ms-2"><i class="fa-regular fa-comment"></i>
+                                    {{blog.comments }}</span>
+                            </div>
+                        </div>
+                        <p>{{ blog.content }}</p>
+                        <a [routerLink]="['/blog', blog._id]" class="text-dark fw-semibold text-decoration-underline">
+                            Read More
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- sidebar -->
+        <div class="col-lg-4 col-12">
+            <div class="sidebarWrapper mb-4">
+
+                <!-- Search Widget -->
+                <div class="widget widget_search mb-4 border rounded p-3">
+                    <div class="input-group shadow-sm ">
+                        <input type="text" id="searchInput" class="form-control p-2" placeholder="Search keyword...">
+                        <button class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Posts Widget -->
+                <div class="widget widget-recent-post mb-4 border ">
+                    <h4 class="widget-title border p-4">Related Blog</h4>
+                    <ul class="list-unstyled p-4">
+                        <li class="d-flex mb-4 pb-3 pt-1 ">
+                            <div class="flex-shrink-0 me-3">
+                                <img src="../../../assets/15.jpg" alt class="img-fluid rounded"
+                                    style="width: 80px; height: 80px;">
+                            </div>
+                            <div>
+                                <div class="mb-2 fw-bold text-dark">
+                                    How to Manage Ads For Clients The Right
+                                    Way
+                                </div>
+                                <a href="#" class="text-primary fw-semibold">Read
+                                    More</a>
+                            </div>
+                        </li>
+                        <li class="d-flex mb-4 pb-3 ">
+                            <div class="flex-shrink-0 me-3">
+                                <img src="../../../assets/15.jpg" alt class="img-fluid rounded"
+                                    style="width: 80px; height: 80px;">
+                            </div>
+                            <div>
+                                <div class="mb-2 fw-bold text-dark">
+                                    How to Manage Ads For Clients The Right
+                                    Way
+                                </div>
+                                <a href="#" class="text-primary fw-semibold">Read
+                                    More</a>
+                            </div>
+                        </li>
+                        <li class="d-flex mb-4 pb-3 ">
+                            <div class="flex-shrink-0 me-3">
+                                <img src="../../../assets/15.jpg" alt class="img-fluid rounded"
+                                    style="width: 80px; height: 80px;">
+                            </div>
+                            <div>
+                                <div class="mb-2 fw-bold text-dark">
+                                    How to Manage Ads For Clients The Right
+                                    Way
+                                </div>
+                                <a href="#" class="text-primary fw-semibold">Read
+                                    More</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="widget widget_catagory mb-4 border ">
+                    <h4 class="widget-title border p-4">Blog
+                        Categoriess</h4>
+                    <ul class="list-unstyled p-4">
+                        <li class="mb-2 border rounded">
+                            <a
+                                class="d-flex justify-content-between align-items-center bg-light py-3 px-4 rounded text-decoration-none">
+                                <span>HTML</span>
+                                <span class="fs-5">23</span>
+                            </a>
+                        </li>
+                        <li class="mb-2 border rounded">
+                            <a href="#"
+                                class="d-flex justify-content-between align-items-center bg-light py-3 px-4 rounded text-decoration-none">
+                                <span>CSS</span>
+                                <span class="fs-5">14</span>
+                            </a>
+                        </li>
+                        <li class="mb-2 border rounded">
+                            <a href="#"
+                                class="d-flex justify-content-between align-items-center bg-light py-3 px-4 rounded text-decoration-none">
+                                <span>JavaScript</span>
+                                <span class="fs-5">28</span>
+                            </a>
+                        </li>
+                        <li class="mb-2 border rounded">
+                            <a href="#"
+                                class="d-flex justify-content-between align-items-center bg-light py-3 px-4 rounded text-decoration-none">
+                                <span>PHP</span>
+                                <span class="fs-5">34</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Popular Tags Widget -->
+                <div class="widget border ">
+                    <h4 class="widget-title border p-4">Popular Tags</h4>
+                    <ul class="list-inline p-4">
+                        <li class="list-inline-item mb-2">
+                            <a href="#" class="btn btn-light btn-sm rounded-pill border">Business</a>
+                        </li>
+                        <li class="list-inline-item mb-2">
+                            <a href="#" class="btn btn-light btn-sm rounded-pill border">Education</a>
+                        </li>
+                        <li class="list-inline-item mb-2">
+                            <a href="#" class="btn btn-light btn-sm rounded-pill border">Design</a>
+                        </li>
+                        <li class="list-inline-item mb-2">
+                            <a href="#" class="btn btn-light btn-sm rounded-pill border">Students</a>
+                        </li>
+                        <li class="list-inline-item mb-2">
+                            <a href="#" class="btn btn-light btn-sm rounded-pill border">Teachers</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

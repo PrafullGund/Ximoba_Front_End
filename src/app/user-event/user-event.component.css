@@ -1,0 +1,49 @@
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.event-card-img {
+  height: 250px !important;
+}
+
+.event-month-label {
+  font-size: 12px;
+}
+
+.event-day-number {
+  font-size: 24px;
+}
+
+.event-name-text {
+  font-size: 14px;
+}
+
+.avatar-group {
+  height: 30px;
+  width: 30px;
+}
+
+.book-seat-small-btn {
+  font-size: 14px;
+  background-color: var(--TextColor);
+}
+
+.view-more-small-btn {
+  font-size: 14px;
+  background-color: var(--btndarkColor);
+}

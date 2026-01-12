@@ -1,0 +1,199 @@
+.profile-box {
+    padding-top: 20px;
+    margin-left: 52px;
+    background-color: #fff;
+    border-radius: 8px;
+    height: 82vh;
+    overflow-y: auto;
+    flex: 2;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 31px;
+}
+
+.main-heading h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.main-heading p {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+}
+
+.form-all {
+    margin-top: 14px;
+}
+
+.language {
+    margin-bottom: 14px;
+}
+
+.form-label {
+    display: inline-block;
+    border: 1px solid #dddddd;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    width: 150px;
+    padding: 5px;
+}
+
+.form-section,
+.form-sections {
+    padding-left: 40px;
+}
+
+.form-section h4,
+.form-sections h4 {
+    font-size: 18px;
+    color: #444;
+    margin-top: 14px;
+}
+
+hr {
+    margin: 5px 0;
+}
+
+.line {
+    display: block;
+    margin: 5px 0;
+    line-height: 1px;
+    content: "";
+}
+
+input[type="text"],
+select {
+    width: 50%;
+    padding: 5px;
+    margin: 1px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+@media (max-width:1440px) {
+    .profile-box {
+        padding-top: 20px;
+        margin-left: 175px;
+        background-color: #fff;
+        border-radius: 8px;
+        height: 115%;
+        overflow-y: auto;
+        flex: 2;
+        box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 85%;
+        min-height: 96vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-box {
+        padding: 15px;
+        min-height: 100vh;
+        margin: 0px 0px 20px 68px;
+    }
+
+    .main-heading h2 {
+        font-size: 20px;
+    }
+
+    .form-section,
+    .form-sections {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    select {
+        padding: 8px;
+    }
+
+    button.Save {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-box {
+        padding: 10px;
+        margin: 0px 0px 20px 33px;
+    }
+
+    .main-heading h2 {
+        font-size: 18px;
+    }
+
+    .form-section h4 {
+        font-size: 16px;
+    }
+
+    .form-section form div {
+        width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    input[type="text"],
+    select {
+        width: 100%; 
+        padding: 8px; 
+        margin-bottom: 10px; 
+        box-sizing: border-box;  
+    }
+
+    button.Save {
+        padding: 8px 16px;
+    }
+
+    .form-section small {
+        font-size: 12px; 
+        color: red;
+    }
+
+    .form-label{
+        width: 100%; 
+        margin-bottom: 5px; 
+        display: block; 
+    }
+}
+
+.social-info {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .social-input {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 8px 0;
+        padding: 10px;
+        background: #f9f9f9;
+
+        span {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input {
+            flex: 2;
+            border: none;
+            outline: none;
+            padding: 5px;
+            background: transparent;
+            color: #777;
+        }
+
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+}

@@ -1,0 +1,116 @@
+.container-fluid {
+    /* background-color: #F9F8FF; */
+    margin-top: 30px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(224, 235, 255, 1) 100%);
+}
+
+input {
+    background-color: #FFFFFF;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.sign-in-btn {
+    background: #3078FF;
+    color: white;
+    padding: 10px;
+}
+
+.rounded-input {
+    border-radius: 15px;
+}
+
+.inputbtn {
+    position: relative;
+}
+
+.inputbtn>button {
+    position: absolute;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (min-width: 600px) {
+    .desktop {
+        width: 80%;
+        margin-left: 10%;
+        padding-top: 20px;
+    }
+}
+
+sup {
+    color: red;
+}
+
+.custom {
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.suggestion-list {
+    min-width: 100px;
+    background: white;
+    position: absolute;
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.suggestion-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestion-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.suggestion-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.tab-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tab-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.terms-link {
+    color: var(--TextColor);
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.error-text {
+    color: red
+}
+
+.role-select {
+    font-size: 15px
+}
+
+.label-medium{
+    font-weight: 500;
+}
+
+.text-primary{
+    cursor: pointer;
+}
+
+

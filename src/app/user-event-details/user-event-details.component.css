@@ -1,0 +1,163 @@
+.section-background{
+  background-color: #F5F5F5;
+}
+
+.social-icon-facebook{
+  color: #0976e4;
+}
+
+.social-icon-whatsapp{
+  color: #30d14e; 
+  text-decoration: none;
+}
+
+.text-justified{
+  text-align: justify;
+}
+
+.trainer-image{
+  width: 170px !important;
+  height: 170px;
+}
+
+.star-icon{
+  color: #FFAE06;
+}
+
+.trainer-avatar{
+  height:60px;
+  width:60px;
+}
+
+.trainercard {
+  position: relative;
+}
+
+.trainercard:hover .viewtrainerbtn {
+  display: block;
+}
+
+.viewtrainerbtn {
+  position: absolute;
+  font-size: var(--Poppins14);
+  top: 30%;
+  left: 35%;
+  background-color: #307DFF;
+  color: #ffffff;
+  display: none;
+}
+
+.trainernameheading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.trainercardfooter {
+  font-size: 13px;
+}
+
+.star-rating {
+  .fa-star {
+    font-size: 18px;
+  }
+
+  .star-icons{
+    cursor: pointer;
+  }
+
+  .checked {
+    color: gold;
+  }
+
+}
+
+.fa-star {
+  color: lightgray;
+}
+
+.checked {
+  color: gold;
+}
+
+.btnq {
+  background-color: var(--TextColor);
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.share-options {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 1000;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.share-option {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.share-button:hover {
+  background-color: #0056b3;
+}
+
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.pagination-controls{
+  font-size: small;
+}
+
+.related-events-title{
+  color: var(--TextColor);
+}
+
+.event-date-label{
+  font-size: 12px;
+}
+
+.event-date-day{
+  font-size: 24px;
+}
+
+.event-name-title{
+  font-size: 14px;
+}
+
+.user-avatar-group{
+  height:30px;
+  width:30px;
+}
+
+.book-seat-btn{
+  font-size: 14px;
+  background-color: var(--TextColor);
+}
+
+.view-more-btn{
+  font-size: 14px;
+  background-color: var(--btndarkColor);
+}

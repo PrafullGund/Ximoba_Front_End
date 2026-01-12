@@ -1,0 +1,76 @@
+
+.counter {
+    
+    border: 1px solid #e0e0e0;
+    font-size: 20px;
+  }
+
+  .star-rating{
+    .fa-star {
+    font-size: 18px; 
+    }
+  
+  .checked {
+    color: gold;  
+  }
+  
+  }
+  
+  .fa-star {
+    color: lightgray; /* Default star color */
+  }
+  
+  .checked {
+    color: gold; /* Color for filled stars */
+  }
+  
+  .btnq{
+    background-color: var(--TextColor);
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+  }
+
+
+  .share-options {
+      position: absolute;
+      display: flex; 
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+      z-index: 1000;
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+  
+  .share-option {
+      cursor: pointer;
+      text-decoration: none;
+  }
+   
+  .share-button:hover {
+    background-color: #0056b3; 
+  }
+
+
+  .trainer-name-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .full-name {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: small;
+    padding: 5px;
+    z-index: 1;
+  }
+  
+  .trainer-name-container:hover .full-name {
+    display: block;
+  }
+  

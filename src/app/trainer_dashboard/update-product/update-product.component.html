@@ -1,0 +1,61 @@
+<div class="container-fluid">
+<div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded border my-3 px-5 py-4">
+    <div class="row">
+      <h2 class="text-center">Update Product</h2>
+        <form [formGroup]="uploadform"  (ngSubmit)="onSubmit()" >
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="product_name" class="col-form-label">Product Name:</label>
+                  <input class="form-control" type="text" id="product_name" formControlName="product_name" name="product_name" required>  
+                </div> 
+          
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="product_prize" class="col-form-label">Product Prize:</label>
+                  <input class="form-control" type="number" id="product_prize" formControlName="product_prize" name="product_prize" required>
+                </div>
+          
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="product_selling_prize" class="col-form-label">Product Selling Prize:</label>
+                  <input class="form-control" type="number"  id="product_selling_prize" formControlName="product_selling_prize" name="product_selling_prize" required>
+                </div> 
+
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="product_flag" class="col-form-label">Product Type</label>
+                    <select class="form-select" aria-label="Default select example" id="product_flag"
+                    formControlName="product_flag" name="product_flag">
+                    <option selected disabled>Select Mode</option>
+                    <option value="Physical">Physical</option>
+                    <option value="Virtual">Virtual</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="product_image" class="col-form-label">Product Image</label>
+                  <input class="form-control" type="file" id="product_image" name="product_image" (change)="onFileSelected($event)" required>
+                </div>
+          
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <label for="products_info" class="col-form-label">Product Short Info:</label>
+                  <textarea class="form-control" id="products_info" formControlName="products_info" name="products_info" required></textarea>
+                </div>
+                
+                <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                  <label for="products_description" class="col-form-label">Product Details Information:</label>
+                  <textarea class="form-control" id="products_description" formControlName="products_description" name="products_description" required></textarea>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button routerLink="/dashboard/product" type="button" class="btn btn-secondary">Back</button>
+              <button type="submit" class="btn btn-primary ms-3">Update Product</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>
+
+
+
+

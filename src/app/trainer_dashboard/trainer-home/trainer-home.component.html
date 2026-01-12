@@ -1,0 +1,185 @@
+<div class="container-fluid" class="form-check mb-2" style="background: #ffffff;
+background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(224, 235, 255, 1) 100%);padding: 1.5rem !important;">
+    <div class="row m-0">
+
+        <!-- Navbar Toggler Button (Visible only on small screens) -->
+        <button class="navbar-toggler d-block d-lg-none mobile-nav-toggle" type="button" (click)="toggleOffcanvas()">
+            <span class="navbar-toggler-icon px-2"><i class="fa-solid fa-bars"></i></span>
+        </button>
+
+        <!-- Offcanvas Sidebar -->
+        <div class="offcanvas offcanvas-start" [ngClass]="{'show': isOffcanvasOpen}" tabindex="-1" id="offcanvasNavbar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title"></h5>
+                <button type="button" class="btn-close" (click)="toggleOffcanvas()"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="list ">
+                    <!-- Dashboard: Visible to USER, TRAINER, ADMIN -->
+                    <li *ngIf="isUser" routerLink="/dashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="nav-item-user">
+                        <img src="assets/icons/Home_icon.png" class="home-icon" /> Home
+                    </li>
+
+                    <!-- Request: Visible only to ADMIN & Institute -->
+                    <li *ngIf="isAdmin || isInstitute " routerLink="/dashboard/superadmin" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-repeat pt-2 "></i> Request
+                    </li>
+
+                    <!-- Category: Visible only to ADMIN -->
+                    <li *ngIf="isAdmin" routerLink="/dashboard/admincategory" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-brands fa-pix pt-2 "></i> Category
+                    </li>
+
+                    <!-- Course: Visible to USER, TRAINER,SELF_EXPRT, INSTITUTE, ADMIN -->
+                    <li *ngIf="isUser" routerLink="/dashboard/mycourse" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover" ngClass="">
+                        <img src="assets/icons/banner_image_header.png" class="home-icon" />
+                        Course
+                    </li>
+            
+                    <!-- Product: Visible to TRAINER and ADMIN -->
+                    <!-- <li *ngIf="isUser" routerLink="/dashboard/product" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                    <i class="fa-solid fa-square-check pt-2 " ></i> Product
+                </li> -->
+
+                    <!-- Event: Visible to TRAINER and ADMIN -->
+                    <!-- <li *ngIf="isUser" routerLink="/dashboard/event" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                    <i class="fa-solid fa-calendar-days pt-2 " ></i> Event
+                </li> -->
+
+                    <!-- Enquiry: Visible to TRAINER and ADMIN -->
+                    <li *ngIf="isSELF_EXPERT || isInstitute || isUser ||isTrainer" routerLink="/dashboard/enquiry"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fas fa-question"></i> Enquiry
+                    </li>
+
+                    <!-- Appointment: Visible to TRAINER and ADMIN -->
+                    <li *ngIf="isSELF_EXPERT || isInstitute || isTrainer" routerLink="/dashboard/appointment"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-circle-user pt-2 "></i> Appointment
+                    </li>
+
+                    <!-- Question: Visible to TRAINER and ADMIN -->
+                    <li *ngIf="isSELF_EXPERT || isInstitute || isTrainer" routerLink="/dashboard/question"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-circle-question pt-2"></i> Question
+                    </li>
+
+                    <!-- Review: Visible to TRAINER and ADMIN -->
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard/review"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <img src="assets/icons/Review_icon.png" style="padding: 8px;margin-left: -10px;" />
+                        Review
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard/review"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-face-smile pt-2 "></i> SelfEvolution
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard/ForumDetails"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-users"></i>Forum
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <p><mat-slide-toggle>DarkMode</mat-slide-toggle></p>
+                    </li>
+
+                    <hr class="my-4">
+
+                    <li (click)="logout()"><i class=" fas fa-sign-out-alt pt-2  text-danger"></i> Logout</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-2 rounded-end pt-1 sidebarlgscreen me-0 pe-0" style="width: fit-content;
+        padding: 0px 30px !important;
+        margin-right: 3rem !important;
+        border-radius: 25px !important;">
+            <div class="rounded custom-white-box">
+                <ul class="list ">
+
+                    <li *ngIf="isUser" routerLink="/dashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="nav-item-user">
+                        <img src="assets/icons/Home_icon.png" class="home-icon" /> Home
+                    </li>
+
+                    <li *ngIf="isAdmin || isInstitute " routerLink="/dashboard/superadmin" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-repeat pt-2 "></i> Request
+                    </li>
+
+                    <li *ngIf="isAdmin" routerLink="/dashboard/admincategory" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-brands fa-pix pt-2 "></i> Category
+                    </li>
+
+                    <!-- <li *ngIf="isUser" routerLink="/dashboard/mycourse" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <img src="assets/icons/banner_image_header.png" class="home-icon"  />
+                        Course
+                    </li> -->
+
+                    <li *ngIf="isUser"
+                    class="hover"
+                    [routerLink]="['/dashboard/mycourse']"
+                    [ngClass]="{'active': isCourseRelatedRoute()}">
+                    <img src="assets/icons/banner_image_header.png" class="home-icon" />
+                    Course
+                </li>
+
+                    <li *ngIf="isSELF_EXPERT || isInstitute || isUser ||isTrainer" routerLink="/dashboard/enquiry"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fas fa-question"></i> Enquiry
+                    </li>
+
+                    <li *ngIf="isSELF_EXPERT || isInstitute || isUser || isTrainer" routerLink="/dashboard/appointment"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-circle-user pt-2 "></i> Appointment
+                    </li>
+
+                    <li *ngIf="isUser" routerLink="/dashboard/question"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-circle-question pt-2"></i> Question
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard/review"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <img src="assets/icons/Review_icon.png" class="home-icon" /> Review
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/self-evaluation"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-face-smile pt-2 "></i> SelfEvolution
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard/ForumDetails"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <i class="fa-solid fa-users"></i>Forum
+                    </li>
+
+                    <li *ngIf="isInstitute || isSELF_EXPERT || isTrainer" routerLink="/dashboard"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="hover">
+                        <p><mat-slide-toggle [checked]="isDarkMode" (change)="toggleDarkMode()">Dark Mode</mat-slide-toggle>
+                        </p>
+                    </li>
+
+                    <hr class="my-4">
+
+                    <li (click)="logout()"><i class=" fas fa-sign-out-alt pt-2  text-danger"></i> Logout</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-10 pt-2">
+            <div class="row">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div> 

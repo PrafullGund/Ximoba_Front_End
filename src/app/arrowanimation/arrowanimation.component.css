@@ -1,0 +1,9 @@
+body {
+    background: rgb(72, 102, 139);
+    overflow: hidden;
+  }
+  
+  svg {
+    height: 100vh;
+  }
+  

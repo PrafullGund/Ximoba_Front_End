@@ -1,0 +1,77 @@
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.coursename {
+  color: var(--TextColor);
+}
+
+.coursename:hover {
+  text-decoration: underline;
+}
+
+.add-event-btn {
+  background-color: #3078ff;
+}
+
+.update-delete-btn {
+  background-color: #f96d63;
+}
+
+.event-date-label {
+  font-size: 12px;
+}
+
+.event-day {
+  font-size: 24px;
+}
+
+.event-name {
+  font-size: 14px;
+}
+
+.profile-img {
+  height: 30px;
+  width: 30px;
+}
+
+.view-more-btn {
+  font-size: 14px;
+  background-color: var(--btndarkColor);
+}
+
+.no-data-img {
+  height: 300px;
+  width: 300px;
+}
+
+.event-date-label {
+  font-size: 12px;
+}
+
+.event-day {
+  font-size: 24px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.justify-text {
+  text-align: justify;
+}

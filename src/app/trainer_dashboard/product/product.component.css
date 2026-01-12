@@ -1,0 +1,71 @@
+.custom-blue-btn {
+  background-color: #3078ff;
+}
+
+.salmon-btn {
+  background-color: #f96d63;
+}
+
+.cart-icon {
+  color: #417CE8;
+}
+
+.product-name-text {
+  font-size: 13px;
+}
+
+.product-category-text {
+  font-size: 12px;
+}
+
+.no-data-image {
+  height: 300px;
+  width: 300px;
+}
+
+.clickable-cell {
+  cursor: pointer;
+}
+
+.thumbnail-img-rounded {
+  border-radius: 8px;
+}
+
+.product-name-text {
+  font-size: 25px;
+}
+
+.business-name-text {
+  font-size: small;
+}
+
+.justify-text {
+  text-align: justify;
+}
+
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.coursename {
+  color: var(--TextColor);
+}
+
+.coursename:hover {
+  text-decoration: underline;
+}

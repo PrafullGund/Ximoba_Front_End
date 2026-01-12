@@ -1,0 +1,104 @@
+<mat-card class="card-background">
+  <div>
+    <div class="block">
+      <h5 class="questions-heading">Questions</h5>
+    </div>
+
+    <!-- Header Section -->
+    <div class="p-5 pb-0 bg-gray-100 rounded-lg container">
+      <div class="flex justify-between items-center flex-row-space-between">
+        <div class="message-container">
+          <p class="text-sm text-gray-500">You've got {{ getQuestionsCount() }} Messages</p>
+        </div>
+
+        <div class="flex space-x-2 btn-group" mat-button-toggle-group>
+          <button id="allBtn" class="p-2 text-white bg-blue-600 rounded-lg btn-all"
+          (click)="loadAllQuestion(currentPage, itemsPerPage)">
+            All
+          </button>
+          <button id="unreadBtn" class="p-2 text-gray-700 bg-white border rounded-lg btn-unread"
+            (click)="showUnreadquestions()">
+            Unread ({{ getUnseenCount() }})
+          </button>
+          <button id="markCompletedBtn" class="p-2 text-white bg-blue-600 rounded-l mark-completed-btn"
+             (click)="markAllAsSeen()">
+            Mark all as completed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions List Using Angular Material Accordion -->
+     <div style="padding: 10px 30px;">
+      <mat-accordion class="accordion-background" 
+        *ngFor="let question of ShowQuestion |  paginate:{ itemsPerPage: itemsPerPage, currentPage: p, totalItems } ">
+        <mat-expansion-panel  *ngIf="question._id"
+        [ngClass]="{ 'selected-question': question.isSelected }" (opened)="markSeenById(question)" class="clickable-panel">
+          
+          <mat-expansion-panel-header class="question-card" style="background-color: rgb(255,255,255); box-shadow: none; padding: 40px;">
+            <img class="profile-img" [src]="question.profile_image" alt="Profile Image">
+  
+            <div class="user-info">
+              <h3 [ngClass]="{'text-muted': question.isSeen, 'fw-bold': !question.isSeen}" class="inquiry-username">
+                {{ question.user_name }}
+              </h3>
+  
+              <p [ngClass]="{'text-muted': question.isSeen, 'text-dark fw-bold': !question.isSeen}" class="email-text">
+                {{ question.email_id }}
+              </p>
+            </div>
+  
+            <div class="action-buttons">
+              <span class="p-2">{{ (question.createdAt |date) || question.time  }}</span>
+              <span class="ml-5 delete-icon" style="margin-left: 1.5rem !important; color: red;" (click)="onDelete(question._id); $event.stopPropagation();"> 
+                <mat-icon>delete</mat-icon>
+              </span>
+            </div>
+          </mat-expansion-panel-header>
+  
+  
+          <div class="user-info">
+            <p><strong>Email:</strong> {{ question.email_id }}</p>
+            <p><strong>Mobile No:</strong> {{ question.mobile_number }}</p>
+            <div class="question-text"><strong>Question:</strong> {{ question.question }}</div>
+          </div>
+  
+          <!-- Mark as Seen -->
+          <!-- <button *ngIf="!question.isSeen" class="mark-seen-button" (click)="markSeenById(question)">
+            <i class="fa-solid fa-eye"></i> Mark as Seen
+          </button> -->
+  
+          <!-- Reply Section -->
+          <button class="reply-button" (click)="toggleReply(question)">
+            <i class="fa-solid fa-reply icon-reply"></i> Reply
+          </button>
+  
+          <div *ngIf="question.showReplyBox" class="d-flex gap-3">
+            <textarea [(ngModel)]="question.replyText" placeholder="Type your reply..."></textarea>
+            <button (click)="sendReply(question)" class="btn-reply">
+              <i class="fa-solid fa-paper-plane"></i> Send
+            </button>
+          </div>
+  
+          <!-- Replies Section -->
+          <div *ngIf="question.replies?.length > 0" class="replies-container">
+            <h4 class="replies-title">Replies</h4>
+            <div *ngFor="let reply of question.replies" class="reply-card">
+              <div class="reply-header">
+                <img [src]="reply.profile_image" alt="Profile" class="reply-profile-img">
+                <div class="reply-info">
+                  <p class="reply-username">{{ reply.user_name }}</p>
+                  <p class="reply-date">{{ (reply.createdAt |date) || reply.time }}</p>
+                </div>
+              </div>
+              <p class="reply-text">{{ reply.reply }}</p>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+     </div>
+  
+    <pagination-controls (pageChange)="onPageChange($event)" class="text-end pagination-controls"></pagination-controls>
+  
+  </div>
+</mat-card>

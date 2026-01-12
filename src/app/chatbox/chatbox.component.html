@@ -1,0 +1,118 @@
+<!-- Floating Chat Icon -->
+<button mat-fab class="floating-icon" (click)="toggleChat()">
+    <mat-icon>chat</mat-icon>
+</button>
+
+<!-- Chat Window -->
+<div class="chat-container" [ngClass]="{'chat-active': chatActive}" *ngIf="chatOpen" style="background: #ffff;">
+
+    <!-- Left Sidebar: Chat List -->
+    <div class="chat-sidebar" style="background: #ffff;" [ngClass]="{'hide-on-mobile': chatActive}">
+        <div class="filter-options">
+            <button mat-button (click)="setFilter('all')" [class.active]="selectedFilter === 'all'">All</button>
+            <button mat-button (click)="setFilter('unread')"
+                [class.active]="selectedFilter === 'unread'">Unread</button>
+        </div>
+
+        <div class="search-bar" style="background: #ffff;">
+            <mat-icon>search</mat-icon>
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Search Name" (input)="filterChats()"
+                style="border: none;">
+        </div>
+
+        <div class="chat-list" style="background: #ffff;">
+            <div class="chat-item" *ngFor="let chat of filteredChats" (click)="selectChat(chat); getmessage(chat._id)">
+                <div class="avatar">
+                    <img *ngIf="chat.users[1]?.trainer_image" [src]="chat.users[1].trainer_image" alt="User">
+                </div>
+                <div class="chat-info">
+                    <p class="text-custom fw-semibold fs-5 text-dark m-0 w-custom h-custom">{{ chat.users[1]?.f_Name }}
+                        {{ chat.users[1]?.l_Name }}</p>
+                        <span>{{ formatChatDate(chat.latestMessage?.createdAt) | date:'medium' }}</span>
+                    <p>{{ chat.latestMessage.content || 'No messages yet' }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Right Panel: Chat Messages -->
+    <div class="chat-content" *ngIf="selectedChat" style="background: #ffff;">
+        <div class="chat-header">
+            <!-- Show back button only on small screens -->
+            <button mat-icon-button (click)="backToChatList()" class="back-button d-lg-none d-md-none">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <div class="avatar">
+                <img *ngIf="selectedChat.users[1]?.trainer_image" [src]="selectedChat.users[1].trainer_image"
+                    alt="User">
+            </div>
+            <div class="user-info">
+                <p class="text-custom">{{ selectedChat.users[1]?.f_Name }} {{ selectedChat.users[1]?.l_Name }}</p>
+                <p>Active now</p>
+            </div>
+            <!-- <div class="chat-actions">
+                <mat-icon click="toggleSidebar()">phone</mat-icon>
+                <!-- <mat-icon>videocam</mat-icon>
+                <mat-icon>more_vert</mat-icon>
+            </div>  -->
+        </div>
+        <div class="chat-messages" style="background: #ffff;">
+            <div *ngFor="let group of groupedMessages">
+                <!-- Display Date Header -->
+                <div class="date-header" style="justify-self: center;">
+                    {{ group.date | date:'mediumDate' }}
+                </div>
+
+                <!-- Display Messages for that Date -->
+                <div>
+                    <div *ngFor="let message of group.messages" class="message" [ngClass]="message.sender === loginUserId ? 'sent' : 'received'">
+                        <!-- Show only Time -->
+                        <!-- <div class="avatar">
+                            <img *ngIf="msg.chat?.users[0]?.trainer_image" [src]="msg.chat?.users[0].trainer_image"
+                                alt="User">
+                        </div> -->
+                        {{ message.content }}  <div> {{ formatTime(message.createdAt) }}</div>
+                    </div>
+                </div>
+
+
+                <ng-template #noMessages>
+                    <p class="no-messages">No messages yet. Start the conversation!</p>
+                </ng-template>
+            </div>
+
+
+
+
+
+
+            <div class="chat-input">
+                <!-- Emoji Picker -->
+                <button mat-icon-button (click)="toggleRecording()"
+                    style="border: none;background: transparent;color: #afafaf;">
+                    <mat-icon>{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
+                </button>
+                <input type="text" [(ngModel)]="messageInput " placeholder="Add a comment..." />
+
+                <button mat-icon-button style="border: none; background: transparent; color: #afafaf;"
+                    (click)="fileInput.click()">
+                    <mat-icon>insert_photo</mat-icon>
+                </button>
+                <input type="file" (change)="onFileSelected($event)" #fileInput hidden />
+
+                <button mat-icon-button (click)="toggleEmojiPicker()"
+                    style="border: none;background: transparent;color: #afafaf;"><mat-icon>insert_emoticon</mat-icon></button>
+                <button (click)="sendMessage()"
+                    class="text-white px-2 py-1 rounded d-flex align-items-center justify-content-center"
+                    style="background-color: #007DFC;border: none;width: 47px;height: 40px;"> <mat-icon>send</mat-icon>
+                </button>
+            </div>
+
+            <div class="emoji-picker-container" *ngIf="showEmojiPicker" style="margin-bottom: 10px;">
+                <emoji-mart set="apple" (emojiSelect)="addEmoji($event)"></emoji-mart>
+            </div>
+
+        </div>
+    </div>

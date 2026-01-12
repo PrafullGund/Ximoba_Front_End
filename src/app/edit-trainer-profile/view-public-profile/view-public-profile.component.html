@@ -1,0 +1,83 @@
+<div class="profile-box">
+  <div class="main-heading">
+      <h2>Public Profile</h2>
+      <p>Add Information about yourself</p>
+  </div>
+  <hr>
+
+  <div class="form-section">
+      <h4>Basic Information</h4>
+      <form [formGroup]="profileForm" (ngSubmit)="submitForm()">
+          <div>
+              <input formControlName="f_Name" type="text" placeholder="Name">
+          </div><br>
+
+          <div>
+              <input formControlName="l_Name" type="text" placeholder="Surname">
+          </div><br>
+
+          <div>
+              <input formControlName="institute_name" type="text" placeholder="institute_name">
+              <p>Add a professional headline like developer</p>
+          </div>
+
+          <!-- <div>
+            <input type="text" placeholder="Date Of Birth">
+          </div><br> -->
+
+          <div>
+              <select formControlName="language">
+                  <option value="">Select Language</option>
+                  <option value="English (US)">English (US)</option>
+                  <option value="Hindi">Hindi</option>
+              </select>
+              <small
+                  *ngIf="profileForm.get('language')?.hasError('required') && profileForm.get('language')?.touched">
+                  Please select a language.
+              </small>
+          </div><br>
+
+          <hr>
+
+          <h4>Social Information</h4>
+
+          <div>
+              <label for="Website" class="form-label">Website.com</label>
+              <input formControlName="Website" type="text" placeholder="Website">
+              <small *ngIf="profileForm.get('Website')?.hasError('pattern') && profileForm.get('Website')?.touched">
+                  Enter a valid Website URL.
+              </small>
+          </div><br>
+
+          <div>
+              <label for="Facebook Profile" class="form-label">Facebook.com</label>
+              <input formControlName="facebook" type="text" placeholder="Facebook Profile Link">
+              <small *ngIf="profileForm.get('facebook')?.hasError('pattern') && profileForm.get('facebook')?.touched">
+                  Enter a valid Facebook URL.
+              </small>
+          </div><br>
+
+          <div>
+              <label for="instagram Profile" class="form-label">Instagram.com</label>
+              <input formControlName="instagram" type="text" placeholder="instagram Profile Link">
+              <small *ngIf="profileForm.get('instagram')?.hasError('pattern') && profileForm.get('instagram')?.touched">
+                  Enter a valid instagram URL.
+              </small>
+          </div><br>
+
+          <div>
+              <label for="Youtube Profile" class="form-label">Youtube.com</label>
+              <input formControlName="youtube" type="text" placeholder="Youtube Profile Link">
+              <small *ngIf="profileForm.get('youtube')?.hasError('pattern') && profileForm.get('youtube')?.touched">
+                  Enter a valid Youtube URL.
+              </small>
+          </div><br>
+
+          <div>
+            <button type="submit" class="btn btn-primary custom-submit-btn">Submit</button>
+          </div>
+          
+
+      </form>
+  </div>
+</div>

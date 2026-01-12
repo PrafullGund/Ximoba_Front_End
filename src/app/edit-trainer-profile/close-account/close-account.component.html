@@ -1,0 +1,47 @@
+<div class="container shadow p-4 mt-4">
+    <div class="main-heading text-center">
+        <h2>Close Account</h2>
+        <p>Close your account permanently</p>
+    </div>
+    <hr>
+    <div class="paragraph">
+        <p>
+            <span class="important-notice text-danger font-weight-bold">Important Notice:</span> Closing your account
+            will
+            result in permanent unsubscription<br>
+            from all your courses and irreversible loss of access to your account and associated<br>
+            data. This applies even if you create a new account with the same email address in the future.
+        </p>
+        <p>
+            If you wish to cancel your account deletion request, you have 15 days from the date of submission to contact
+            us
+            to reverse this action.
+        </p>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#closeAccountModal">Close
+            Account</button>
+    </div>
+
+    <div class="modal fade" id="closeAccountModal" tabindex="-1" aria-labelledby="closeAccountModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title " id="closeAccountModalLabel">Close Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Enter the 6-digit code we sent to <strong>testgmail.com</strong> to close your account.</p>
+                    <div class="mb-3">
+                        <label for="codeInput" class="form-label">6-digit code</label>
+                        <input type="number" class="form-control" id="codeInput" placeholder="Enter 6-digit code" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Close Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

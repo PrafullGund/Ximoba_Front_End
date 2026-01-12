@@ -1,0 +1,55 @@
+.productcard {
+  position: relative;
+}
+
+.productcard:hover .onproducthover {
+  display: block;
+}
+
+.onproducthover {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  display: none;
+}
+
+.trainer-name-container {
+  position: relative;
+  display: inline-block;
+}
+
+.full-name {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: small;
+  padding: 5px;
+  z-index: 1;
+}
+
+.trainer-name-container:hover .full-name {
+  display: block;
+}
+
+.product-name{
+  font-size: 13px;
+}
+
+.custom-cart-icon{
+  color: var(--TextColor);
+}
+
+.product-price{
+  font-family: Poppins;
+  color: var(--TextColor);
+  font-size: 20px;
+}
+
+.custom-heart-icon{
+  color: var(--TextColor);;
+}
+
+.pagination-controls{
+  font-size: small;
+}

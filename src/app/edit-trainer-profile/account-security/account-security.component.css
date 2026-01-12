@@ -1,0 +1,110 @@
+.container {
+    padding-top: 15px;
+    margin-left: 52px;
+    max-width: 750px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow-y: auto;
+    flex: 2;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    height: 81vh;
+    margin-top: 31px;
+}
+
+.main-heading h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.main-heading p {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+}
+
+.account-form-container {
+    margin-left: 60px;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+select {
+    width: 50%;
+    padding: 5px;
+    margin: 1px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+@media (max-width:1440px) {
+    .container {
+        padding-top: 15px;
+        margin-left: 175px;
+        width: 85%;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow-y: auto;
+        flex: 2;
+        box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+        height: 81vh;
+        margin-top: 31px;
+        min-height: 96vh;
+    }
+}
+
+@media (max-width:768px){
+    .container{
+        padding: 15px;
+        min-height: 100vh;
+        margin: 0px 0px 20px 68px;
+    }
+
+    input[type="text"], input[type="tel"], input[type="password"], select {
+        width: 61%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container{
+        margin-left: 29px;
+    }
+
+    .account-form-container {
+      padding-left: 10px;
+      margin-left: 0px;
+    }
+  
+    section {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"],
+    select {
+      width: 96%;
+      margin-left: 0;
+    }
+  
+    label {
+      margin-left: 0;
+      display: inline-block;
+    }
+  
+    small.text-danger {
+      margin-left: 0;
+      display: block;
+    }
+  }
+  

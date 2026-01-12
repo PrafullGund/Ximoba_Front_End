@@ -1,0 +1,302 @@
+.light-background {
+  background-color: #f3f3f3
+}
+
+.trainer-home {
+  border-radius: 32px
+}
+
+.frosted-profile-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(50px);
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.section-divider {
+  border: 1px solid darkblue;
+  width: 90%;
+  margin: 20px auto;
+}
+
+.full-width-blue-btn {
+  color: blue;
+  border: none
+}
+
+.arrow-icon {
+  margin-left: 30px
+}
+
+.custom-card{
+  background-color: #3a3ac1; 
+  color: white
+}
+
+.full-width-white-btn{
+  color: white; 
+  border: none
+}
+
+.arrow-img{
+  margin-left: 30px; 
+  color: white
+}
+
+.blurred-user-card{
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(50px);
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  min-height: 400px;
+}
+
+.custom-divider{
+  border: 1px solid darkblue; 
+  width: 101%; 
+  margin: 20px auto
+}
+
+.floating-chatbox{
+  bottom:20px;
+  right:20px;
+}
+
+
+
+
+
+.icon {
+  font-size: 1.8rem;
+}
+
+.card {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-icon {
+  width: 60px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.card-title-one {
+  font-size: 20px;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  padding: 4px;
+  margin-left: 20px;
+}
+
+.card-title-two {
+  font-size: 20px;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  padding: 4px;
+  margin-left: 20px;
+}
+
+.card-title span {
+  display: block;
+}
+
+.card-text {
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 56px;
+}
+
+.btn {
+  font-size: 20px;
+}
+
+.d-flex {
+  gap: 20px;
+}
+
+.d-flex>button {
+  width: 45%;
+}
+
+@media (max-width: 768px) {
+  .d-flex button {
+    width: 100%;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.btn-plu {
+  border-radius: 35px;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px;
+  width: 225px;
+}
+
+.btn-add {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  row-gap: 10px;
+}
+
+.d-flex>button {
+  width: 21%;
+}
+
+.chat-container {
+  position: relative;
+}
+
+.btn-plus-expert {
+  background-color: #2979ff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 34px 41px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+  width: 306px;
+  height: 130px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-plus-expert:hover {
+  transform: translateY(-10px);
+}
+
+.plus-icon {
+  font-size: 33px;
+  margin-right: 22px;
+}
+
+.btn-text {
+  text-align: left;
+  font-size: 19px;
+}
+
+.details-button-one {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2979ff;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.details-button-one span {
+  font-size: 18px;
+}
+
+.certificate-card {
+  background-color: #3a3ac1;
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  height: 173px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.certificate-card:hover {
+  transform: translateY(-10px);
+}
+
+.course-count {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.details-button-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  background: none;
+  border: none;
+  padding-left: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.card-title-achieved {
+  font-size: 20px;
+}
+
+.details-button-two span {
+  font-size: 18px;
+}
+
+.arrow-icon-second {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 1440px) {
+  .certificate-card {
+    height: 213px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card-title-one {
+    font-size: 18px;
+    margin-left: 7px;
+  }
+}
+
+@media(max-width:1024px) {
+  .certificate-card {
+    height: 226px;
+  }
+
+  .details-button-two span {
+    font-size: 17px;
+  }
+
+  .card-title-achieved {
+    margin-left: -31px;
+    font-size: 15px;
+  }
+
+}
+

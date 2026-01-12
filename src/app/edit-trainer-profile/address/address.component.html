@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="main-heading">
+        <h2>Address</h2>
+        <p>Add Address</p>
+    </div>
+    <hr>
+    <div>
+        <form class="form-section"  [formGroup]="addressForm" (ngSubmit)="updateAddress()">
+            <input formControlName="address1" type="text" placeholder="Address line 1">
+            <input formControlName="address2" type="text" placeholder="Address line 2">
+            <input formControlName="addressLine3" type="text" placeholder="Address line 3">
+            <input formControlName="city" type="text" placeholder="City">
+            <input formControlName="pincode" type="number" placeholder="Pincode">
+            <input formControlName="state" type="text" placeholder="State">
+            <input formControlName="country" type="text" placeholder="Country"><br>
+            <label>
+                <input type="checkbox"> Same as permanent address
+            </label><br>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

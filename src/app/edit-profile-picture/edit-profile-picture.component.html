@@ -1,0 +1,40 @@
+<div class="container my-3">
+  <div class="row text-center border py-5">
+    
+    <!-- Display current image if available -->
+    <div class="my-3">
+      <h3>Profile Photo</h3>
+      <ng-container *ngIf="currentImage; else iconTemplate">
+        <img [src]="currentImage" class="rounded-circle object-fit-cover" alt="Trainer Image" height="200" width="200" />
+      </ng-container>
+      <ng-template #iconTemplate>
+        <img src="../../assets/user-dummy-img.png" alt="Trainer Image" height="200" width="200" />
+      </ng-template>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-4 text-center">
+          <label for="trainer_image" class="form-label">Upload New Image:</label>
+          <input type="file" class="form-control" id="trainer_image" (change)="onFileSelected($event)" accept="image/*" />
+        </div>
+      </div>
+
+      <!-- Notes section -->
+      <div class="d-flex justify-content-center my-2">
+        <div class=" " style=" text-align: left;">
+          <h6 class="mb-2 ms-3 text-primary">Notes</h6>
+          <ul class="text-muted" style="font-size: 0.9rem;">
+            <li>Please upload a JPG, PNG, or JPEG image.</li>
+            <li>Ensure the image is smaller than 5MB.</li>
+            <li>Image resolution should be between 2000x2000 pixels.</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary mb-3" type="submit">Update Image</button>
+    </form>
+  </div>
+</div>
+
+

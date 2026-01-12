@@ -1,0 +1,330 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@import "~@ctrl/ngx-emoji-mart/picker";
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.right-side-top {
+  background-color: #f9c4c4 !important;
+  padding: 4px 6px !important;
+  border-radius: 50% !important;
+  font-size: large;
+  border: none;
+  position: absolute;
+  top: 205px !important;
+  right: 15px !important;
+  margin-top: 20px !important;
+}
+
+.right-side-top-delete {
+  background-color: #f9c4c4 !important;
+  padding: 5px 6px !important;
+  border-radius: 50% !important;
+  font-size: large !important;
+  border: none;
+  position: absolute !important;
+  top: 205px !important;
+  right: 50px !important;
+  margin-top: 20px !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.btn-close {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.ThumbnailImage {
+  height: 350px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.card > img {
+  height: 206px !important;
+  object-fit: cover !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* CSS For zoom effect for card */
+.card {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  /* transform: translatey(-10px) */
+}
+
+.card-footer {
+  background-color: #ffffff !important;
+}
+/* css forcategory Show on card image */
+.left-side-top {
+  background-color: var(--TextColor) !important;
+  color: white !important;
+  /* padding: 5px 15px 5px 15px; */
+  font-size: small !important;
+  border: none !important;
+  position: absolute !important;
+  top: 0% !important;
+  margin-top: 20px;
+}
+
+.round {
+  border-radius: 10px !important;
+}
+
+/* Style for Registration POP up */
+.sign-in-btn {
+  background: var(--TextColor);
+  color: white;
+  padding: 10px;
+}
+
+.rounded-input {
+  border-radius: 15px;
+}
+
+.inputbtn {
+  position: relative;
+}
+
+.inputbtn > button {
+  position: absolute;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+}
+
+sup {
+  color: red;
+}
+
+/* New Theam CSS */
+:root {
+  --bodyColor: #f5f5f5; /*Background Color */
+  --rowColor: #1b1e2a; /*Row Background Color */
+  --TextColor: #307dff; /*Text Color */
+  --btndarkColor: #265abb;
+  --WhiteColor: #ffffff;
+  --ArrowIcon: #307cfc; /*Arrow Color */
+  --Poppins14: 14px;
+  --mainColor: ;
+  --headingColor: #293a5c;
+  --blackColor: #000000;
+  --darkBlueColor: #123726;
+  --boxShadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+  --transition: all 0.5s;
+  --borderRadius: 20px;
+}
+
+/* CSS For Product Card on Hover  */
+.productcard {
+  position: relative;
+}
+
+.productcard:hover .onproducthover {
+  display: block; /* Shows on hover */
+}
+
+.onproducthover {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  display: none; /* Initially hidden */
+}
+
+.onproducthoverflag {
+  background-color: var(--TextColor);
+  color: #ffffff;
+  font-size: small !important;
+  border: none !important;
+  position: absolute !important;
+  top: 0;
+  margin-top: 20px;
+  left: 4%;
+}
+
+/* CSS For Trainer Card on Hover  */
+
+.trainercard {
+  position: relative;
+}
+
+.trainercard:hover .viewtrainerbtn {
+  display: block;
+}
+
+.viewtrainerbtn {
+  position: absolute;
+  font-size: var(--Poppins14);
+  top: 30%;
+  left: 35%;
+  background-color: var(--TextColor);
+  color: #ffffff;
+  display: none;
+}
+
+.trainernameheading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.trainercardfooter {
+  font-size: 13px;
+
+  align-items: center;
+}
+
+/* social icons */
+.social-icons {
+  /* margin-top: 1rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.social-icons i {
+  padding: 10px;
+  text-decoration: none;
+  font-size: 19px;
+}
+
+.social-icons i:hover {
+  background-color: var(--TextColor);
+  color: var(--WhiteColor);
+}
+
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Define default theme variables */
+:root {
+  /* --background-color: #ffffff; */
+  --text-color: #000000;
+}
+
+/* Dark mode theme */
+.dark-mode {
+  --background-color: black;
+  --text-color: #ffffff;
+}
+
+/* Apply variables to the body */
+/* body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+} */
